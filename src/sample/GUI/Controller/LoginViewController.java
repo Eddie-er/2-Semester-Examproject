@@ -33,7 +33,7 @@ public class LoginViewController implements Initializable{
     private Button Reset;
     @FXML
     private ImageView imageView;
-    
+
     //sætter Arla logo.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
