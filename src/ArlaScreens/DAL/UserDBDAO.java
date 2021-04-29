@@ -32,7 +32,7 @@ public class UserDBDAO {
         while (resultSet.next()) {
             User user = new User(
                     resultSet.getInt("UserID"),
-                    resultSet.getString("Password"),
+                    resultSet.getString("PasswordHashing"),
                     resultSet.getBytes("Salt"),
                     resultSet.getString("UserName"),
                     resultSet.getInt("UserViewID")
@@ -81,7 +81,7 @@ public class UserDBDAO {
             while (resultSet.next()) {
                 User user = new User(
                         resultSet.getInt("UserID"),
-                        resultSet.getString("Password"),
+                        resultSet.getString("PasswordHashing"),
                         resultSet.getBytes("Salt"),
                         resultSet.getString("UserName"),
                         resultSet.getInt("UserViewID")
@@ -111,7 +111,7 @@ public class UserDBDAO {
             while (resultSet.next()) {
                 User user = new User(
                         resultSet.getInt("UserID"),
-                        resultSet.getString("Password"),
+                        resultSet.getString("PasswordHashing"),
                         resultSet.getBytes("Salt"),
                         resultSet.getString("UserName"),
                         resultSet.getInt("UserViewID")
