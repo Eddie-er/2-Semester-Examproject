@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ArlaScreens.GUI.View.AdminView"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="941.0" prefWidth="1621.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.View.AdminViewController">
+    <children>
+        <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="1920.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="User Settings">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#addUserAction" text="Add User" />
+                        <MenuItem mnemonicParsing="false" onAction="#editUserAction" text="Edit User" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteUserAction" text="Delete User" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TableView fx:id="departmentTableView" layoutY="66.0" prefHeight="1014.0" prefWidth="1202.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <columns>
+                <TableColumn fx:id="departmentCol" prefWidth="243.0" text="Afdeling" />
+                <TableColumn prefWidth="177.0" text="Info 1" />
+                <TableColumn prefWidth="209.0" text="Info 2" />
+                <TableColumn prefWidth="189.0" text="Info 3" />
+                <TableColumn prefWidth="187.0" text="Info 4" />
+                <TableColumn prefWidth="196.0" text="Info 5" />
+            </columns>
+        </TableView>
+        <Label layoutX="28.0" layoutY="37.0" prefHeight="14.0" prefWidth="160.0" text="Produktions brugere" />
+        <CheckBox layoutX="1268.0" layoutY="98.0" mnemonicParsing="false" onAction="#barChartChoiceBox" text="Søjle Diagram" />
+        <CheckBox layoutX="1268.0" layoutY="140.0" mnemonicParsing="false" onAction="#pieChartChoiceBox" text="Cirkel Diagram" />
+        <CheckBox layoutX="1268.0" layoutY="180.0" mnemonicParsing="false" onAction="#showWebsiteChoiceBox" text="Hjemmeside" />
+        <CheckBox layoutX="1268.0" layoutY="218.0" mnemonicParsing="false" onAction="#showPDFChoiceBox" prefHeight="25.0" prefWidth="53.0" text="PDF" />
+        <Button layoutX="1355.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleChoosePDFBtn" text="Vælg PDF" />
+        <Button layoutX="1865.0" layoutY="984.0" mnemonicParsing="false" onAction="#handleSaveBtn" text="Gem" />
+        <Button layoutX="1797.0" layoutY="984.0" mnemonicParsing="false" onAction="#handleRegretBtn" text="Fortryd" />
+        <Label fx:id="choosedDepLabel" layoutX="1268.0" layoutY="66.0" prefHeight="17.0" prefWidth="167.0" />
+    </children>
 </AnchorPane>

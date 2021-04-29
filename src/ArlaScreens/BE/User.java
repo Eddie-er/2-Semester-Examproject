@@ -2,12 +2,14 @@ package ArlaScreens.BE;
 
 public class User {
     private int userID;
-    private byte salt;
+    private String password;
+    private byte[] salt;
     private String username;
     private int userviewID;
 
-    public User(int userID, byte salt, String username, int userviewID) {
+    public User(int userID, String password, byte[] salt, String username, int userviewID) {
         this.userID = userID;
+        this.password = password;
         this.salt = salt;
         this.username = username;
         this.userviewID = userviewID;
@@ -29,12 +31,20 @@ public class User {
         this.userID = userID;
     }
 
-    public byte getSalt() {
+    public byte[] getSalt() {
         return salt;
     }
 
-    public void setSalt(byte salt) {
+    public void setSalt(byte[] salt) {
         this.salt = salt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getUserViewID() {
