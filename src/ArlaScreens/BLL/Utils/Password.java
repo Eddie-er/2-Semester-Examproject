@@ -1,4 +1,4 @@
-package sample.BLL.Utils;
+package ArlaScreens.BLL.Utils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

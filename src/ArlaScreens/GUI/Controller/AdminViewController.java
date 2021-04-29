@@ -1,4 +1,4 @@
-package sample.GUI.Controller;
+package ArlaScreens.GUI.Controller;
 
 public class AdminViewController {
 }

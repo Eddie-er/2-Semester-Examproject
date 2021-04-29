@@ -1,4 +1,4 @@
-package sample.BE;
+package ArlaScreens.BE;
 
 public class Admin {
 }

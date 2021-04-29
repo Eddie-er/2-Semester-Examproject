@@ -1,4 +1,4 @@
-package sample.BLL;
+package ArlaScreens.BLL;
 
 public class UserManager {
 }
