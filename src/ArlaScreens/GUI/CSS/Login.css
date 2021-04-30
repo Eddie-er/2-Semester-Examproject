@@ -1,3 +1,18 @@
+.button {
+    -fx-font-weight: bold;
+    -fx-background-radius: 22;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+
+.button:hover{
+    -fx-font-weight: bold;
+    -fx-background-radius: 22;
+    -fx-font-size: 16;
+    -fx-text-fill: #6f7172;
+    -fx-border-color: #6f7172;
+}
+
 AnchorPane{
     -fx-background-color: #27B417;
 }
