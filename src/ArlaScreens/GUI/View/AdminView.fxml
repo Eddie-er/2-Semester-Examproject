@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1668.0" stylesheets="@../CSS/Admin.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.AdminViewController">
+<AnchorPane prefHeight="900.0" prefWidth="1668.0" stylesheets="@../CSS/Admin.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.AdminViewController">
     <children>
         <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="1240.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -52,7 +52,7 @@
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-        <Button layoutX="1143.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleChoosePDFBtn" text="Vælg PDF" />
+        <Button layoutX="1143.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleChoosePDFBtn" stylesheets="@../CSS/Admin.css" text="Vælg PDF" />
         <Button layoutX="1157.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleSaveBtn" text="Gem" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="502.0" />
         <Button layoutX="1059.0" layoutY="855.0" mnemonicParsing="false" onAction="#handleRegretBtn" text="Fortryd" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="586.0" />
         <Label fx:id="choosedDepLabel" layoutX="1268.0" layoutY="66.0" prefHeight="17.0" prefWidth="167.0" />
