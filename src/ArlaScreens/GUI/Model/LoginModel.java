@@ -2,6 +2,7 @@ package ArlaScreens.GUI.Model;
 
 import ArlaScreens.BE.User;
 import ArlaScreens.BLL.LoginManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 public class LoginModel {
     private static LoginModel instance = null;
@@ -19,8 +20,8 @@ public class LoginModel {
         return instance;
     }
 
-    public User login (String userName, String password) {
-        user = login(userName, password);
+    public User login (String userName, String password) throws SQLServerException {
+        user = loginManager.login(userName, password);
         return user;
     }
 

@@ -24,7 +24,7 @@ public class UserDBDAO {
         Connection connection = dbConnector.getConnection();
         List<User> users = new ArrayList<>();
 
-        String query = "SELECT * FROM User";
+        String query = "SELECT * FROM dbo.[User]";
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -32,10 +32,9 @@ public class UserDBDAO {
         while (resultSet.next()) {
             User user = new User(
                     resultSet.getInt("UserID"),
-                    resultSet.getString("PasswordHashing"),
+                    resultSet.getString("Password"),
                     resultSet.getBytes("Salt"),
-                    resultSet.getString("UserName"),
-                    resultSet.getInt("UserViewID")
+                    resultSet.getString("UserName")
             );
             users.add(user);
         }
@@ -48,14 +47,13 @@ public class UserDBDAO {
      * @param user
      */
     public void addUser(User user) {
-        String query = "INSERT INTO User(Password, UserName, UserViewID, Salt) VALUES (?,?,?,?)";
+        String query = "INSERT INTO dbo.[User](Password, UserName, Salt) VALUES (?,?,?)";
         try (Connection connection = dbConnector.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getUsername());
-            preparedStatement.setInt(3, user.getUserViewID());
-            preparedStatement.setBytes(4, user.getSalt());
+            preparedStatement.setBytes(3, user.getSalt());
             preparedStatement.execute();
 
         } catch (SQLException throwables) {
@@ -71,7 +69,7 @@ public class UserDBDAO {
      */
     public User getUserByName(String userName) throws SQLServerException {
         try (Connection connection = dbConnector.getConnection()) {
-            String query = "SELECT * FROM User WHERE User.UserName = ?";
+            String query = "SELECT * FROM dbo.[User] WHERE dbo.[User].UserName = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userName);
@@ -81,10 +79,9 @@ public class UserDBDAO {
             while (resultSet.next()) {
                 User user = new User(
                         resultSet.getInt("UserID"),
-                        resultSet.getString("PasswordHashing"),
+                        resultSet.getString("Password"),
                         resultSet.getBytes("Salt"),
-                        resultSet.getString("UserName"),
-                        resultSet.getInt("UserViewID")
+                        resultSet.getString("UserName")
                 );
                 return user;
             }
@@ -101,7 +98,7 @@ public class UserDBDAO {
      */
     public User getUserByID(int userID) {
         try (Connection connection = dbConnector.getConnection()) {
-            String query = "SELECT * FROM User WHERE User.UserID = ?";
+            String query = "SELECT * FROM User WHERE dbo.[User].UserID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
@@ -111,10 +108,9 @@ public class UserDBDAO {
             while (resultSet.next()) {
                 User user = new User(
                         resultSet.getInt("UserID"),
-                        resultSet.getString("PasswordHashing"),
+                        resultSet.getString("Password"),
                         resultSet.getBytes("Salt"),
-                        resultSet.getString("UserName"),
-                        resultSet.getInt("UserViewID")
+                        resultSet.getString("UserName")
                 );
                 return user;
             }

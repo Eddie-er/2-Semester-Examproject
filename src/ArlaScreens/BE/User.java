@@ -7,6 +7,13 @@ public class User {
     private String username;
     private int userviewID;
 
+    public User(int userID, String password, byte[] salt, String username) {
+        this.userID = userID;
+        this.password = password;
+        this.salt = salt;
+        this.username = username;
+    }
+
     public User(int userID, String password, byte[] salt, String username, int userviewID) {
         this.userID = userID;
         this.password = password;
@@ -14,6 +21,8 @@ public class User {
         this.username = username;
         this.userviewID = userviewID;
     }
+
+
 
     public String getUsername() {
         return username;

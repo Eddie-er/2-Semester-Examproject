@@ -5,6 +5,7 @@ import ArlaScreens.BLL.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class UserModel {
@@ -22,7 +23,7 @@ public class UserModel {
         return allUsers;
     }
 
-    public void addUser(User user) {
-        userManager.addUser(user);
+    public void addUser(String username, String password) throws NoSuchAlgorithmException {
+        userManager.addUser(username, password);
     }
 }
