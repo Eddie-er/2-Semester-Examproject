@@ -63,6 +63,10 @@ public class UserDBDAO {
         }
     }
 
+    /**
+     * Deletes a user from the database
+     * @param user
+     */
     public void deleteUser(User user) {
         String query = "DELETE FROM dbo.[User] WHERE UserName = ?";
         try (Connection connection = dbConnector.getConnection()){
@@ -74,6 +78,7 @@ public class UserDBDAO {
             throwables.printStackTrace();
         }
     }
+
     /**
      * Gets a user by a specific username
      * @param userName
@@ -112,7 +117,7 @@ public class UserDBDAO {
      */
     public User getUserByID(int userID) {
         try (Connection connection = dbConnector.getConnection()) {
-            String query = "SELECT * FROM User WHERE dbo.[User].UserID = ?";
+            String query = "SELECT * FROM dbo.[User] WHERE dbo.[User].UserID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
