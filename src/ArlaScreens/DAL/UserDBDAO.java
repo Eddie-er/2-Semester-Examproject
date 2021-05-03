@@ -34,7 +34,8 @@ public class UserDBDAO {
                     resultSet.getInt("UserID"),
                     resultSet.getString("Password"),
                     resultSet.getBytes("Salt"),
-                    resultSet.getString("UserName")
+                    resultSet.getString("UserName"),
+                    resultSet.getBoolean("IsAdmin")
             );
             users.add(user);
         }
@@ -47,13 +48,14 @@ public class UserDBDAO {
      * @param user
      */
     public void addUser(User user) {
-        String query = "INSERT INTO dbo.[User](Password, UserName, Salt) VALUES (?,?,?)";
+        String query = "INSERT INTO dbo.[User](Password, UserName, Salt, IsAdmin) VALUES (?,?,?,?)";
         try (Connection connection = dbConnector.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setBytes(3, user.getSalt());
+            preparedStatement.setBoolean(4, user.isAdmin());
             preparedStatement.execute();
 
         } catch (SQLException throwables) {
@@ -61,6 +63,17 @@ public class UserDBDAO {
         }
     }
 
+    public void deleteUser(User user) {
+        String query = "DELETE FROM dbo.[User] WHERE UserName = ?";
+        try (Connection connection = dbConnector.getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     /**
      * Gets a user by a specific username
      * @param userName
@@ -81,7 +94,8 @@ public class UserDBDAO {
                         resultSet.getInt("UserID"),
                         resultSet.getString("Password"),
                         resultSet.getBytes("Salt"),
-                        resultSet.getString("UserName")
+                        resultSet.getString("UserName"),
+                        resultSet.getBoolean("IsAdmin")
                 );
                 return user;
             }
@@ -110,7 +124,8 @@ public class UserDBDAO {
                         resultSet.getInt("UserID"),
                         resultSet.getString("Password"),
                         resultSet.getBytes("Salt"),
-                        resultSet.getString("UserName")
+                        resultSet.getString("UserName"),
+                        resultSet.getBoolean("IsAdmin")
                 );
                 return user;
             }

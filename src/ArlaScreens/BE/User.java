@@ -1,35 +1,33 @@
 package ArlaScreens.BE;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class User {
     private int userID;
     private String password;
     private byte[] salt;
-    private String username;
-    private int userviewID;
+    private StringProperty username;
+    private boolean isAdmin;
 
-    public User(int userID, String password, byte[] salt, String username) {
+    public User(int userID, String password, byte[] salt, String username, boolean isAdmin) {
         this.userID = userID;
         this.password = password;
         this.salt = salt;
-        this.username = username;
+        this.username = new SimpleStringProperty(username);
+        this.isAdmin = isAdmin;
     }
 
-    public User(int userID, String password, byte[] salt, String username, int userviewID) {
-        this.userID = userID;
-        this.password = password;
-        this.salt = salt;
-        this.username = username;
-        this.userviewID = userviewID;
-    }
-
-
-
-    public String getUsername() {
+    public StringProperty usernameProperty() {
         return username;
     }
 
+    public String getUsername() {
+        return username.get();
+    }
+
     public void setUsername(String username) {
-        this.username = username;
+        this.username.set(username);
     }
 
     public int getUserID() {
@@ -56,11 +54,11 @@ public class User {
         this.password = password;
     }
 
-    public int getUserViewID() {
-        return userviewID;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setUserViewID(int userviewID) {
-        this.userviewID = userviewID;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

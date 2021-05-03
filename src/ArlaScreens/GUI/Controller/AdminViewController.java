@@ -1,8 +1,11 @@
 package ArlaScreens.GUI.Controller;
 
+import ArlaScreens.BE.User;
+import ArlaScreens.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -11,17 +14,40 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class AdminViewController {
+public class AdminViewController implements Initializable {
+
+    private UserModel userModel;
+
 
     @FXML
-    private TableView<?> departmentTableView;
+    private TableView<User> departmentTableView;
 
     @FXML
-    private TableColumn<?, ?> departmentCol;
+    private TableColumn<User, String> departmentCol;
 
     @FXML
     private Label choosedDepLabel;
+    private User selectedUser = null;
+
+    public AdminViewController() {
+        userModel = new UserModel();
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            departmentTableView.setItems(userModel.getAllUsers());
+            departmentCol.setCellValueFactory(celldata -> celldata.getValue().usernameProperty());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        departmentTableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue)->{
+            selectedUser = newValue;
+        });
+    }
 
     @FXML
     void addUserAction(ActionEvent event) throws IOException {
@@ -39,7 +65,14 @@ public class AdminViewController {
 
     @FXML
     void deleteUserAction(ActionEvent event) {
-
+        if (selectedUser != null) {
+            userModel.deleteUser(selectedUser);
+            try {
+                departmentTableView.setItems(userModel.getAllUsers());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -76,6 +109,7 @@ public class AdminViewController {
     void showWebsiteChoiceBox(ActionEvent event) {
 
     }
+
 
 }
 

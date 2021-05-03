@@ -20,9 +20,13 @@ public class UserManager {
         return userDBDAO.getAllUsers();
     }
 
-    public void addUser(String username, String password) throws NoSuchAlgorithmException {
+    public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
-        userDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username));
+        userDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
+    }
+
+    public void deleteUser(User user) {
+        userDBDAO.deleteUser(user);
     }
 
     public User getUserByName(String userName) throws SQLServerException {

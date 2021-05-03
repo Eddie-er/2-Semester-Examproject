@@ -23,7 +23,11 @@ public class UserModel {
         return allUsers;
     }
 
-    public void addUser(String username, String password) throws NoSuchAlgorithmException {
-        userManager.addUser(username, password);
+    public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
+        userManager.addUser(username, password, isAdmin);
+    }
+
+    public void deleteUser(User user) {
+        userManager.deleteUser(user);
     }
 }

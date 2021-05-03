@@ -59,8 +59,6 @@ public class LoginViewController implements Initializable{
 
     }
 
-
-    // tømmer user, password og error felded
     public void reset(javafx.event.ActionEvent actionEvent) {
         UserName.setText("");
         PassWord.setText("");
