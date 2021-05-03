@@ -12,42 +12,42 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="799.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.LoginViewController">
    <right>
-      <AnchorPane fx:id="AnchorPaneRight" prefHeight="962.0" prefWidth="1235.0" stylesheets="@../CSS/Login.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="AnchorPaneRight" prefHeight="650.0" prefWidth="1280.0" stylesheets="@../CSS/Login.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="233.0" layoutY="435.0" prefHeight="53.0" prefWidth="201.0" text="Brugernavn :" AnchorPane.bottomAnchor="311.0" AnchorPane.rightAnchor="801.0">
+            <Label layoutX="274.0" layoutY="434.0" prefHeight="53.0" prefWidth="210.0" text="Brugernavn :" AnchorPane.bottomAnchor="311.6" AnchorPane.rightAnchor="750.8000000000001">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="277.0" layoutY="532.0" prefHeight="53.0" prefWidth="165.0" text="Kodeord :" AnchorPane.bottomAnchor="214.0" AnchorPane.rightAnchor="793.0">
+            <Label layoutX="309.0" layoutY="533.0" prefHeight="53.0" prefWidth="210.0" text="Kodeord :" AnchorPane.bottomAnchor="212.60000000000002" AnchorPane.rightAnchor="715.8000000000001">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
-            <PasswordField fx:id="PassWord" layoutX="442.0" layoutY="533.0" prefHeight="50.0" prefWidth="400.0" AnchorPane.bottomAnchor="216.0" AnchorPane.leftAnchor="442.0" AnchorPane.rightAnchor="378.0" />
-            <TextField fx:id="UserName" layoutX="442.0" layoutY="436.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="433.0" AnchorPane.bottomAnchor="313.0" AnchorPane.leftAnchor="442.0" AnchorPane.rightAnchor="378.0" />
-            <Button fx:id="Cancel" layoutX="788.0" layoutY="615.0" mnemonicParsing="false" onAction="#cancel" text="Luk" AnchorPane.topAnchor="615.0">
+            <TextField fx:id="UserName" layoutX="450.0" layoutY="436.0" minHeight="50.0" minWidth="400.0" prefHeight="45.0" prefWidth="300.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="436.0" />
+            <PasswordField fx:id="PassWord" layoutX="450.0" layoutY="537.0" prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="216.60000000000002" AnchorPane.leftAnchor="450.0" />
+            <Button fx:id="Cancel" layoutX="803.0" layoutY="616.0" mnemonicParsing="false" onAction="#cancel" text="Luk" AnchorPane.bottomAnchor="147.20000000000005">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="Reset" layoutX="618.0" layoutY="615.0" mnemonicParsing="false" onAction="#reset" text="Nulstil" AnchorPane.topAnchor="615.0">
+            <Button fx:id="Reset" layoutX="618.0" layoutY="616.0" mnemonicParsing="false" onAction="#reset" text="Nulstil" AnchorPane.bottomAnchor="147.20000000000005">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <ImageView fx:id="imageView" fitHeight="267.0" fitWidth="454.0" layoutX="450.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="20.0">
+            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="400.0" layoutX="500.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="500.0">
                <image>
                   <Image url="@../../../../Billeder/Arla-Logo.png" />
                </image>
             </ImageView>
 
-            <Label layoutX="590.0" layoutY="312.0" text="Siden 2000" AnchorPane.leftAnchor="590.0" AnchorPane.topAnchor="312.0">
+            <Label layoutX="617.0" layoutY="258.0" text="Siden 2000" AnchorPane.leftAnchor="617.0" AnchorPane.topAnchor="258.0">
                <font>
-                  <Font size="24.0" />
+                  <Font size="13.0" />
                </font>
             </Label>
-            <Button fx:id="Login" layoutX="442.0" layoutY="615.0" mnemonicParsing="false" onAction="#handleLogin" text="Log ind">
+            <Button fx:id="Login" layoutX="450.0" layoutY="616.0" mnemonicParsing="false" onAction="#handleLogin" text="Log ind" AnchorPane.bottomAnchor="147.20000000000005">
                <font>
                   <Font size="24.0" />
                </font>
