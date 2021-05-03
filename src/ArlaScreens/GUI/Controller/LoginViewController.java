@@ -70,6 +70,9 @@ public class LoginViewController implements Initializable{
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
+                stage.setTitle("User");
+                //stage.setTitle(String.valueOf(new Scene(root, 1280, 650)));
+
                 stage.setScene(scene);
                 stage.showAndWait();
             } catch (IOException e) {

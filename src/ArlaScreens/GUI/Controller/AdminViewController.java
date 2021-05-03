@@ -76,8 +76,18 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    void editUserAction(ActionEvent event) {
+    void editUserAction(ActionEvent event) throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../View/EditUserView.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
 
+
+        }
     }
 
     @FXML
