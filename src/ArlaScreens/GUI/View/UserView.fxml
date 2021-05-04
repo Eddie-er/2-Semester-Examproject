@@ -5,16 +5,16 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.UserViewController">
+<BorderPane maxHeight="650" maxWidth="1280" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.UserViewController">
    <top>
-      <AnchorPane prefHeight="610.0" prefWidth="1739.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="325" prefWidth="1280" BorderPane.alignment="CENTER">
          <children>
-            <AreaChart layoutX="963.0" layoutY="-3.0" prefHeight="629.0" prefWidth="1186.0">
+            <AreaChart layoutX="640.0" layoutY="3.0" prefHeight="325" prefWidth="640">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -22,15 +22,14 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <WebView fx:id="webView" prefHeight="617.0" prefWidth="954.0" />
+            <WebView fx:id="webView" layoutY="6.0" prefHeight="325" prefWidth="640" />
          </children>
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="610.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="325" prefWidth="640" BorderPane.alignment="CENTER">
          <children>
-            <TextArea layoutX="1006.0" layoutY="12.0" prefHeight="705.0" prefWidth="1104.0" />
-            <TableView layoutX="18.0" layoutY="9.0" prefHeight="704.0" prefWidth="970.0">
+            <TableView prefHeight="331.0" prefWidth="640.0">
               <columns>
                 <TableColumn minWidth="160.0" prefWidth="75.0" text="C1" />
                 <TableColumn minWidth="160.0" prefWidth="75.0" text="C2" />
@@ -40,6 +39,7 @@
                   <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
               </columns>
             </TableView>
+            <ImageView fitHeight="331.0" fitWidth="640.0" layoutX="640.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </bottom>
