@@ -87,8 +87,6 @@ public class AdminViewController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-
-
         }
     }
 

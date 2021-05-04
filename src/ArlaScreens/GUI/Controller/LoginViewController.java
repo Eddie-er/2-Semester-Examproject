@@ -78,7 +78,7 @@ public class LoginViewController implements Initializable{
                 Parent root = FXMLLoader.load(getClass().getResource("../View/AdminView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
-                stage.setTitle("User");
+                stage.setTitle("Admin");
                 stage.setScene(scene);
                 stage.showAndWait();
             } catch (IOException e) {
@@ -90,7 +90,7 @@ public class LoginViewController implements Initializable{
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
-                stage.setTitle("User");
+                stage.setTitle("Bruger");
                 stage.setScene(scene);
                 stage.showAndWait();
             } catch (IOException e) {
