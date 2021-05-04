@@ -1,6 +1,8 @@
 package ArlaScreens.GUI.Controller;
 
+import ArlaScreens.BE.User;
 import ArlaScreens.GUI.Model.LoginModel;
+import ArlaScreens.GUI.Model.UserModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -39,9 +44,11 @@ public class LoginViewController implements Initializable{
     private ImageView imageView;
 
     private LoginModel loginModel;
+    private UserModel userModel;
 
     public LoginViewController() {
         loginModel = LoginModel.getInstance();
+        userModel = new UserModel();
     }
 
     //sætter Arla logo.
@@ -64,12 +71,26 @@ public class LoginViewController implements Initializable{
         PassWord.setText("");
     }
 
-    public void handleLogin(ActionEvent actionEvent) throws IOException, SQLServerException {
-        if (loginModel.login(UserName.getText(), PassWord.getText()) != null) {
+    public void handleLogin(ActionEvent actionEvent) throws IOException, SQLException {
+
+        if (loginModel.login(UserName.getText(), PassWord.getText()) != null && loginModel.getLoggedInUser().isAdmin()) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("../View/AdminView.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setTitle("User");
+                stage.setScene(scene);
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (loginModel.login(UserName.getText(), PassWord.getText()) != null) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
+                stage.setTitle("User");
                 stage.setScene(scene);
                 stage.showAndWait();
             } catch (IOException e) {

@@ -11,8 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -76,13 +78,28 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    void editUserAction(ActionEvent event) {
+    void editUserAction(ActionEvent event) throws IOException {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../View/EditUserView.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
 
+
+        }
     }
 
     @FXML
     void handleChoosePDFBtn(ActionEvent event) {
-
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Vælg en PDF...");
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\PDF"));
+        fc.getExtensionFilters().addAll();
+        new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
+        File selectedFiles = fc.showOpenDialog(null);
     }
 
     @FXML
