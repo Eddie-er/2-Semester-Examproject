@@ -96,7 +96,7 @@ public class AdminViewController implements Initializable {
     void handleChoosePDFBtn(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Vælg en PDF...");
-        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\PDF"));
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\PDF"));
         fc.getExtensionFilters().addAll();
         new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
         File selectedFiles = fc.showOpenDialog(null);
@@ -106,7 +106,7 @@ public class AdminViewController implements Initializable {
     void handleChooseCSVBtn(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Vælg en CSV...");
-        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\CSV"));
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\CSV"));
         fc.getExtensionFilters().addAll();
         new FileChooser.ExtensionFilter("CSV Files", "*.csv");
         File selectedFiles = fc.showOpenDialog(null);
