@@ -64,6 +64,27 @@ public class UserDBDAO {
     }
 
     /**
+     * Edits a Choosen User in The DataBase.
+     * @param user
+     */
+   public void editUser(User user){
+        try (Connection connection = dbConnector.getConnection()){
+            String query = "UPDATE dbo.[User] SET Password =?, UserName =?, Salt =?, IsAdmin =? WHERE UserID =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setBytes(3, user.getSalt());
+            preparedStatement.setBoolean(4, user.isAdmin());
+            preparedStatement.setInt(5, user.getUserID());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+
+    /**
      * Deletes a user from the database
      * @param user
      */

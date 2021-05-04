@@ -19,7 +19,6 @@
                 <Menu mnemonicParsing="false" text="User Settings">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#addUserAction" text="Add User" />
-                        <MenuItem mnemonicParsing="false" onAction="#editUserAction" text="Edit User" />
                         <MenuItem mnemonicParsing="false" onAction="#deleteUserAction" text="Delete User" />
                     </items>
                 </Menu>
@@ -63,5 +62,6 @@
       </CheckBox>
       <ListView layoutX="750.0" layoutY="328.0" prefHeight="100.0" prefWidth="200.0" />
       <Button layoutX="820.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleChooseCSVBtn" text="Vælg CSV" />
+      <Button fx:id="editUser" layoutX="666.0" layoutY="600.0" mnemonicParsing="false" onAction="#editAction" text="Edit" />
     </children>
 </AnchorPane>

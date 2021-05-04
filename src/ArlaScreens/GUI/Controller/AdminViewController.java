@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,10 +25,12 @@ public class AdminViewController implements Initializable {
 
     private UserModel userModel;
 
+    @FXML
+    Button editUser;
+
 
     @FXML
     private TableView<User> departmentTableView;
-
     @FXML
     private TableColumn<User, String> departmentCol;
 
@@ -52,12 +55,14 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    void addUserAction(ActionEvent event) throws IOException {
+    void addUserAction(ActionEvent event) throws IOException, SQLException {
         Parent root = FXMLLoader.load(getClass().getResource("../View/NewUserView.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.showAndWait();
+        //updates the TableView
+        departmentTableView.setItems(userModel.getAllUsers());
     }
 
     @FXML
@@ -77,18 +82,28 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Edit a Choosen User.
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    void editUserAction(ActionEvent event) throws IOException {
+    void editAction(ActionEvent event) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("../View/EditUserView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/EditUserView.fxml"));
             Stage stage = new Stage();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(loader.load());
             stage.setScene(scene);
+
+            EditUserViewController euvc = loader.getController();
+            euvc.initData(departmentTableView.getSelectionModel().getSelectedItem());
             stage.showAndWait();
-        } catch (IOException e) {
+
+            //updates the TableView
+            departmentTableView.setItems(userModel.getAllUsers());
+
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
-
-
         }
     }
 
@@ -136,6 +151,7 @@ public class AdminViewController implements Initializable {
     void showWebsiteChoiceBox(ActionEvent event) {
 
     }
+
 
 
 }

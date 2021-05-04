@@ -18,7 +18,7 @@
       <TextField fx:id="txtPassword" layoutX="286.0" layoutY="225.0" />
       <Label layoutX="215.0" layoutY="185.0" text="Brugernavn:" />
       <Label layoutX="230.0" layoutY="229.0" text="Kodeord:" />
-      <Button layoutX="626.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleAddUser" text="Gem bruger" />
+      <Button fx:id="saveButton" layoutX="626.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleAddUser" text="Gem bruger" />
       <CheckBox fx:id="checkboxAdmin" layoutX="286.0" layoutY="265.0" mnemonicParsing="false" text="Admin" />
    </children>
 </AnchorPane>

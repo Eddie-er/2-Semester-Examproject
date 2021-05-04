@@ -3,6 +3,7 @@ package ArlaScreens.BLL;
 import ArlaScreens.BE.User;
 import ArlaScreens.BLL.Utils.PasswordHashing;
 import ArlaScreens.DAL.UserDBDAO;
+import ArlaScreens.GUI.Controller.EditUserViewController;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.security.NoSuchAlgorithmException;
@@ -18,6 +19,13 @@ public class UserManager {
 
     public List<User> getAllUsers() throws SQLException {
         return userDBDAO.getAllUsers();
+    }
+
+
+   public void editUser(String username, String password, boolean isAdmin, int userID) throws NoSuchAlgorithmException {
+        byte[] salt = PasswordHashing.getSalt();
+        userDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
+
     }
 
     public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {

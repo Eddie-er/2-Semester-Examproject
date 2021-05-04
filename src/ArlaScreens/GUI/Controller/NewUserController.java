@@ -2,9 +2,12 @@ package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +18,8 @@ public class NewUserController implements Initializable {
     public TextField txtUserName;
     public TextField txtPassword;
     public CheckBox checkboxAdmin;
+    @FXML
+    private Button saveButton;
 
     private UserModel userModel;
 
@@ -33,5 +38,7 @@ public class NewUserController implements Initializable {
         String password = txtPassword.getText();
 
         userModel.addUser(username, password, isSelected);
+        Stage stage = (Stage) saveButton.getScene().getWindow();
+        stage.close();
     }
 }
