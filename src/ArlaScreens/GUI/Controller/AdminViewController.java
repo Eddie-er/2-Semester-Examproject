@@ -103,6 +103,16 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
+    void handleChooseCSVBtn(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Vælg en CSV...");
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\CSV"));
+        fc.getExtensionFilters().addAll();
+        new FileChooser.ExtensionFilter("CSV Files", "*.csv");
+        File selectedFiles = fc.showOpenDialog(null);
+    }
+
+    @FXML
     void handleRegretBtn(ActionEvent event) {
 
     }
