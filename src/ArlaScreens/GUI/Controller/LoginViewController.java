@@ -54,7 +54,7 @@ public class LoginViewController implements Initializable{
     //sætter Arla logo.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        File file = new File("Billeder/Arla-Logo.png");
+        File file = new File("Data\\Billeder/Arla-Logo.png");
         Image image = new Image(file.toURI().toString());
         imageView.setImage(image);
     }
