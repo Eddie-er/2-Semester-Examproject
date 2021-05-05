@@ -26,7 +26,7 @@
             </Label>
             <TextField fx:id="UserName" layoutX="450.0" layoutY="436.0" minHeight="50.0" minWidth="400.0" prefHeight="45.0" prefWidth="300.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="436.0" />
             <PasswordField fx:id="PassWord" layoutX="450.0" layoutY="537.0" prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="216.60000000000002" AnchorPane.leftAnchor="450.0" />
-            <Button fx:id="Cancel" layoutX="803.0" layoutY="616.0" mnemonicParsing="false" onAction="#cancel" text="Luk" AnchorPane.bottomAnchor="147.20000000000005">
+            <Button fx:id="Cancel" layoutX="796.0" layoutY="616.0" mnemonicParsing="false" onAction="#cancel" text="Luk" AnchorPane.bottomAnchor="147.20000000000005">
                <font>
                   <Font size="24.0" />
                </font>
@@ -42,9 +42,9 @@
                </image>
             </ImageView>
 
-            <Label layoutX="617.0" layoutY="258.0" text="Siden 2000" AnchorPane.leftAnchor="617.0" AnchorPane.topAnchor="258.0">
+            <Label layoutX="563.0" layoutY="263.0" text="Siden 2000" AnchorPane.leftAnchor="563.0" AnchorPane.topAnchor="263.0">
                <font>
-                  <Font size="13.0" />
+                  <Font size="35.0" />
                </font>
             </Label>
             <Button fx:id="Login" layoutX="450.0" layoutY="616.0" mnemonicParsing="false" onAction="#handleLogin" text="Log ind" AnchorPane.bottomAnchor="147.20000000000005">
@@ -52,7 +52,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Label fx:id="errorLabel" layoutX="519.0" layoutY="384.0" prefHeight="27.0" prefWidth="327.0" textAlignment="CENTER">
+            <Label fx:id="errorLabel" layoutX="469.0" layoutY="386.0" prefHeight="27.0" prefWidth="478.0" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
