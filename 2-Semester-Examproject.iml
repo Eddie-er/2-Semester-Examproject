@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="javafx-fxml">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/javafx-fxml-15.jar!/" />
@@ -23,9 +23,9 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="mssql-jdbc-9.2.1.jre15" level="project" />
-    <orderEntry type="library" name="com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre15" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="javafx.web" level="project" />
+    <orderEntry type="library" exported="" name="mssql-jdbc-9.2.1.jre15" level="project" />
+    <orderEntry type="library" exported="" name="com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre15" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="javafx.web" level="project" />
   </component>
 </module>

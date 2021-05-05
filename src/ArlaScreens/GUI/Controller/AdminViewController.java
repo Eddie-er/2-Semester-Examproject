@@ -36,6 +36,8 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private Label choosedDepLabel;
+    @FXML
+    private Button aLogOut;
     private User selectedUser = null;
 
     public AdminViewController() {
@@ -106,7 +108,7 @@ public class AdminViewController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    //Opens file chooser and only allows PDF files
     @FXML
     void handleChoosePDFBtn(ActionEvent event) {
         FileChooser fc = new FileChooser();
@@ -116,7 +118,7 @@ public class AdminViewController implements Initializable {
         new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
         File selectedFiles = fc.showOpenDialog(null);
     }
-
+    //Opens file chooser and only allows CSV files
     @FXML
     void handleChooseCSVBtn(ActionEvent event) {
         FileChooser fc = new FileChooser();
@@ -130,6 +132,11 @@ public class AdminViewController implements Initializable {
     @FXML
     void handleRegretBtn(ActionEvent event) {
 
+    }
+
+    public void adminlogout(javafx.event.ActionEvent actionEvent)throws IOException {
+        Stage stage = (Stage) aLogOut.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -151,8 +158,4 @@ public class AdminViewController implements Initializable {
     void showWebsiteChoiceBox(ActionEvent event) {
 
     }
-
-
-
 }
-

@@ -11,36 +11,36 @@
 <?import javafx.scene.web.WebView?>
 
 <BorderPane maxHeight="650" maxWidth="1280" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.UserViewController">
-   <top>
-      <AnchorPane prefHeight="325" prefWidth="1280" BorderPane.alignment="CENTER">
-         <children>
-            <AreaChart layoutX="640.0" layoutY="3.0" prefHeight="325" prefWidth="640">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </AreaChart>
-            <WebView fx:id="webView" layoutY="6.0" prefHeight="325" prefWidth="640" />
-         </children>
-      </AnchorPane>
-   </top>
-   <bottom>
-      <AnchorPane prefHeight="325" prefWidth="640" BorderPane.alignment="CENTER">
-         <children>
-            <TableView prefHeight="331.0" prefWidth="640.0">
-              <columns>
-                <TableColumn minWidth="160.0" prefWidth="75.0" text="C1" />
-                <TableColumn minWidth="160.0" prefWidth="75.0" text="C2" />
-                  <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
-                  <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
-                  <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
-                  <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
-              </columns>
-            </TableView>
-            <ImageView fitHeight="331.0" fitWidth="640.0" layoutX="640.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </AnchorPane>
-   </bottom>
+    <top>
+        <AnchorPane prefHeight="325" prefWidth="1280" BorderPane.alignment="CENTER">
+            <children>
+                <AreaChart layoutX="640.0" layoutY="3.0" prefHeight="325" prefWidth="640">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </AreaChart>
+                <WebView fx:id="webView" layoutY="6.0" prefHeight="325" prefWidth="640" />
+            </children>
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="325" prefWidth="640" BorderPane.alignment="CENTER">
+            <children>
+                <TableView prefHeight="331.0" prefWidth="640.0">
+                    <columns>
+                        <TableColumn minWidth="160.0" prefWidth="75.0" text="C1" />
+                        <TableColumn minWidth="160.0" prefWidth="75.0" text="C2" />
+                        <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
+                        <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
+                        <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
+                        <TableColumn minWidth="160.0" prefWidth="75.0" text="Column X" />
+                    </columns>
+                </TableView>
+                <ImageView fitHeight="331.0" fitWidth="640.0" layoutX="640.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </AnchorPane>
+    </bottom>
 </BorderPane>

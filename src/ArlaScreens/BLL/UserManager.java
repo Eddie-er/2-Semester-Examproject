@@ -25,7 +25,6 @@ public class UserManager {
    public void editUser(String username, String password, boolean isAdmin, int userID) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
         userDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
-
     }
 
     public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
