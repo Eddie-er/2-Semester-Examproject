@@ -5,13 +5,10 @@ import ArlaScreens.BLL.Utils.PasswordAlert;
 import ArlaScreens.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,15 +30,15 @@ public class EditUserViewController implements Initializable {
 
 
     @FXML
-    private Button gemButton;
+    private Button saveButton;
     @FXML
     private CheckBox adminCheck;
     @FXML
-    private Button fortrydButton;
+    private Button CancelButton;
     @FXML
     private TextField userName;
     @FXML
-    private Button nulstillKodeord;
+    private Button ResetPassWord;
 
     public EditUserViewController() {
         userModel = new UserModel();
@@ -53,8 +50,8 @@ public class EditUserViewController implements Initializable {
     }
 
     //throws interactive Warning to double check if the codeword should be reset.
-    public void nulstillKodeordAction(ActionEvent actionEvent) throws IOException{
-        nulstillKodeord.setOnAction(e -> PasswordAlert.display());
+    public void ResetPasswordAction(ActionEvent actionEvent) throws IOException{
+        ResetPassWord.setOnAction(e -> PasswordAlert.display());
     }
 
     //Checks the Check box if the choosen User is an admin.
@@ -76,9 +73,15 @@ public class EditUserViewController implements Initializable {
             isAdmin = false;
         }
     }
+    
+    //Closes the Window without any changes.
+    public void CancelAction(javafx.event.ActionEvent actionEvent)throws IOException {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
 
-    public void gemAction(ActionEvent actionEvent) throws NoSuchAlgorithmException {
+    }
 
+    public void saveAction(ActionEvent actionEvent) throws NoSuchAlgorithmException {
         //boolean isSelected = resetPassword;
         String username = userName.getText();
         String password;
@@ -98,16 +101,11 @@ public class EditUserViewController implements Initializable {
         System.out.println("User ID: " + userID);
         System.out.println("Admin: " + admin);
 
-        //Edits the Choosen USer
-       userModel.editUser(username, password, admin, userID);
+        //Edits the choosen User
+        userModel.editUser(username, password, admin, userID);
 
-        Stage stage = (Stage) gemButton.getScene().getWindow();
+        Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
     }
-    //Closes the Window without any changes.
-    public void FortrydAction(javafx.event.ActionEvent actionEvent)throws IOException {
-        Stage stage = (Stage) fortrydButton.getScene().getWindow();
-        stage.close();
 
-    }
 }

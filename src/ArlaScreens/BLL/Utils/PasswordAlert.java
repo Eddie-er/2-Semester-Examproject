@@ -20,14 +20,14 @@ public class PasswordAlert extends EditUserViewController{
         alert.setHeight(200);
         alert.setWidth(300);
         alert.setResizable(false);
-        alert.setTitle("bekræft sletning");
-        alert.setHeaderText("Er du sikkert at du vil slette kodeordet?");
-        alert.setContentText("Kodeordet vil Blive sat Til : Banan69");
-        ButtonType bekræft = new ButtonType("Bekræft");
-        ButtonType fortryd = new ButtonType("Fortryd", (ButtonBar.ButtonData.CANCEL_CLOSE));
-        alert.getButtonTypes().setAll(bekræft, fortryd);
+        alert.setTitle("Bekræft sletning");
+        alert.setHeaderText("Er du sikker på at du vil slette kodeordet?");
+        alert.setContentText("Kodeordet vil blive sat til : banan69");
+        ButtonType confirm = new ButtonType("Bekræft");
+        ButtonType cancel = new ButtonType("Fortryd", (ButtonBar.ButtonData.CANCEL_CLOSE));
+        alert.getButtonTypes().setAll(confirm, cancel);
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == bekræft) {
+        if(result.get() == confirm) {
             resetPassword = true;
         }
     }

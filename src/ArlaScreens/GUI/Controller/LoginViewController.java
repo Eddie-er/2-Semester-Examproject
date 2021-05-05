@@ -103,7 +103,7 @@ public class LoginViewController implements Initializable{
             }
 
         }else{
-            errorLabel.setText("Brugernavn eller Kodeord forkert.");
+            errorLabel.setText("Brugernavn eller kodeord forkert. Prøv igen.");
         }
     }
 }
