@@ -73,6 +73,7 @@ public class LoginViewController implements Initializable{
     public void reset(javafx.event.ActionEvent actionEvent) {
         UserName.setText("");
         PassWord.setText("");
+        errorLabel.setText("");
     }
 
     public void handleLogin(ActionEvent actionEvent) throws IOException, SQLException {
