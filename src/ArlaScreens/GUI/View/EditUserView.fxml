@@ -30,7 +30,7 @@
          </font>
       </CheckBox>
       <TextField fx:id="userName" layoutX="160.0" layoutY="80.0" AnchorPane.topAnchor="85.0" />
-      <Button fx:id="ResetPassWord" layoutX="157.0" layoutY="149.0" mnemonicParsing="false" onAction="#ResetPasswordAction" text="Nulstil" />
+      <Button fx:id="ResetPassWord" layoutX="160.0" layoutY="152.0" mnemonicParsing="false" onAction="#ResetPasswordAction" text="Nulstil" />
       <Button fx:id="saveButton" layoutX="94.0" layoutY="278.0" mnemonicParsing="false" onAction="#saveAction" text="Gem" />
       <Button fx:id="CancelButton" layoutX="196.0" layoutY="278.0" mnemonicParsing="false" onAction="#CancelAction" text="Fortryd" />
    </children>
