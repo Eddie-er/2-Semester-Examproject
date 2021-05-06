@@ -2,6 +2,7 @@ package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.BE.User;
 import ArlaScreens.GUI.Model.UserModel;
+import com.gembox.spreadsheet.SpreadsheetInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +44,7 @@ public class AdminViewController implements Initializable {
     public AdminViewController() {
         userModel = new UserModel();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
