@@ -9,29 +9,29 @@
 
 <AnchorPane prefHeight="330.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.EditUserViewController">
    <children>
-      <Label layoutX="79.0" layoutY="84.0" text="Navn:" AnchorPane.rightAnchor="225.4" AnchorPane.topAnchor="84.0">
+      <Label layoutX="79.0" layoutY="84.0" text="Navn:" AnchorPane.leftAnchor="79.0" AnchorPane.topAnchor="84.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="65.0" layoutY="151.0" prefHeight="27.0" prefWidth="73.0" text="Kodeord:" AnchorPane.rightAnchor="211.4" AnchorPane.topAnchor="151.0">
+      <Label layoutX="58.0" layoutY="151.0" prefHeight="27.0" prefWidth="73.0" text="Kodeord:" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="151.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="59.0" layoutY="208.0" text="Admin:" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="210.0">
+      <Label layoutX="66.0" layoutY="210.0" text="Admin:" AnchorPane.leftAnchor="66.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox fx:id="adminCheck" layoutX="160.0" layoutY="287.0" mnemonicParsing="false" onAction="#adminAction" AnchorPane.topAnchor="210.0">
+      <CheckBox fx:id="adminCheck" layoutX="163.0" layoutY="210.0" mnemonicParsing="false" onAction="#adminAction" AnchorPane.leftAnchor="163.0" AnchorPane.topAnchor="210.0">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="userName" layoutX="160.0" layoutY="80.0" AnchorPane.topAnchor="85.0" />
-      <Button fx:id="ResetPassWord" layoutX="160.0" layoutY="152.0" mnemonicParsing="false" onAction="#ResetPasswordAction" text="Nulstil" />
-      <Button fx:id="saveButton" layoutX="94.0" layoutY="278.0" mnemonicParsing="false" onAction="#saveAction" text="Gem" />
-      <Button fx:id="CancelButton" layoutX="196.0" layoutY="278.0" mnemonicParsing="false" onAction="#CancelAction" text="Fortryd" />
+      <TextField fx:id="userName" layoutX="160.0" layoutY="80.0" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="85.0" />
+      <Button fx:id="ResetPassWord" layoutX="160.0" layoutY="152.0" mnemonicParsing="false" onAction="#ResetPasswordAction" text="Nulstil" AnchorPane.leftAnchor="160.0" />
+      <Button fx:id="saveButton" layoutX="94.0" layoutY="278.0" mnemonicParsing="false" onAction="#saveAction" text="Gem" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="94.0" />
+      <Button fx:id="CancelButton" layoutX="183.0" layoutY="278.0" mnemonicParsing="false" onAction="#CancelAction" text="Fortryd" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="183.0" />
    </children>
 </AnchorPane>
