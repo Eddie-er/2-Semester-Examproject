@@ -6,10 +6,12 @@ import com.gembox.spreadsheet.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 
 import java.io.File;
@@ -25,6 +27,30 @@ public class UserViewController implements Initializable {
 
     private UserModel userModel;
     private ExcelReader excelReader;
+
+    private boolean isImageFitToScreen;
+
+    @FXML
+    void areaChartClickAction(MouseEvent event) {
+        
+    }
+
+
+    @FXML
+    void imageViewClickAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void tableViewClickAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void webViewClickAction(MouseEvent event) {
+
+    }
+
 
     public UserViewController() {
         userModel = new UserModel();

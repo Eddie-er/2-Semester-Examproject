@@ -13,7 +13,7 @@
    <top>
       <AnchorPane prefHeight="465.0" prefWidth="1550.0" BorderPane.alignment="CENTER">
          <children>
-            <AreaChart layoutX="754.0" layoutY="3.0" prefHeight="472.0" prefWidth="796.0">
+            <AreaChart layoutX="754.0" layoutY="3.0" onMouseClicked="#areaChartClickAction" prefHeight="472.0" prefWidth="796.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -21,15 +21,15 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <WebView fx:id="webView" layoutY="6.0" prefHeight="458.0" prefWidth="760.0" />
+            <WebView fx:id="webView" layoutY="6.0" onMouseClicked="#webViewClickAction" prefHeight="458.0" prefWidth="760.0" />
          </children>
       </AnchorPane>
    </top>
    <bottom>
       <AnchorPane prefHeight="417.0" prefWidth="1545.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="tblExcel" prefHeight="405.0" prefWidth="757.0" />
-            <ImageView fitHeight="408.0" fitWidth="789.0" layoutX="757.0" pickOnBounds="true" preserveRatio="true" />
+            <TableView fx:id="tblExcel" onMouseClicked="#tableViewClickAction" prefHeight="405.0" prefWidth="757.0" />
+            <ImageView fitHeight="408.0" fitWidth="789.0" layoutX="757.0" onMouseClicked="#imageViewClickAction" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </bottom>
