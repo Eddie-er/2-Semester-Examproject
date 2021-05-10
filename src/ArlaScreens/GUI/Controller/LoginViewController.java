@@ -97,6 +97,7 @@ public class LoginViewController implements Initializable{
                 Scene scene = new Scene(root);
                 stage.setTitle("Bruger");
                 stage.setScene(scene);
+                stage.setResizable(false);
                 stage.showAndWait();
             } catch (IOException e) {
                 e.printStackTrace();
