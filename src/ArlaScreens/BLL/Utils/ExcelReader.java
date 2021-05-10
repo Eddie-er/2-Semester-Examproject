@@ -11,6 +11,12 @@ public class ExcelReader {
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
 
+    /**
+     * Loads an excel file and creates the rows and columns used in the table
+     * Link: https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
+     * @return
+     * @throws IOException
+     */
     public String[][] loadExcel() throws IOException {
         File file = new File("Data/Excel/MOCK_DATA.xlsx");
 
