@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.NewUserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="553.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.NewUserController">
    <children>
       <Label layoutX="22.0" layoutY="14.0" prefHeight="21.0" prefWidth="151.0" text="Lav en ny bruger">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUserName" layoutX="286.0" layoutY="181.0" />
-      <TextField fx:id="txtPassword" layoutX="286.0" layoutY="225.0" />
-      <Label layoutX="215.0" layoutY="185.0" text="Brugernavn:" />
-      <Label layoutX="230.0" layoutY="229.0" text="Kodeord:" />
-      <Button layoutX="626.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleAddUser" text="Gem bruger" />
-      <CheckBox fx:id="checkboxAdmin" layoutX="286.0" layoutY="265.0" mnemonicParsing="false" text="Admin" />
+      <TextField fx:id="txtUserName" layoutX="240.0" layoutY="143.0" />
+      <TextField fx:id="txtPassword" layoutX="240.0" layoutY="181.0" />
+      <Label layoutX="166.0" layoutY="147.0" text="Brugernavn:" />
+      <Label layoutX="181.0" layoutY="185.0" text="Kodeord:" />
+      <Button fx:id="saveButton" layoutX="459.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleAddUser" text="Gem bruger" />
+      <CheckBox fx:id="checkboxAdmin" layoutX="240.0" layoutY="220.0" mnemonicParsing="false" text="Admin" />
    </children>
 </AnchorPane>

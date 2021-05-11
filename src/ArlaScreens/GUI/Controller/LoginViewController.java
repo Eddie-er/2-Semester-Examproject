@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +34,8 @@ import java.util.ResourceBundle;
 public class LoginViewController implements Initializable{
 
     public javafx.scene.control.TextField UserName;
+    @FXML
+    private Label errorLabel;
     @FXML
     private PasswordField PassWord;
     @FXML
@@ -69,6 +73,7 @@ public class LoginViewController implements Initializable{
     public void reset(javafx.event.ActionEvent actionEvent) {
         UserName.setText("");
         PassWord.setText("");
+        errorLabel.setText("");
     }
 
     public void handleLogin(ActionEvent actionEvent) throws IOException, SQLException {
@@ -78,7 +83,7 @@ public class LoginViewController implements Initializable{
                 Parent root = FXMLLoader.load(getClass().getResource("../View/AdminView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
-                stage.setTitle("User");
+                stage.setTitle("Admin");
                 stage.setScene(scene);
                 stage.showAndWait();
             } catch (IOException e) {
@@ -90,12 +95,16 @@ public class LoginViewController implements Initializable{
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
-                stage.setTitle("User");
+                stage.setTitle("Bruger");
                 stage.setScene(scene);
+                stage.setResizable(false);
                 stage.showAndWait();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+        }else{
+            errorLabel.setText("Brugernavn eller kodeord forkert. Prøv igen.");
         }
     }
 }

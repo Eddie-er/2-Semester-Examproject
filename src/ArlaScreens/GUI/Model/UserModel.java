@@ -17,10 +17,15 @@ public class UserModel {
         userManager = new UserManager();
     }
 
+
     public ObservableList<User> getAllUsers() throws SQLException {
         allUsers = FXCollections.observableArrayList();
         allUsers.addAll(userManager.getAllUsers());
         return allUsers;
+    }
+
+    public void editUser(String username, String password, boolean isAdmin, int userID) throws NoSuchAlgorithmException{
+        userManager.editUser(username, password, isAdmin, userID);
     }
 
     public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
@@ -30,4 +35,5 @@ public class UserModel {
     public void deleteUser(User user) {
         userManager.deleteUser(user);
     }
+
 }
