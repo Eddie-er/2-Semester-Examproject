@@ -3,12 +3,16 @@ package ArlaScreens.GUI.Controller;
 import ArlaScreens.BLL.Utils.ExcelReader;
 import ArlaScreens.GUI.Model.UserModel;
 import com.gembox.spreadsheet.*;
+import com.sun.javafx.tk.Toolkit;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -75,6 +79,44 @@ public class UserViewController implements Initializable {
 
             private void fillTable(String[][] dataSource) {
                 tblExcel.getColumns().clear();
+        try {
+            fillTable(excelReader.loadExcel());
+            thread.setDaemon(true);
+            thread.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Updates the GUI every 5 minutes
+     */
+    Thread thread = new Thread(() -> {
+        while (true) {
+            try {
+                Thread.sleep(300_000);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            fillTable(excelReader.loadExcel());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+
+    /**
+     * Fills the tableview with data from an xlsx file
+     * @param dataSource
+     */
+    private void fillTable(String[][] dataSource) {
+        tblExcel.getColumns().clear();
 
                 ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
                 for (String[] row : dataSource) {
