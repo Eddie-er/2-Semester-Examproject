@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane maxHeight="880.0" maxWidth="1545.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1528.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.UserViewController">
+<BorderPane maxHeight="880.0" maxWidth="1545.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1528.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.UserViewController">
    <top>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="1528.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,7 +18,7 @@
       <AnchorPane prefHeight="440.0" prefWidth="1545.0" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="tblExcel" layoutX="8.0" layoutY="8.0" prefHeight="401.0" prefWidth="766.0" />
-            <ImageView fitHeight="400.0" fitWidth="772.0" layoutX="774.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="772.0" layoutX="774.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
 
          </children>
       </AnchorPane>
