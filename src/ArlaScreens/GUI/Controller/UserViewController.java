@@ -70,15 +70,7 @@ public class UserViewController implements Initializable {
                 }
             }
         });
-                try {
-                    fillTable(excelReader.loadExcel());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            private void fillTable(String[][] dataSource) {
-                tblExcel.getColumns().clear();
+        
         try {
             fillTable(excelReader.loadExcel());
             thread.setDaemon(true);
