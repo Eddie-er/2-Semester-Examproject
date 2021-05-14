@@ -15,6 +15,4 @@ public class ZoomedWebViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         zoomedWebView.getEngine().load("https://www.arla.dk/");
     }
-
-
 }

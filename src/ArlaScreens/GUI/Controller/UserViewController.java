@@ -1,6 +1,7 @@
 package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.BLL.Utils.ExcelReader;
+import ArlaScreens.BLL.Utils.PDFDisplayer;
 import ArlaScreens.GUI.Model.UserModel;
 import com.gembox.spreadsheet.*;
 import com.sun.javafx.tk.Toolkit;
@@ -38,12 +39,14 @@ public class UserViewController implements Initializable {
 
     private UserModel userModel;
     private ExcelReader excelReader;
+    private PDFDisplayer pdfDisplayer;
 
 
 
     public UserViewController() {
         userModel = new UserModel();
         excelReader = new ExcelReader();
+        pdfDisplayer = new PDFDisplayer();
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
 
@@ -70,7 +73,7 @@ public class UserViewController implements Initializable {
                 }
             }
         });
-        
+
         try {
             fillTable(excelReader.loadExcel());
             thread.setDaemon(true);
@@ -78,6 +81,8 @@ public class UserViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     /**
