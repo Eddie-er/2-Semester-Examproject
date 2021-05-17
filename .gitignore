@@ -105,3 +105,9 @@ fabric.properties
 .idea/codestream.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij
+lib/javafx-base-12-ea+6-win.jar
+lib/javafx-base-12-ea+6.jar
+lib/javafx-graphics-12-ea+6-win.jar
+lib/javafx-graphics-12-ea+6.jar
+lib/javafx-media-12-ea+6-win.jar
+lib/javafx-media-12-ea+6.jar
