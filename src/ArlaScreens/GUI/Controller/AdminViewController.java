@@ -132,6 +132,16 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
+    void handleChooseExcelBtn(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Vælg en Excel...");
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\Excel"));
+        fc.getExtensionFilters().addAll();
+        new FileChooser.ExtensionFilter("Excel Files", "*.xlxs");
+        File selectedFiles = fc.showOpenDialog(null);
+    }
+
+    @FXML
     void handleRegretBtn(ActionEvent event) {
 
     }
