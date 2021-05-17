@@ -36,6 +36,7 @@ public class UserViewController implements Initializable {
     public WebView webView;
     public ImageView imageView;
     public TableView tblExcel;
+    public WebView PDFView;
 
     private UserModel userModel;
     private ExcelReader excelReader;
@@ -74,6 +75,26 @@ public class UserViewController implements Initializable {
             }
         });
 
+        PDFView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("../View/ZoomedInPDFView.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("PDF Viewer");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+                    }
+                }
+            }
+        });
         try {
             fillTable(excelReader.loadExcel());
             thread.setDaemon(true);
