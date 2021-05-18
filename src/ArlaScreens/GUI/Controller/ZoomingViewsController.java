@@ -7,12 +7,15 @@ import javafx.scene.web.WebView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+public class ZoomingViewsController implements Initializable {
+    @FXML
+    public WebView zoomedPDFView;
 
-public class ZoomedWebViewController implements Initializable {
     @FXML
     private WebView zoomedWebView;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         zoomedWebView.getEngine().load("https://www.arla.dk/");
+
     }
 }
