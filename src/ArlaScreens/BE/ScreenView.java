@@ -3,19 +3,15 @@ package ArlaScreens.BE;
 public class ScreenView {
 
     private int screenViewID;
-    private int screenSetupID;
-    private boolean barChart;
-    private boolean pieChart;
+    private int userID;
     private boolean webSite;
     private boolean pdf;
     private boolean csv;
     private boolean excel;
 
-    public ScreenView(int screenViewID, int screenSetupID, boolean barChart, boolean pieChart, boolean webSite, boolean pdf, boolean csv, boolean excel) {
+    public ScreenView(int screenViewID, int userID, boolean webSite, boolean pdf, boolean csv, boolean excel) {
         this.screenViewID = screenViewID;
-        this.screenSetupID = screenSetupID;
-        this.barChart = barChart;
-        this.pieChart = pieChart;
+        this.userID = userID;
         this.webSite = webSite;
         this.pdf = pdf;
         this.csv = csv;
@@ -30,28 +26,12 @@ public class ScreenView {
         this.screenViewID = screenViewID;
     }
 
-    public int getScreenSetupID() {
-        return screenSetupID;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setScreenSetupID(int screenSetupID) {
-        this.screenSetupID = screenSetupID;
-    }
-
-    public boolean isBarChart() {
-        return barChart;
-    }
-
-    public void setBarChart(boolean barChart) {
-        this.barChart = barChart;
-    }
-
-    public boolean isPieChart() {
-        return pieChart;
-    }
-
-    public void setPieChart(boolean pieChart) {
-        this.pieChart = pieChart;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public boolean isWebSite() {
