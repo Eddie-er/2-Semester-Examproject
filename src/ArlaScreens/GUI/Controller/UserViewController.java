@@ -2,8 +2,11 @@ package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.BLL.Utils.ExcelReader;
 import ArlaScreens.BLL.Utils.PDFDisplayer;
+import ArlaScreens.BLL.Utils.TresholdNode;
 import ArlaScreens.GUI.Model.UserModel;
 import com.gembox.spreadsheet.*;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -17,6 +20,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -26,9 +33,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserViewController implements Initializable {
@@ -38,10 +49,16 @@ public class UserViewController implements Initializable {
     public TableView tblExcel;
     public WebView PDFView;
 
+    @FXML
+    private LineChart<Number, Number> lineChartView;
+
+    //public LineChart<Number, Number> lineChartView;
+    public javafx.scene.chart.NumberAxis NumberAxis;
+    public javafx.scene.chart.CategoryAxis CategoryAxis;
+
     private UserModel userModel;
     private ExcelReader excelReader;
     private PDFDisplayer pdfDisplayer;
-
 
 
     public UserViewController() {
@@ -51,9 +68,60 @@ public class UserViewController implements Initializable {
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
 
+    public void CSVIntoChart() throws FileNotFoundException {
+            lineChartView.setTitle("Chart over ARLA stuff");
+
+
+
+
+            try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
+
+                String[] names = dataReader.readNext();
+                ArrayList<XYChart.Series> chartSeries = new ArrayList();
+
+                for (int i = 0; i < names.length; i++) {
+                    XYChart.Series chartSerie = new XYChart.Series();
+                    chartSerie.setName(names[i]);
+                    chartSeries.add(chartSerie);
+                }
+
+                String[] nextLine;
+                while ((nextLine = dataReader.readNext()) != null) {
+
+                    String month = nextLine[0];
+
+                    for (int i = 0; i < chartSeries.size(); i++) {
+
+                        XYChart.Data<String, Number> data = new XYChart.Data(month, Integer.parseInt(nextLine[i+1]));
+                        data.setNode(new TresholdNode(data.getYValue()));
+                        chartSeries.get(i).getData().add(data);
+                    }
+                }
+
+                for (XYChart.Series serie: chartSeries){
+                    lineChartView.getData().add(serie);
+                }
+
+            } catch (IOException | CsvValidationException e) {
+                e.printStackTrace();
+            }
+
+
+
+        }
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         webView.getEngine().load("https://www.arla.dk/");
+
+        try {
+            CSVIntoChart();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         webView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -102,7 +170,6 @@ public class UserViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
