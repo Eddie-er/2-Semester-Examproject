@@ -1,6 +1,12 @@
 package ArlaScreens.GUI.Controller;
 
+import ArlaScreens.BE.FilePath;
+import ArlaScreens.BE.ScreenSetup;
+import ArlaScreens.BE.ScreenView;
 import ArlaScreens.BE.User;
+import ArlaScreens.GUI.Model.FilePathModel;
+import ArlaScreens.GUI.Model.ScreenSetupModel;
+import ArlaScreens.GUI.Model.ScreenViewModel;
 import ArlaScreens.GUI.Model.UserModel;
 import com.gembox.spreadsheet.SpreadsheetInfo;
 import javafx.event.ActionEvent;
@@ -9,10 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,12 +27,28 @@ import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable {
 
+
+    
+    public CheckBox checkboxWebsite;
+    public CheckBox checkboxPDF;
+    public CheckBox checkboxExcel;
+    public CheckBox checkboxCSV;
+
+    public TextField txtURL;
+    public TextField txtPDFPath;
+    public TextField txtCSVPath;
+    public TextField txtExcelPath;
+
     private UserModel userModel;
+    private ScreenSetupModel screenSetupModel;
+    private ScreenViewModel screenViewModel;
+    private FilePathModel filePathModel;
 
     @FXML
     Button editUser;
 
-
+    public ChoiceBox choiceBoxRows;
+    public ChoiceBox choiceBoxColumns;
     @FXML
     private TableView<User> departmentTableView;
     @FXML
@@ -43,6 +62,9 @@ public class AdminViewController implements Initializable {
 
     public AdminViewController() {
         userModel = new UserModel();
+        screenSetupModel = new ScreenSetupModel();
+        screenViewModel = new ScreenViewModel();
+        filePathModel = new FilePathModel();
     }
 
     @Override
@@ -56,6 +78,9 @@ public class AdminViewController implements Initializable {
         departmentTableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue)->{
             selectedUser = newValue;
         });
+
+        choiceBoxRows.getItems().addAll(1, 2, 3, 4);
+        choiceBoxColumns.getItems().addAll(1, 2, 3, 4);
     }
 
     @FXML
@@ -68,12 +93,7 @@ public class AdminViewController implements Initializable {
         //updates the TableView
         departmentTableView.setItems(userModel.getAllUsers());
     }
-
-    @FXML
-    void barChartChoiceBox(ActionEvent event) {
-
-    }
-
+    
     @FXML
     void deleteUserAction(ActionEvent event) {
         if (selectedUser != null) {
@@ -118,7 +138,11 @@ public class AdminViewController implements Initializable {
         fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\PDF"));
         fc.getExtensionFilters().addAll();
         new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
-        File selectedFiles = fc.showOpenDialog(null);
+        File selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            txtPDFPath.setText(selectedFile.getAbsolutePath());
+        }
     }
     //Opens file chooser and only allows CSV files
     @FXML
@@ -128,7 +152,11 @@ public class AdminViewController implements Initializable {
         fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\CSV"));
         fc.getExtensionFilters().addAll();
         new FileChooser.ExtensionFilter("CSV Files", "*.csv");
-        File selectedFiles = fc.showOpenDialog(null);
+        File selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            txtCSVPath.setText(selectedFile.getAbsolutePath());
+        }
     }
 
     @FXML
@@ -138,7 +166,11 @@ public class AdminViewController implements Initializable {
         fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\Excel"));
         fc.getExtensionFilters().addAll();
         new FileChooser.ExtensionFilter("Excel Files", "*.xlxs");
-        File selectedFiles = fc.showOpenDialog(null);
+        File selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            txtExcelPath.setText(selectedFile.getAbsolutePath());
+        }
     }
 
     @FXML
@@ -153,21 +185,26 @@ public class AdminViewController implements Initializable {
 
     @FXML
     void handleSaveBtn(ActionEvent event) {
+        int rows = (int) choiceBoxRows.getSelectionModel().getSelectedItem();
+        int columns = (int) choiceBoxColumns.getSelectionModel().getSelectedItem();
 
-    }
+        ScreenSetup screenSetup = new ScreenSetup(0, selectedUser.getUserID(), rows, columns);
+        screenSetupModel.addScreenSetup(screenSetup);
 
-    @FXML
-    void pieChartChoiceBox(ActionEvent event) {
+        boolean showWebsite = checkboxWebsite.isSelected();
+        boolean showPDF = checkboxPDF.isSelected();
+        boolean showCSV = checkboxCSV.isSelected();
+        boolean showExcel = checkboxExcel.isSelected();
 
-    }
+        ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
+        screenViewModel.addScreenView(screenView);
 
-    @FXML
-    void showPDFChoiceBox(ActionEvent event) {
+        String webSiteURL = txtURL.getText();
+        String pdfPath = txtPDFPath.getText();
+        String csvPath = txtCSVPath.getText();
+        String excelPath = txtExcelPath.getText();
 
-    }
-
-    @FXML
-    void showWebsiteChoiceBox(ActionEvent event) {
-
+        FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
+        filePathModel.addFilePath(filePath);
     }
 }

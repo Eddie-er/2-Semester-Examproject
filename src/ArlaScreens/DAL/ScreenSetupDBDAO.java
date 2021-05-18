@@ -14,13 +14,12 @@ public class ScreenSetupDBDAO {
     }
 
     public void addScreenSetup(ScreenSetup screenSetup) {
-        String query = "INSERT INTO ScreenSetup (ScreenSetupID, UserID, Rows, Columns) VALUES (?,?,?,?)";
+        String query = "INSERT INTO ScreenSetup (UserID, Rows, Columns) VALUES (?,?,?)";
         try (Connection connection = dbConnector.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
-            preparedStatement.setInt(2, screenSetup.getUserID());
-            preparedStatement.setInt(3, screenSetup.getRows());
-            preparedStatement.setInt(4, screenSetup.getColumns());
+            preparedStatement.setInt(1, screenSetup.getUserID());
+            preparedStatement.setInt(2, screenSetup.getRows());
+            preparedStatement.setInt(3, screenSetup.getColumns());
 
             preparedStatement.execute();
         } catch (SQLException throwables) {

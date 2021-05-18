@@ -10,6 +10,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -35,38 +36,48 @@
                 <TableColumn prefWidth="100.0" text="Info 5" />
             </columns>
         </TableView>
-        <CheckBox layoutX="644.0" layoutY="37.0" mnemonicParsing="false" onAction="#showWebsiteChoiceBox" prefHeight="30.0" prefWidth="140.0" text="Hjemmeside" textFill="#0d0d0d" AnchorPane.rightAnchor="296.0">
+        <CheckBox fx:id="checkboxWebsite" layoutX="644.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Hjemmeside" textFill="#0d0d0d" AnchorPane.rightAnchor="296.0">
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-        <CheckBox layoutX="644.0" layoutY="75.0" mnemonicParsing="false" onAction="#showPDFChoiceBox" prefHeight="30.0" prefWidth="84.0" text="PDF" textFill="#0a0a0a" AnchorPane.rightAnchor="352.0">
+        <CheckBox fx:id="checkboxPDF" layoutX="644.0" layoutY="114.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="PDF" textFill="#0a0a0a" AnchorPane.rightAnchor="352.0">
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-        <Button layoutX="714.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleChoosePDFBtn" prefHeight="26.0" prefWidth="74.0" stylesheets="@../CSS/Admin.css" text="Vælg PDF" AnchorPane.rightAnchor="292.0" />
+        <Button layoutX="714.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleChoosePDFBtn" prefHeight="26.0" prefWidth="74.0" stylesheets="@../CSS/Admin.css" text="Vælg PDF" AnchorPane.rightAnchor="292.0" />
         <Button layoutX="957.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleSaveBtn" text="Gem" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="82.0" />
         <Button layoutX="883.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleRegretBtn" text="Fortryd" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="142.0" />
         <Label fx:id="choosedDepLabel" layoutX="1268.0" layoutY="66.0" prefHeight="17.0" prefWidth="167.0" />
-      <CheckBox layoutX="644.0" layoutY="115.0" mnemonicParsing="false" onAction="#showPDFChoiceBox" prefHeight="30.0" prefWidth="84.0" text="CSV" textFill="#111111" AnchorPane.rightAnchor="352.0">
+      <CheckBox fx:id="checkboxCSV" layoutX="644.0" layoutY="190.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="CSV" textFill="#111111" AnchorPane.rightAnchor="352.0">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <ListView layoutX="641.0" layoutY="354.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="354.0" />
-      <Button layoutX="714.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleChooseCSVBtn" prefHeight="26.0" prefWidth="74.0" text="Vælg CSV" AnchorPane.rightAnchor="292.0" />
+      <ListView layoutX="640.0" layoutY="395.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="395.0" />
+      <Button layoutX="714.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleChooseCSVBtn" prefHeight="26.0" prefWidth="74.0" text="Vælg CSV" AnchorPane.rightAnchor="292.0" />
       <Button fx:id="editUser" layoutX="792.0" layoutY="611.0" mnemonicParsing="false" onAction="#editAction" text="Redigér bruger" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="251.0" />
       <Button fx:id="aLogOut" layoutX="1011.0" layoutY="611.0" mnemonicParsing="false" onAction="#adminlogout" text="Log Ud" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ChoiceBox layoutX="902.0" layoutY="39.0" prefWidth="150.0" />
-      <Label layoutX="829.0" layoutY="37.0" text="Layout:">
+      <ChoiceBox fx:id="choiceBoxRows" layoutX="936.0" layoutY="40.0" prefHeight="25.0" prefWidth="103.0" />
+      <Label layoutX="857.0" layoutY="39.0" text="Rækker:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox layoutX="644.0" layoutY="157.0" mnemonicParsing="false" text="Excel">
+      <CheckBox fx:id="checkboxExcel" layoutX="643.0" layoutY="276.0" mnemonicParsing="false" text="Excel">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <Button layoutX="728.0" layoutY="158.0" mnemonicParsing="false" onAction="#handleChooseExcelBtn" prefHeight="26.0" prefWidth="73.0" text="Vælg Excel" />
+      <Button layoutX="722.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleChooseExcelBtn" prefHeight="26.0" prefWidth="73.0" text="Vælg Excel" />
+      <ChoiceBox fx:id="choiceBoxColumns" layoutX="936.0" layoutY="78.0" prefHeight="25.0" prefWidth="103.0" />
+      <Label layoutX="845.0" layoutY="77.0" text="Kolonner:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtURL" layoutX="643.0" layoutY="78.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField fx:id="txtPDFPath" layoutX="643.0" layoutY="154.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField fx:id="txtCSVPath" layoutX="644.0" layoutY="233.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField fx:id="txtExcelPath" layoutX="642.0" layoutY="313.0" prefHeight="25.0" prefWidth="191.0" />
     </children>
 </AnchorPane>
