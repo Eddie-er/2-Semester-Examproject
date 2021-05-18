@@ -18,4 +18,12 @@ public class ScreenSetupModel {
     public void addScreenSetup(ScreenSetup screenSetup) {
         screenSetupManager.addScreenSetup(screenSetup);
     }
+
+    public int getRows(User user) {
+        return screenSetupManager.getRows(user);
+    }
+
+    public int getColumns(User user) {
+        return screenSetupManager.getColumns(user);
+    }
 }

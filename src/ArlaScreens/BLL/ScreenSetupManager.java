@@ -18,4 +18,12 @@ public class ScreenSetupManager {
     public void addScreenSetup(ScreenSetup screenSetup) {
         screenSetupDBDAO.addScreenSetup(screenSetup);
     }
+
+    public int getRows(User user) {
+        return screenSetupDBDAO.getRows(user);
+    }
+
+    public int getColumns(User user) {
+        return screenSetupDBDAO.getColumns(user);
+    }
 }
