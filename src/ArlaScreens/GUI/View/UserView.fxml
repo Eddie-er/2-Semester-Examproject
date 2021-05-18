@@ -16,10 +16,10 @@
             <WebView fx:id="webView" layoutY="6.0" prefHeight="389.0" prefWidth="764.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <LineChart fx:id="lineChartView" layoutX="764.0" layoutY="1.0" prefHeight="388.0" prefWidth="763.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis fx:id="CategoryAxis" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis fx:id="NumberAxis" side="LEFT" />
               </yAxis>
             </LineChart>
          </children>
