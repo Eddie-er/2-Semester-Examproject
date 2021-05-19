@@ -27,7 +27,7 @@ public class UserManager {
         userDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
     }
 
-    public void editAdmin(boolean isAdmin,int userID) throws NoSuchAlgorithmException, SQLException {
+    public void editAdmin(boolean isAdmin,int userID) throws SQLException {
         userDBDAO.editAdmin(userID, isAdmin);
     }
 

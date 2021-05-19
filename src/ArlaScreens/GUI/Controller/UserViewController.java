@@ -71,9 +71,6 @@ public class UserViewController implements Initializable {
     public void CSVIntoChart() throws FileNotFoundException {
             lineChartView.setTitle("Chart over ARLA stuff");
 
-
-
-
             try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
 
                 String[] names = dataReader.readNext();
@@ -105,13 +102,7 @@ public class UserViewController implements Initializable {
             } catch (IOException | CsvValidationException e) {
                 e.printStackTrace();
             }
-
-
-
         }
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

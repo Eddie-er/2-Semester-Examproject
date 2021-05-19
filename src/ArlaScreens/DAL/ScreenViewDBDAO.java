@@ -49,7 +49,7 @@ public class ScreenViewDBDAO {
 
     public boolean checkPDF(int userID) {
         try (Connection connection = dbConnector.getConnection()){
-            String query = "SELECT PFDPath FROM ScreenView JOIN dbo.[User] ON dbo.[User].UserID = ScreenView.UserID WHERE ScreenView.UserID = ?";
+            String query = "SELECT PFD FROM ScreenView JOIN dbo.[User] ON dbo.[User].UserID = ScreenView.UserID WHERE ScreenView.UserID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
@@ -66,7 +66,7 @@ public class ScreenViewDBDAO {
 
     public boolean checkCSV(int userID) {
         try (Connection connection = dbConnector.getConnection()) {
-            String query = "SELECT CSVPath FROM ScreenView JOIN dbo.[User] ON dbo.[User].UserID = ScreenView.UserID WHERE ScreenView.UserID = ?";
+            String query = "SELECT CSV FROM ScreenView JOIN dbo.[User] ON dbo.[User].UserID = ScreenView.UserID WHERE ScreenView.UserID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
@@ -83,7 +83,7 @@ public class ScreenViewDBDAO {
 
     public boolean checkExcel(int userID) {
         try (Connection connection = dbConnector.getConnection()) {
-            String query = "SELECT ExcelPath FROM ScreenView JOIN dbo.[User] ON dbo.[User].UserID = ScreenView.UserID WHERE ScreenView.UserID = ?";
+            String query = "SELECT Excel FROM ScreenView JOIN dbo.[User] ON dbo.[User].UserID = ScreenView.UserID WHERE ScreenView.UserID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
