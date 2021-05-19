@@ -83,6 +83,24 @@ public class UserDBDAO {
         }
     }
 
+    /**
+     * Edits Choosen Admin in the Database.
+     * @param userID
+     * @param isAdmin
+     * @throws SQLException
+     */
+    public void editAdmin(int userID, boolean isAdmin) throws SQLException {
+       try (Connection connection = dbConnector.getConnection()) {
+           String query = "UPDATE dbo.[User] SET IsAdmin =? WHERE UserID =?";
+           PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+           preparedStatement.setBoolean(1, isAdmin);
+           preparedStatement.setInt(2, userID);
+           preparedStatement.executeUpdate();
+       } catch (SQLException throwables){
+           throwables.printStackTrace();
+       }
+    }
+
 
 
     /**

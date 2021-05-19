@@ -18,6 +18,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User(int userID, boolean isAdmin) {
+        this.userID = userID;
+        this.isAdmin = isAdmin;
+    }
+
     public StringProperty usernameProperty() {
         return username;
     }

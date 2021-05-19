@@ -36,4 +36,7 @@ public class UserModel {
         userManager.deleteUser(user);
     }
 
+    public void editAdmin(boolean isAdmin, int userID) throws SQLException, NoSuchAlgorithmException {
+        userManager.editAdmin(isAdmin,userID);
+    }
 }

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EditUserViewController implements Initializable {
@@ -81,7 +82,7 @@ public class EditUserViewController implements Initializable {
 
     }
 
-    public void saveAction(ActionEvent actionEvent) throws NoSuchAlgorithmException {
+    public void saveAction(ActionEvent actionEvent) throws NoSuchAlgorithmException, SQLException {
         //boolean isSelected = resetPassword;
         String username = userName.getText();
         String password;
@@ -103,6 +104,7 @@ public class EditUserViewController implements Initializable {
 
         //Edits the choosen User
         userModel.editUser(username, password, admin, userID);
+        userModel.editAdmin(isAdmin,userID);
 
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
