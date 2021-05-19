@@ -14,6 +14,10 @@ public class FilePathDBDAO {
         dbConnector = new DBConnector();
     }
 
+    /**
+     * Adds a new filepath configuration to the database
+     * @param filePath
+     */
     public void addFilePath(FilePath filePath) {
         String query = "INSERT INTO FilePath (UserID, WebSiteURL, PDFPath, CSVPath, ExcelPath) VALUES (?,?,?,?,?)";
         try (Connection connection = dbConnector.getConnection()) {
@@ -30,75 +34,29 @@ public class FilePathDBDAO {
         }
     }
 
-    public String getWebSiteURL(User user) {
+    /**
+     * Gets the filepaths from a user
+     * @param user
+     * @return filepaths
+     */
+    public FilePath getFilePath(User user) {
         try (Connection connection = dbConnector.getConnection()) {
-
             int userID = user.getUserID();
-            String query = "SELECT WebSiteURL FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UserID = " + userID;
+            String query = "SELECT * FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UsereID = " +userID;
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                String url = resultSet.getString("WebSiteURL");
-                return url;
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-
-    public String getPDFPath(User user) {
-        try (Connection connection = dbConnector.getConnection()){
-
-            int userID = user.getUserID();
-            String query = "SELECT PDFPath FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UserID = " + userID;
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                String path = resultSet.getString("PDFPath");
-                return path;
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-
-    public String getCSVPath(User user) {
-        try (Connection connection = dbConnector.getConnection()){
-
-            int userID = user.getUserID();
-            String query = "SELECT CSVPath FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UserID = " + userID;
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                String path = resultSet.getString("CSVPath");
-                return path;
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-
-    public String getExcelPath(User user) {
-        try (Connection connection = dbConnector.getConnection()) {
-
-            int userID = user.getUserID();
-            String query = "SELECT ExcelPath FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UserID = " + userID;
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                String path = resultSet.getString("ExcelPath");
-                return path;
+                FilePath filePath = new FilePath(
+                        resultSet.getInt("FilePathID"),
+                        resultSet.getInt("UserID"),
+                        resultSet.getString("WebSiteURL"),
+                        resultSet.getString("PDFPath"),
+                        resultSet.getString("CSVPath"),
+                        resultSet.getString("ExcelPath")
+                );
+                return filePath;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

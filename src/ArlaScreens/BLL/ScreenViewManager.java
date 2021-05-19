@@ -1,6 +1,7 @@
 package ArlaScreens.BLL;
 
 import ArlaScreens.BE.ScreenView;
+import ArlaScreens.BE.User;
 import ArlaScreens.DAL.ScreenViewDBDAO;
 
 public class ScreenViewManager {
@@ -15,19 +16,7 @@ public class ScreenViewManager {
         screenViewDBDAO.addScreenView(screenView);
     }
 
-    public boolean checkWebsite(int userID) {
-        return screenViewDBDAO.checkWebsite(userID);
-    }
-
-    public boolean checkPDF(int userID) {
-        return screenViewDBDAO.checkPDF(userID);
-    }
-
-    public boolean checkCSV(int userID) {
-        return screenViewDBDAO.checkCSV(userID);
-    }
-
-    public boolean checkExcel(int userID) {
-        return screenViewDBDAO.checkExcel(userID);
+    public ScreenView getScreenView(User user) {
+        return screenViewDBDAO.getScreenView(user);
     }
 }

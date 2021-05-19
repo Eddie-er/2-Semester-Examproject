@@ -16,19 +16,7 @@ public class FilePathModel {
         filePathManager.addFilePath(filePath);
     }
 
-    public String getWebSiteURL(User user) {
-        return filePathManager.getWebSiteURL(user);
-    }
-
-    public String getPDFPath(User user) {
-        return filePathManager.getPDFPath(user);
-    }
-
-    public String getCSVPath(User user) {
-        return filePathManager.getCSVPath(user);
-    }
-
-    public String getExcelPath(User user) {
-        return filePathManager.getExcelPath(user);
+    public FilePath getFilePath(User user) {
+        return filePathManager.getFilePath(user);
     }
 }

@@ -1,5 +1,6 @@
 package ArlaScreens.GUI.Controller;
 
+import ArlaScreens.BE.ScreenView;
 import ArlaScreens.BLL.Utils.ExcelReader;
 import ArlaScreens.GUI.Model.LoginModel;
 import ArlaScreens.GUI.Model.ScreenSetupModel;
@@ -39,10 +40,10 @@ public class UserViewTest implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int userID = loginModel.getLoggedInUser().getUserID();
 
+        ScreenView screenView = screenViewModel.getScreenView(loginModel.getLoggedInUser());
 
-        if (screenViewModel.checkExcel(userID)) {
+        if (screenView.isExcel()) {
             try {
                 fillTable(excelReader.loadExcel());
                 gridPane.add(tblExcel, 0, 0);
