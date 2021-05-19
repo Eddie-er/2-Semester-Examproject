@@ -185,6 +185,7 @@ public class UserViewController implements Initializable {
                     public void run() {
                         try {
                             fillTable(excelReader.loadExcel());
+                            CSVIntoChart();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
