@@ -16,6 +16,14 @@ public class ScreenViewModel {
         screenViewManager.addScreenView(screenView);
     }
 
+    public void editScreenView(ScreenView screenView) {
+        screenViewManager.editScreenView(screenView);
+    }
+
+    public boolean checkIfUserExist(User user) {
+        return screenViewManager.checkIfScreenViewExist(user);
+    }
+
     public ScreenView getScreenView(User user) {
         return screenViewManager.getScreenView(user);
     }

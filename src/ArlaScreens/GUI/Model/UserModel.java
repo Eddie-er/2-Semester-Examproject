@@ -32,6 +32,10 @@ public class UserModel {
         userManager.addUser(username, password, isAdmin);
     }
 
+    public boolean checkIfUserExist(String userName) {
+        return userManager.checkIfUserExist(userName);
+    }
+
     public void deleteUser(User user) {
         userManager.deleteUser(user);
     }

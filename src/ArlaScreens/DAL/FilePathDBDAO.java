@@ -34,6 +34,42 @@ public class FilePathDBDAO {
         }
     }
 
+    public void editFilePath(FilePath filePath) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query= "UPDATE FilePath SET WebSiteURL =?, PDFPath =?, CSVPath =?, ExcelPath =? WHERE FilePath.UserID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, filePath.getWebSiteURL());
+            preparedStatement.setString(2, filePath.getPdfPath());
+            preparedStatement.setString(3, filePath.getCsvPath());
+            preparedStatement.setString(4, filePath.getExcelPath());
+            preparedStatement.setInt(5, filePath.getUserID());
+
+            preparedStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public boolean checkIfFilePathExist(User user) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT UserID FROM FilePath WHERE UserID = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, user.getUserID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     /**
      * Gets the filepaths from a user
      * @param user
@@ -42,7 +78,7 @@ public class FilePathDBDAO {
     public FilePath getFilePath(User user) {
         try (Connection connection = dbConnector.getConnection()) {
             int userID = user.getUserID();
-            String query = "SELECT * FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UsereID = " +userID;
+            String query = "SELECT * FROM FilePath JOIN dbo.[User] ON dbo.[User].UserID = FilePath.UserID WHERE dbo.[User].UserID = " +userID;
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

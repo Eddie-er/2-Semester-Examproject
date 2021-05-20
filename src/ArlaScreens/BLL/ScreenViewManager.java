@@ -16,6 +16,14 @@ public class ScreenViewManager {
         screenViewDBDAO.addScreenView(screenView);
     }
 
+    public void editScreenView(ScreenView screenView) {
+        screenViewDBDAO.editScreenView(screenView);
+    }
+
+    public boolean checkIfScreenViewExist(User user) {
+        return screenViewDBDAO.checkIfScreenViewExist(user);
+    }
+
     public ScreenView getScreenView(User user) {
         return screenViewDBDAO.getScreenView(user);
     }

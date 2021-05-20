@@ -92,7 +92,7 @@ public class LoginViewController implements Initializable{
 
         } else if (loginModel.login(UserName.getText(), PassWord.getText()) != null) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../View/UserViewTest.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setTitle("Bruger");

@@ -1,5 +1,6 @@
 package ArlaScreens.GUI.Controller;
 
+import ArlaScreens.BLL.Utils.AlertSystem;
 import ArlaScreens.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,8 +38,12 @@ public class NewUserController implements Initializable {
         String username = txtUserName.getText();
         String password = txtPassword.getText();
 
-        userModel.addUser(username, password, isSelected);
-        Stage stage = (Stage) saveButton.getScene().getWindow();
-        stage.close();
+        if (userModel.checkIfUserExist(username)) {
+            AlertSystem.alertUser("Bruger findes allerede", "Fejl opstod...", "Der findes allerede en bruger med det navn");
+        } else {
+            userModel.addUser(username, password, isSelected);
+            Stage stage = (Stage) saveButton.getScene().getWindow();
+            stage.close();
+        }
     }
 }

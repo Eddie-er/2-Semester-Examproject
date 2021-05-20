@@ -69,40 +69,38 @@ public class UserViewController implements Initializable {
     }
 
     public void CSVIntoChart() throws FileNotFoundException {
-            lineChartView.setTitle("Chart over ARLA stuff");
+        lineChartView.setTitle("Chart over ARLA stuff");
 
-            try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
+        try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
 
-                String[] names = dataReader.readNext();
-                ArrayList<XYChart.Series> chartSeries = new ArrayList();
+            String[] names = dataReader.readNext();
+            ArrayList<XYChart.Series> chartSeries = new ArrayList();
 
-                for (int i = 0; i < names.length; i++) {
-                    XYChart.Series chartSerie = new XYChart.Series();
-                    chartSerie.setName(names[i]);
-                    chartSeries.add(chartSerie);
-                }
-
-                String[] nextLine;
-                while ((nextLine = dataReader.readNext()) != null) {
-
-                    String month = nextLine[0];
-
-                    for (int i = 0; i < chartSeries.size(); i++) {
-
-                        XYChart.Data<String, Number> data = new XYChart.Data(month, Integer.parseInt(nextLine[i+1]));
-                        data.setNode(new TresholdNode(data.getYValue()));
-                        chartSeries.get(i).getData().add(data);
-                    }
-                }
-
-                for (XYChart.Series serie: chartSeries){
-                    lineChartView.getData().add(serie);
-                }
-
-            } catch (IOException | CsvValidationException e) {
-                e.printStackTrace();
+            for (int i = 0; i < names.length; i++) {
+                XYChart.Series chartSerie = new XYChart.Series();
+                chartSerie.setName(names[i]);
+                chartSeries.add(chartSerie);
             }
+            String[] nextLine;
+            while ((nextLine = dataReader.readNext()) != null) {
+
+                String month = nextLine[0];
+
+                for (int i = 0; i < chartSeries.size(); i++) {
+
+                    XYChart.Data<String, Number> data = new XYChart.Data(month, Integer.parseInt(nextLine[i+1]));
+                    data.setNode(new TresholdNode(data.getYValue()));
+                    chartSeries.get(i).getData().add(data);
+                }
+            }
+            for (XYChart.Series serie: chartSeries){
+                lineChartView.getData().add(serie);
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
         }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

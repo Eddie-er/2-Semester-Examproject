@@ -33,6 +33,39 @@ public class ScreenViewDBDAO {
         }
     }
 
+    public void editScreenView(ScreenView screenView) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "UPDATE ScreenView SET WebSite =?, PDF =?, CSV=?, Excel =? WHERE UserID =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setBoolean(1, screenView.isWebSite());
+            preparedStatement.setBoolean(2, screenView.isPdf());
+            preparedStatement.setBoolean(3, screenView.isCsv());
+            preparedStatement.setBoolean(4, screenView.isExcel());
+            preparedStatement.setInt(5, screenView.getUserID());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public boolean checkIfScreenViewExist(User user) {
+        try (Connection connection = dbConnector.getConnection()){
+            String query = "SELECT ScreenView.UserID FROM ScreenView WHERE ScreenView.UserID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, user.getUserID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     /**
      * Gets the screenview for the logged in user
      * @param user

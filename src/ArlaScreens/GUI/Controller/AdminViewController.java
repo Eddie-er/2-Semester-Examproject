@@ -4,6 +4,7 @@ import ArlaScreens.BE.FilePath;
 import ArlaScreens.BE.ScreenSetup;
 import ArlaScreens.BE.ScreenView;
 import ArlaScreens.BE.User;
+import ArlaScreens.BLL.Utils.AlertSystem;
 import ArlaScreens.GUI.Model.FilePathModel;
 import ArlaScreens.GUI.Model.ScreenSetupModel;
 import ArlaScreens.GUI.Model.ScreenViewModel;
@@ -77,6 +78,7 @@ public class AdminViewController implements Initializable {
         }
         departmentTableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue)->{
             selectedUser = newValue;
+            updateInformation();
         });
 
         choiceBoxRows.getItems().addAll(1, 2, 3, 4);
@@ -104,6 +106,52 @@ public class AdminViewController implements Initializable {
                 throwables.printStackTrace();
             }
         }
+    }
+
+    public void updateInformation() {
+        if (selectedUser != null) {
+            FilePath filePath = filePathModel.getFilePath(selectedUser);
+
+            clearTextfields();
+            clearCheckboxes();
+
+            txtURL.setText(filePath.getWebSiteURL());
+            txtPDFPath.setText(filePath.getPdfPath());
+            txtCSVPath.setText(filePath.getCsvPath());
+            txtExcelPath.setText(filePath.getExcelPath());
+
+            ScreenView screenView = screenViewModel.getScreenView(selectedUser);
+
+            if (screenView.isWebSite()) {
+                checkboxWebsite.setSelected(true);
+            }
+
+            if (screenView.isPdf()) {
+                checkboxPDF.setSelected(true);
+            }
+
+            if (screenView.isCsv()) {
+                checkboxCSV.setSelected(true);
+            }
+
+            if (screenView.isExcel()) {
+                checkboxExcel.setSelected(true);
+            }
+        }
+    }
+
+    public void clearTextfields() {
+        txtURL.clear();
+        txtPDFPath.clear();
+        txtCSVPath.clear();
+        txtExcelPath.clear();
+    }
+
+    public void clearCheckboxes() {
+        checkboxWebsite.setSelected(false);
+        checkboxPDF.setSelected(false);
+        checkboxCSV.setSelected(false);
+        checkboxExcel.setSelected(false);
     }
 
     /**
@@ -196,15 +244,25 @@ public class AdminViewController implements Initializable {
         boolean showCSV = checkboxCSV.isSelected();
         boolean showExcel = checkboxExcel.isSelected();
 
-        ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
-        screenViewModel.addScreenView(screenView);
+        if (screenViewModel.checkIfUserExist(selectedUser)) {
+            ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
+            screenViewModel.editScreenView(screenView);
+        } else {
+            ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
+            screenViewModel.addScreenView(screenView);
+        }
 
         String webSiteURL = txtURL.getText();
         String pdfPath = txtPDFPath.getText();
         String csvPath = txtCSVPath.getText();
         String excelPath = txtExcelPath.getText();
 
-        FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
-        filePathModel.addFilePath(filePath);
+        if (filePathModel.checkIfFilePathExist(selectedUser)) {
+            FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
+            filePathModel.editFilePath(filePath);
+        } else {
+            FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
+            filePathModel.addFilePath(filePath);
+        }
     }
 }

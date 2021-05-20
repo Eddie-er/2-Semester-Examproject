@@ -16,6 +16,14 @@ public class FilePathManager {
         filePathDBDAO.addFilePath(filePath);
     }
 
+    public boolean checkIfFilePathExist(User user) {
+        return filePathDBDAO.checkIfFilePathExist(user);
+    }
+
+    public void editFilePath(FilePath filePath) {
+        filePathDBDAO.editFilePath(filePath);
+    }
+
     public FilePath getFilePath(User user) {
         return filePathDBDAO.getFilePath(user);
     }

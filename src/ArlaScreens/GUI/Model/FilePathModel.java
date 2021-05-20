@@ -16,6 +16,14 @@ public class FilePathModel {
         filePathManager.addFilePath(filePath);
     }
 
+    public boolean checkIfFilePathExist(User user) {
+        return filePathManager.checkIfFilePathExist(user);
+    }
+
+    public void editFilePath(FilePath filePath) {
+        filePathManager.editFilePath(filePath);
+    }
+
     public FilePath getFilePath(User user) {
         return filePathManager.getFilePath(user);
     }

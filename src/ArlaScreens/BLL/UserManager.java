@@ -36,6 +36,10 @@ public class UserManager {
         userDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
     }
 
+    public boolean checkIfUserExist(String userName) {
+        return userDBDAO.checkIfUserExist(userName);
+    }
+
     public void deleteUser(User user) {
         userDBDAO.deleteUser(user);
     }

@@ -45,6 +45,29 @@ public class UserDBDAO {
     }
 
     /**
+     * Checks if a user with the given name already exists
+     * @param user
+     * @return true if username exists
+     */
+    public boolean checkIfUserExist(String userName) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT UserName FROM dbo.[User] WHERE UserName = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, userName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
      * Adds a new user to the database
      * @param user
      */
@@ -100,8 +123,6 @@ public class UserDBDAO {
            throwables.printStackTrace();
        }
     }
-
-
 
     /**
      * Deletes a user from the database
