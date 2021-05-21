@@ -83,13 +83,6 @@ public class PDFDisplayer {
         THREAD_POOL.submit(task);
     }
 
-    /**
-     * @deprecated Use {@link #loadPDF(InputStream)} instead
-     */
-    @Deprecated
-    public void displayPdf(InputStream inputStream) throws IOException {
-        loadPDF(inputStream);
-    }
 
     private Task<String> buildLoadingTask(InputStream inputStream) {
         final Task<String> task = new Task<String>() {
@@ -226,7 +219,7 @@ public class PDFDisplayer {
         webView.setContextMenuEnabled(false);
 
         WebEngine engine = webView.getEngine();
-        String url = new File("resources/pdfjs_2.7.570/web/viewer.html").toURL().toString();
+        String url = new File("resources/pdfjs_2.7.570/web/viewer.html").toURI().toString();
 
         engine.setJavaScriptEnabled(true);
         engine.load(url);

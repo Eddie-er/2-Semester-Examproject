@@ -2,6 +2,7 @@ package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.BE.ScreenView;
 import ArlaScreens.BLL.Utils.ExcelReader;
+import ArlaScreens.BLL.Utils.PDFDisplayer;
 import ArlaScreens.BLL.Utils.TresholdNode;
 import ArlaScreens.GUI.Model.LoginModel;
 import ArlaScreens.GUI.Model.ScreenSetupModel;
@@ -23,9 +24,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.web.WebView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -43,6 +46,8 @@ public class UserViewTest implements Initializable {
 
     private WebView webView;
 
+    private PDFDisplayer pdfDisplayer;
+
     private final CategoryAxis xAxis = new CategoryAxis();
     private final NumberAxis yAxis = new NumberAxis();
     private final LineChart<?, ?> lineChart = new LineChart<String, Number>(xAxis, yAxis);
@@ -55,6 +60,7 @@ public class UserViewTest implements Initializable {
         excelReader = new ExcelReader();
         tblExcel = new TableView();
         webView = new WebView();
+        pdfDisplayer = new PDFDisplayer();
         loginModel = LoginModel.getInstance();
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
 
@@ -93,12 +99,10 @@ public class UserViewTest implements Initializable {
 
         if (screenView.isCsv()) {
             try {
-                /*CSVIntoChart();
-                gridPane.add(lineChart, 1, 0);
-
-                 */
+                CSVIntoChart();
                 CSVIntoBar();
                 gridPane.add(barChart, 1, 0);
+                gridPane.add(lineChart, 1, 1);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -109,6 +113,16 @@ public class UserViewTest implements Initializable {
                 webView.getEngine().load("https://www.arla.dk/");
                 gridPane.add(webView, 0, 1);
             } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (screenView.isPdf()) {
+            try {
+                pdfDisplayer.loadPDF(new File("Data/PDF/Tro og love-erklæring.pdf"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -142,7 +156,7 @@ public class UserViewTest implements Initializable {
         barChart.layout();
         yAxis.setTickUnit(1.0);
         yAxis.setLowerBound(0);
-        //yAxis.setAutoRanging(false);
+
         try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
 
             String[] names = dataReader.readNext();
