@@ -11,6 +11,7 @@ import com.gembox.spreadsheet.ExcelColumnCollection;
 import com.gembox.spreadsheet.SpreadsheetInfo;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -126,8 +127,47 @@ public class UserViewTest implements Initializable {
                 e.printStackTrace();
             }
         }
+        thread.setDaemon(true);
+        thread.start();
     }
 
+    /**
+     * Updates the GUI every 5 minutes
+     */
+    Thread thread = new Thread(() -> {
+        while (true) {
+            try {
+                Thread.sleep(300_000);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            ScreenView screenView = screenViewModel.getScreenView(loginModel.getLoggedInUser());
+
+                            if (screenView.isExcel()) {
+                                fillTable(excelReader.loadExcel());
+                            }
+
+                            if (screenView.isCsv()) {
+                                CSVIntoBar();
+                                CSVIntoChart();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+
+    /**
+     * Fills the tableview with data from an excel file
+     * Link: https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
+     * @param dataSource
+     */
     private void fillTable(String[][] dataSource) {
         tblExcel.getColumns().clear();
 
