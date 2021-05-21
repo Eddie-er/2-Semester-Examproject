@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -21,6 +22,14 @@
                 <NumberAxis fx:id="NumberAxis" side="LEFT" />
               </yAxis>
             </LineChart>
+            <BarChart fx:id="BarChart" layoutX="766.0" layoutY="1.0" prefHeight="400.0" prefWidth="764.0">
+              <xAxis>
+                <CategoryAxis fx:id="BarX" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="BarY" side="LEFT" />
+              </yAxis>
+            </BarChart>
          </children>
       </AnchorPane>
    </top>

@@ -14,10 +14,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -49,6 +46,8 @@ public class UserViewTest implements Initializable {
     private final CategoryAxis xAxis = new CategoryAxis();
     private final NumberAxis yAxis = new NumberAxis();
     private final LineChart<?, ?> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
+    private final BarChart barChart = new BarChart(xAxis, yAxis);
 
     public UserViewTest() {
         screenSetupModel = new ScreenSetupModel();
@@ -94,8 +93,12 @@ public class UserViewTest implements Initializable {
 
         if (screenView.isCsv()) {
             try {
-                CSVIntoChart();
+                /*CSVIntoChart();
                 gridPane.add(lineChart, 1, 0);
+
+                 */
+                CSVIntoBar();
+                gridPane.add(barChart, 1, 0);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -133,6 +136,44 @@ public class UserViewTest implements Initializable {
             tblExcel.getColumns().add(column);
         }
     }
+
+    public void CSVIntoBar() throws  FileNotFoundException{
+        barChart.getData().clear();
+        barChart.layout();
+        yAxis.setTickUnit(1.0);
+        yAxis.setLowerBound(0);
+        //yAxis.setAutoRanging(false);
+        try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
+
+            String[] names = dataReader.readNext();
+            ArrayList<XYChart.Series> chartSeries = new ArrayList();
+
+            for (int i = 0; i < names.length; i++) {
+                XYChart.Series chartSerie = new XYChart.Series();
+                chartSerie.setName(names[i]);
+                chartSeries.add(chartSerie);
+            }
+            String[] nextLine;
+            while ((nextLine = dataReader.readNext()) != null) {
+
+                String month = nextLine[0];
+
+                for (int i = 0; i < chartSeries.size(); i++) {
+
+                    XYChart.Data<String, Number> data = new XYChart.Data(month, Integer.parseInt(nextLine[i+1]));
+                    data.setNode(new TresholdNode(data.getYValue()));
+                    chartSeries.get(i).getData().add(data);
+                }
+            }
+            for (XYChart.Series serie: chartSeries){
+                barChart.getData().add(serie);
+            }
+            barChart.setTitle("Chart over ARLA stuff");
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void CSVIntoChart() throws FileNotFoundException {
         try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {

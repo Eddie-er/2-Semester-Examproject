@@ -20,10 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -48,6 +45,9 @@ public class UserViewController implements Initializable {
     public ImageView imageView;
     public TableView tblExcel;
     public WebView PDFView;
+    public javafx.scene.chart.BarChart BarChart;
+    public javafx.scene.chart.CategoryAxis BarX;
+    public javafx.scene.chart.NumberAxis BarY;
 
     @FXML
     private LineChart<Number, Number> lineChartView;
@@ -67,6 +67,7 @@ public class UserViewController implements Initializable {
         pdfDisplayer = new PDFDisplayer();
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
+
 
     public void CSVIntoChart() throws FileNotFoundException {
         lineChartView.setTitle("Chart over ARLA stuff");
