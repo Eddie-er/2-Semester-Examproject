@@ -1,8 +1,8 @@
 package ArlaScreens.DAL;
 
-import ArlaScreens.BE.ScreenSetup;
-import ArlaScreens.BE.User;
+import ArlaScreens.BE.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import org.jpedal.parser.shape.S;
 
 import java.sql.*;
 
@@ -97,6 +97,11 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    /**
+     * Gets the rows for the screensetup
+     * @param user
+     * @return
+     */
     public int getRows(User user) {
         try (Connection connection = dbConnector.getConnection()){
 
@@ -117,6 +122,11 @@ public class ScreenSetupDBDAO {
         return 0;
     }
 
+    /**
+     * Gets the columns for the screensetup
+     * @param user
+     * @return
+     */
     public int getColumns(User user) {
         try (Connection connection = dbConnector.getConnection()) {
                 int userID = user.getUserID();
@@ -135,6 +145,10 @@ public class ScreenSetupDBDAO {
         return 0;
     }
 
+    /**
+     * Deletes the screensetup to the user
+     * @param user
+     */
     public void deleteScreenSetup(User user) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "DELETE FROM ScreenSetup WHERE ScreenSetup.UserID =?";
@@ -146,5 +160,178 @@ public class ScreenSetupDBDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public void addBarChart(BarChart barChart) {
+        try (Connection connection = dbConnector.getConnection()){
+            String query = "INSERT INTO BarChart (ScreenSetupID, Row, Columns, IsSelected, FilePath) VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, barChart.getScreenSetupID());
+            preparedStatement.setInt(2, barChart.getRow());
+            preparedStatement.setInt(3, barChart.getColumn());
+            preparedStatement.setBoolean(4, barChart.isSelected());
+            preparedStatement.setString(5, barChart.getFilePath());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public BarChart getBarChart(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT * FROM BarChart WHERE BarChart.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                BarChart  barChart = new BarChart(
+                        resultSet.getInt("ScreenSetupID"),
+                        resultSet.getInt("Row"),
+                        resultSet.getInt("Columns"),
+                        resultSet.getBoolean("IsSelected"),
+                        resultSet.getString("FilePath")
+                );
+                return barChart;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void addLineChart(LineChart lineChart) {
+        try (Connection connection = dbConnector.getConnection()){
+            String query = "INSERT INTO LineChart (ScreenSetupID, Row, Columns, IsSelected, FilePath) VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, lineChart.getScreenSetupID());
+            preparedStatement.setInt(2, lineChart.getRow());
+            preparedStatement.setInt(3, lineChart.getColumn());
+            preparedStatement.setBoolean(4, lineChart.isSelected());
+            preparedStatement.setString(5, lineChart.getFilePath());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public LineChart getLineChart(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT * FROM LineChart WHERE LineChart.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                LineChart lineChart = new LineChart(
+                        resultSet.getInt("ScreenSetupID"),
+                        resultSet.getInt("Row"),
+                        resultSet.getInt("Columns"),
+                        resultSet.getBoolean("IsSelected"),
+                        resultSet.getString("FilePath")
+                );
+                return lineChart;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void addExcel(Excel excel) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "INSERT INTO Excel (ScreenSetupID, Row, Columns, IsSelected, FilePath) VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, excel.getScreenSetupID());
+            preparedStatement.setInt(2, excel.getRow());
+            preparedStatement.setInt(3, excel.getColumn());
+            preparedStatement.setBoolean(4, excel.isSelected());
+            preparedStatement.setString(5, excel.getFilePath());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public Excel getExcel(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT * FROM Excel WHERE Excel.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Excel excel = new Excel(
+                        resultSet.getInt("ScreenSetupID"),
+                        resultSet.getInt("Row"),
+                        resultSet.getInt("Columns"),
+                        resultSet.getBoolean("IsSelected"),
+                        resultSet.getString("FilePath")
+                );
+                return excel;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void addWebsite(WebSite webSite) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "INSERT INTO WebSite (ScreenSetupID, Row, Columns, IsSelected, URL) VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, webSite.getScreenSetupID());
+            preparedStatement.setInt(2, webSite.getRow());
+            preparedStatement.setInt(3, webSite.getColumn());
+            preparedStatement.setBoolean(4, webSite.isSelected());
+            preparedStatement.setString(5, webSite.getUrl());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public WebSite getWebSite(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT * FROM WebSite WHERE WebSite.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                WebSite webSite = new WebSite(
+                        resultSet.getInt("ScreenSetupID"),
+                        resultSet.getInt("Row"),
+                        resultSet.getInt("Columns"),
+                        resultSet.getBoolean("IsSelected"),
+                        resultSet.getString("URL")
+                );
+                return webSite;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

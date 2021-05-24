@@ -1,7 +1,6 @@
 package ArlaScreens.GUI.Controller;
 
-import ArlaScreens.BE.FilePath;
-import ArlaScreens.BE.ScreenView;
+import ArlaScreens.BE.*;
 import ArlaScreens.BLL.Utils.ExcelReader;
 import ArlaScreens.BLL.Utils.PDFDisplayer;
 import ArlaScreens.BLL.Utils.TresholdNode;
@@ -24,6 +23,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -62,9 +63,9 @@ public class UserViewTest implements Initializable {
 
     private final CategoryAxis xAxis = new CategoryAxis();
     private final NumberAxis yAxis = new NumberAxis();
-    private final LineChart<?, ?> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+    private final LineChart<?, ?> lineChartGraph = new LineChart<String, Number>(xAxis, yAxis);
 
-    private final BarChart barChart = new BarChart(xAxis, yAxis);
+    private final BarChart barChartGraph = new BarChart(xAxis, yAxis);
 
 
     public UserViewTest() {
@@ -82,11 +83,12 @@ public class UserViewTest implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         gridPane.setGridLinesVisible(true);
 
-        final int numCols = screenSetupModel.getColumns(loginModel.getLoggedInUser());
-        final int numRows = screenSetupModel.getRows(loginModel.getLoggedInUser());
+        ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
+
+        final int numCols = screenSetup.getColumns();
+        final int numRows = screenSetup.getRows();
 
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
@@ -100,62 +102,53 @@ public class UserViewTest implements Initializable {
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
-        ScreenView screenView = screenViewModel.getScreenView(loginModel.getLoggedInUser());
+        ArlaScreens.BE.BarChart barChart = screenSetupModel.getBarChart(screenSetup);
 
-        if (screenView.isExcel()) {
+        if (barChart.isSelected()) {
             try {
-                fillTable(excelReader.loadExcel());
-                gridPane.add(tblExcel, 0, 0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (screenView.isCsv()) {
-            try {
-                CSVIntoChart();
                 CSVIntoBar();
-                gridPane.add(barChart, 1, 0);
-                gridPane.add(lineChart, 1, 1);
+                gridPane.add(barChartGraph, barChart.getRow(), barChart.getColumn());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        if (screenView.isWebSite()) {
+        ArlaScreens.BE.LineChart lineChart = screenSetupModel.getLineChart(screenSetup);
+
+        if (lineChart.isSelected()) {
             try {
-                FilePath filePath = filePathModel.getFilePath(loginModel.getLoggedInUser());
-                String path = filePath.getWebSiteURL();
-                webView.getEngine().load(path);
-                gridPane.add(webView, 0, 1);
-            } catch (Exception e) {
+                CSVIntoChart();
+                gridPane.add(lineChartGraph, lineChart.getRow(), lineChart.getColumn());
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
-        if (screenView.isPdf()) {
+        Excel excel = screenSetupModel.getExcel(screenSetup);
+
+        if (excel.isSelected()) {
             try {
-                pdfDisplayer.loadPDF(new File("Data/PDF/Tro og love-erklæring.pdf"));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+                fillTable(excelReader.loadExcel());
+                gridPane.add(tblExcel, excel.getRow(), excel.getColumn());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        /**
-        gridPane.getChildren().add(tblExcel);
-        gridPane.getChildren().add(barChart);
-        gridPane.getChildren().add(lineChart);
-        gridPane.getChildren().add(webView);
-        **/
+        WebSite webSite = screenSetupModel.getWebSite(screenSetup);
 
+        if (webSite.isSelected()) {
+            try {
+                webView.getEngine().load(webSite.getUrl());
+                gridPane.add(webView, webSite.getRow(), webSite.getColumn());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         openWebView();
 
         thread.setDaemon(true);
         thread.start();
-
-        System.out.println(gridPane.getChildren());
     }
 
     /**
@@ -169,13 +162,23 @@ public class UserViewTest implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            ScreenView screenView = screenViewModel.getScreenView(loginModel.getLoggedInUser());
-                            if (screenView.isExcel()) {
+                            ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
+
+                            Excel excel = screenSetupModel.getExcel(screenSetup);
+
+                            if (excel.isSelected()) {
                                 fillTable(excelReader.loadExcel());
                             }
 
-                            if (screenView.isCsv()) {
+                            ArlaScreens.BE.BarChart barChart = screenSetupModel.getBarChart(screenSetup);
+
+                            if (barChart.isSelected()) {
                                 CSVIntoBar();
+                            }
+
+                            ArlaScreens.BE.LineChart lineChart = screenSetupModel.getLineChart(screenSetup);
+
+                            if (lineChart.isSelected()) {
                                 CSVIntoChart();
                             }
                         } catch (IOException e) {
@@ -218,13 +221,16 @@ public class UserViewTest implements Initializable {
     }
 
     public void CSVIntoBar() throws  FileNotFoundException{
-        barChart.getData().clear();
-        barChart.layout();
+        barChartGraph.getData().clear();
+        barChartGraph.layout();
         yAxis.setTickUnit(1.0);
         yAxis.setLowerBound(0);
 
-        FilePath filePath = filePathModel.getFilePath(loginModel.getLoggedInUser());
-        String path = filePath.getCsvPath();
+        ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
+
+        ArlaScreens.BE.BarChart barChart = screenSetupModel.getBarChart(screenSetup);
+
+        String path = barChart.getFilePath();
 
         try (CSVReader dataReader = new CSVReader(new FileReader(path))) {
 
@@ -249,9 +255,9 @@ public class UserViewTest implements Initializable {
                 }
             }
             for (XYChart.Series serie: chartSeries){
-                barChart.getData().add(serie);
+                barChartGraph.getData().add(serie);
             }
-            barChart.setTitle("Chart over ARLA stuff");
+            barChartGraph.setTitle("Chart over ARLA stuff");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
@@ -259,8 +265,11 @@ public class UserViewTest implements Initializable {
 
 
     public void CSVIntoChart() throws FileNotFoundException {
-        FilePath filePath = filePathModel.getFilePath(loginModel.getLoggedInUser());
-        String path = filePath.getCsvPath();
+        ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
+
+        ArlaScreens.BE.LineChart lineChart = screenSetupModel.getLineChart(screenSetup);
+
+        String path = lineChart.getFilePath();
         //"Data/CSV/test2.csv"
         try (CSVReader dataReader = new CSVReader(new FileReader(path))) {
 
@@ -285,14 +294,13 @@ public class UserViewTest implements Initializable {
                 }
             }
             for (XYChart.Series serie: chartSeries){
-                lineChart.getData().add(serie);
+                lineChartGraph.getData().add(serie);
             }
-            lineChart.setTitle("Chart over ARLA stuff");
+            lineChartGraph.setTitle("Chart over ARLA stuff");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
-
 
     public void openWebView() {
         webView.setOnMouseClicked(new EventHandler<MouseEvent>() {

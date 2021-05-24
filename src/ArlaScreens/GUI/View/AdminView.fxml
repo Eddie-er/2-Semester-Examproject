@@ -4,24 +4,24 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" prefHeight="650.0" prefWidth="1080.0" stylesheets="@../CSS/Admin.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.AdminViewController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="100.0" prefHeight="755.0" prefWidth="1167.0" stylesheets="@../CSS/Admin.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ArlaScreens.GUI.Controller.AdminViewController">
     <children>
         <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="1080.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
-                <Menu mnemonicParsing="false" text="User Settings">
+                <Menu mnemonicParsing="false" text="Bruger indstillinger">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#addUserAction" text="Add User" />
-                        <MenuItem mnemonicParsing="false" onAction="#deleteUserAction" text="Delete User" />
+                        <MenuItem mnemonicParsing="false" onAction="#addUserAction" text="Tilføj Bruger" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteUserAction" text="Slet Bruger" />
                     </items>
                 </Menu>
             </menus>
@@ -40,44 +40,93 @@
          <font>
             <Font size="18.0" />
          </font></CheckBox>
-        <CheckBox fx:id="checkboxPDF" layoutX="644.0" layoutY="114.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="PDF" textFill="#0a0a0a" AnchorPane.rightAnchor="352.0">
-         <font>
-            <Font size="18.0" />
-         </font></CheckBox>
-        <Button layoutX="714.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleChoosePDFBtn" prefHeight="26.0" prefWidth="74.0" stylesheets="@../CSS/Admin.css" text="Vælg PDF" AnchorPane.rightAnchor="292.0" />
         <Button layoutX="957.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleSaveBtn" text="Gem" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="82.0" />
         <Button layoutX="883.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleRegretBtn" text="Fortryd" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="142.0" />
         <Label fx:id="choosedDepLabel" layoutX="1268.0" layoutY="66.0" prefHeight="17.0" prefWidth="167.0" />
-      <CheckBox fx:id="checkboxCSV" layoutX="644.0" layoutY="190.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" text="CSV" textFill="#111111" AnchorPane.rightAnchor="352.0">
+      <CheckBox fx:id="checkboxLineChart" layoutX="726.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="191.0" text="Linje Diagram" textFill="#111111" AnchorPane.rightAnchor="250.0">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <ListView layoutX="640.0" layoutY="395.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="395.0" />
-      <Button layoutX="714.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleChooseCSVBtn" prefHeight="26.0" prefWidth="74.0" text="Vælg CSV" AnchorPane.rightAnchor="292.0" />
+      <Button layoutX="933.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleChooseLineChartBtn" prefHeight="26.0" prefWidth="74.0" text="Vælg CSV" AnchorPane.rightAnchor="160.0" />
       <Button fx:id="editUser" layoutX="792.0" layoutY="611.0" mnemonicParsing="false" onAction="#editAction" text="Redigér bruger" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="251.0" />
       <Button fx:id="aLogOut" layoutX="1011.0" layoutY="611.0" mnemonicParsing="false" onAction="#adminlogout" text="Log Ud" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <ChoiceBox fx:id="choiceBoxRows" layoutX="936.0" layoutY="40.0" prefHeight="25.0" prefWidth="103.0" />
-      <Label layoutX="857.0" layoutY="39.0" text="Rækker:">
+      <ChoiceBox fx:id="choiceBoxRows" layoutX="1047.0" layoutY="40.0" prefHeight="25.0" prefWidth="103.0" />
+      <Label layoutX="980.0" layoutY="39.0" text="Rækker:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox fx:id="checkboxExcel" layoutX="643.0" layoutY="276.0" mnemonicParsing="false" text="Excel">
+      <CheckBox fx:id="checkboxExcel" layoutX="731.0" layoutY="186.0" mnemonicParsing="false" text="Excel">
          <font>
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <Button layoutX="722.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleChooseExcelBtn" prefHeight="26.0" prefWidth="73.0" text="Vælg Excel" />
-      <ChoiceBox fx:id="choiceBoxColumns" layoutX="936.0" layoutY="78.0" prefHeight="25.0" prefWidth="103.0" />
-      <Label layoutX="845.0" layoutY="77.0" text="Kolonner:">
+      <Button layoutX="934.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleChooseExcelBtn" prefHeight="26.0" prefWidth="73.0" text="Vælg Excel" />
+      <ChoiceBox fx:id="choiceBoxColumns" layoutX="1047.0" layoutY="78.0" prefHeight="25.0" prefWidth="103.0" />
+      <Label layoutX="970.0" layoutY="77.0" text="Kolonner:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtURL" layoutX="643.0" layoutY="78.0" prefHeight="25.0" prefWidth="191.0" />
-      <TextField fx:id="txtPDFPath" layoutX="643.0" layoutY="154.0" prefHeight="25.0" prefWidth="191.0" />
-      <TextField fx:id="txtCSVPath" layoutX="644.0" layoutY="233.0" prefHeight="25.0" prefWidth="191.0" />
-      <TextField fx:id="txtExcelPath" layoutX="642.0" layoutY="313.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField fx:id="txtURL" layoutX="732.0" layoutY="78.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField fx:id="txtLineChartPath" layoutX="725.0" layoutY="377.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="txtExcelPath" layoutX="732.0" layoutY="221.0" prefHeight="25.0" prefWidth="191.0" />
+      <TextField fx:id="rowWebSite" layoutX="792.0" layoutY="114.0" prefHeight="25.0" prefWidth="35.0" />
+      <Label layoutX="731.0" layoutY="116.0" text="Række:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="columnWebSite" layoutX="792.0" layoutY="147.0" prefHeight="25.0" prefWidth="35.0" />
+      <Label layoutX="732.0" layoutY="150.0" prefHeight="17.0" prefWidth="55.0" text="Kolonne:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rowExcel" layoutX="792.0" layoutY="256.0" prefHeight="25.0" prefWidth="35.0" />
+      <TextField fx:id="columnExcel" layoutX="792.0" layoutY="288.0" prefHeight="25.0" prefWidth="35.0" />
+      <Label layoutX="731.0" layoutY="259.0" text="Række:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="732.0" layoutY="291.0" prefHeight="17.0" prefWidth="55.0" text="Kolonne:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rowLineChart" layoutX="792.0" layoutY="409.0" prefHeight="25.0" prefWidth="35.0" />
+      <TextField fx:id="columnLineChart" layoutX="792.0" layoutY="440.0" prefHeight="25.0" prefWidth="35.0" />
+      <Label layoutX="731.0" layoutY="412.0" text="Række:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="732.0" layoutY="443.0" prefHeight="17.0" prefWidth="55.0" text="Kolonne:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="checkboxBarChart" layoutX="725.0" layoutY="478.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="191.0" text="Søjle Diagram" textFill="#111111">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <TextField fx:id="txtBarChartPath" layoutX="727.0" layoutY="518.0" prefHeight="25.0" prefWidth="200.0" />
+      <Button layoutX="934.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleChooseBarChartBtn" prefHeight="26.0" prefWidth="74.0" text="Vælg CSV" />
+      <TextField fx:id="rowBarChart" layoutX="792.0" layoutY="552.0" prefHeight="25.0" prefWidth="35.0" />
+      <TextField fx:id="columnBarChart" layoutX="792.0" layoutY="582.0" prefHeight="25.0" prefWidth="35.0" />
+      <Label layoutX="731.0" layoutY="555.0" text="Række:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="732.0" layoutY="585.0" prefHeight="17.0" prefWidth="55.0" text="Kolonne:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgExample" fitHeight="134.0" fitWidth="230.0" layoutX="923.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

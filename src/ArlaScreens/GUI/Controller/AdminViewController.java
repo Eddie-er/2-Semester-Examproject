@@ -1,9 +1,6 @@
 package ArlaScreens.GUI.Controller;
 
-import ArlaScreens.BE.FilePath;
-import ArlaScreens.BE.ScreenSetup;
-import ArlaScreens.BE.ScreenView;
-import ArlaScreens.BE.User;
+import ArlaScreens.BE.*;
 import ArlaScreens.BLL.Utils.AlertSystem;
 import ArlaScreens.GUI.Model.FilePathModel;
 import ArlaScreens.GUI.Model.ScreenSetupModel;
@@ -17,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -29,14 +28,25 @@ import java.util.ResourceBundle;
 public class AdminViewController implements Initializable {
 
     public CheckBox checkboxWebsite;
-    public CheckBox checkboxPDF;
     public CheckBox checkboxExcel;
-    public CheckBox checkboxCSV;
+    public CheckBox checkboxBarChart;
+    public CheckBox checkboxLineChart;
 
     public TextField txtURL;
-    public TextField txtPDFPath;
-    public TextField txtCSVPath;
     public TextField txtExcelPath;
+    public TextField txtLineChartPath;
+    public TextField txtBarChartPath;
+
+    public TextField rowWebSite;
+    public TextField columnWebSite;
+    public TextField rowExcel;
+    public TextField columnExcel;
+    public TextField rowLineChart;
+    public TextField columnLineChart;
+    public TextField rowBarChart;
+    public TextField columnBarChart;
+
+    public ImageView imgExample;
 
     private UserModel userModel;
     private ScreenSetupModel screenSetupModel;
@@ -81,6 +91,10 @@ public class AdminViewController implements Initializable {
 
         choiceBoxRows.getItems().addAll(1, 2, 3, 4);
         choiceBoxColumns.getItems().addAll(1, 2, 3, 4);
+
+        File file = new File("Data/Billeder/gridpane.png");
+        Image image = new Image(file.toURI().toString());
+        imgExample.setImage(image);
     }
 
     @FXML
@@ -99,8 +113,6 @@ public class AdminViewController implements Initializable {
         if (selectedUser != null) {
             userModel.deleteUser(selectedUser);
             screenSetupModel.deleteScreenSetup(selectedUser);
-            screenViewModel.deleteScreenView(selectedUser);
-            filePathModel.deleteFilePath(selectedUser);
 
             try {
                 departmentTableView.setItems(userModel.getAllUsers());
@@ -112,47 +124,61 @@ public class AdminViewController implements Initializable {
 
     public void updateInformation() {
         if (selectedUser != null) {
-            FilePath filePath = filePathModel.getFilePath(selectedUser);
 
             clearTextfields();
             clearCheckboxes();
 
-            txtURL.setText(filePath.getWebSiteURL());
-            txtPDFPath.setText(filePath.getPdfPath());
-            txtCSVPath.setText(filePath.getCsvPath());
-            txtExcelPath.setText(filePath.getExcelPath());
+            ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
 
-            ScreenView screenView = screenViewModel.getScreenView(selectedUser);
+            BarChart barChart = screenSetupModel.getBarChart(screenSetup);
 
-            if (screenView.isWebSite()) {
-                checkboxWebsite.setSelected(true);
+            if (barChart.isSelected()) {
+                txtBarChartPath.setText(barChart.getFilePath());
+                checkboxBarChart.setSelected(true);
+                rowBarChart.setText(String.valueOf(barChart.getRow()));
+                columnBarChart.setText(String.valueOf(barChart.getColumn()));
             }
 
-            if (screenView.isPdf()) {
-                checkboxPDF.setSelected(true);
+            LineChart lineChart = screenSetupModel.getLineChart(screenSetup);
+
+            if (lineChart.isSelected()) {
+                txtLineChartPath.setText(lineChart.getFilePath());
+                checkboxLineChart.setSelected(true);
+                rowLineChart.setText(String.valueOf(lineChart.getRow()));
+                columnLineChart.setText(String.valueOf(lineChart.getColumn()));
             }
 
-            if (screenView.isCsv()) {
-                checkboxCSV.setSelected(true);
-            }
+            Excel excel = screenSetupModel.getExcel(screenSetup);
 
-            if (screenView.isExcel()) {
+            if (excel.isSelected()) {
+                txtExcelPath.setText(excel.getFilePath());
                 checkboxExcel.setSelected(true);
+                rowExcel.setText(String.valueOf(excel.getRow()));
+                columnExcel.setText(String.valueOf(excel.getColumn()));
+            }
+
+            WebSite webSite = screenSetupModel.getWebSite(screenSetup);
+
+            if (webSite.isSelected()) {
+                txtURL.setText(webSite.getUrl());
+                checkboxWebsite.setSelected(true);
+                rowWebSite.setText(String.valueOf(webSite.getRow()));
+                columnWebSite.setText(String.valueOf(webSite.getColumn()));
             }
         }
     }
 
     public void clearTextfields() {
         txtURL.clear();
-        txtPDFPath.clear();
-        txtCSVPath.clear();
+        txtLineChartPath.clear();
+        txtBarChartPath.clear();
         txtExcelPath.clear();
     }
 
     public void clearCheckboxes() {
         checkboxWebsite.setSelected(false);
-        checkboxPDF.setSelected(false);
-        checkboxCSV.setSelected(false);
+        checkboxBarChart.setSelected(false);
+        checkboxLineChart.setSelected(false);
         checkboxExcel.setSelected(false);
     }
 
@@ -180,48 +206,6 @@ public class AdminViewController implements Initializable {
             e.printStackTrace();
         }
     }
-    //Opens file chooser and only allows PDF files
-    @FXML
-    void handleChoosePDFBtn(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Vælg en PDF...");
-        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\PDF"));
-        fc.getExtensionFilters().addAll();
-        new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
-        File selectedFile = fc.showOpenDialog(null);
-
-        if (selectedFile != null) {
-            txtPDFPath.setText(selectedFile.getAbsolutePath());
-        }
-    }
-    //Opens file chooser and only allows CSV files
-    @FXML
-    void handleChooseCSVBtn(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Vælg en CSV...");
-        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\CSV"));
-        fc.getExtensionFilters().addAll();
-        new FileChooser.ExtensionFilter("CSV Files", "*.csv");
-        File selectedFile = fc.showOpenDialog(null);
-
-        if (selectedFile != null) {
-            txtCSVPath.setText(selectedFile.getAbsolutePath());
-        }
-    }
-
-    @FXML
-    void handleChooseExcelBtn(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Vælg en Excel...");
-        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\Excel"));
-        fc.getExtensionFilters().addAll();
-        new FileChooser.ExtensionFilter("Excel Files", "*.xlxs");
-        File selectedFile = fc.showOpenDialog(null);
-
-        if (selectedFile != null) {
-            txtExcelPath.setText(selectedFile.getAbsolutePath());
-        }
-    }
 
     @FXML
     void handleRegretBtn(ActionEvent event) {
@@ -238,38 +222,85 @@ public class AdminViewController implements Initializable {
         int rows = (int) choiceBoxRows.getSelectionModel().getSelectedItem();
         int columns = (int) choiceBoxColumns.getSelectionModel().getSelectedItem();
 
-        ScreenSetup screenSetup = new ScreenSetup(0, selectedUser.getUserID(), rows, columns);
-
         if (screenSetupModel.checkIfScreenSetupExist(selectedUser)) {
+            ScreenSetup screenSetup = new ScreenSetup(0, selectedUser.getUserID(), rows, columns);
             screenSetupModel.editScreenSetup(screenSetup);
         } else {
+            ScreenSetup screenSetup = new ScreenSetup(0, selectedUser.getUserID(), rows, columns);
             screenSetupModel.addScreenSetup(screenSetup);
         }
 
-        boolean showWebsite = checkboxWebsite.isSelected();
-        boolean showPDF = checkboxPDF.isSelected();
-        boolean showCSV = checkboxCSV.isSelected();
+        ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
+
+        int rowBar = Integer.parseInt(rowBarChart.getText());
+        int colBar = Integer.parseInt(columnBarChart.getText());
+        boolean showBarChart = checkboxBarChart.isSelected();
+        String barChartPath = txtBarChartPath.getText();
+
+        BarChart barChart = new BarChart(screenSetup.getScreenSetupID(), rowBar, colBar, showBarChart, barChartPath);
+        screenSetupModel.addBarChart(barChart);
+
+        int rowLine = Integer.parseInt(rowLineChart.getText());
+        int colLine = Integer.parseInt(columnLineChart.getText());
+        boolean showLineChart = checkboxLineChart.isSelected();
+        String lineChartPath = txtLineChartPath.getText();
+
+        LineChart lineChart = new LineChart(screenSetup.getScreenSetupID(), rowLine, colLine, showLineChart, lineChartPath);
+        screenSetupModel.addLineChart(lineChart);
+
+        int rowEx = Integer.parseInt(rowExcel.getText());
+        int colEx = Integer.parseInt(columnExcel.getText());
         boolean showExcel = checkboxExcel.isSelected();
-
-        ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
-
-        if (screenViewModel.checkIfUserExist(selectedUser)) {
-            screenViewModel.editScreenView(screenView);
-        } else {
-            screenViewModel.addScreenView(screenView);
-        }
-
-        String webSiteURL = txtURL.getText();
-        String pdfPath = txtPDFPath.getText();
-        String csvPath = txtCSVPath.getText();
         String excelPath = txtExcelPath.getText();
 
-        FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
+        Excel excel = new Excel(screenSetup.getScreenSetupID(), rowEx, colEx, showExcel, excelPath);
+        screenSetupModel.addExcel(excel);
 
-        if (filePathModel.checkIfFilePathExist(selectedUser)) {
-            filePathModel.editFilePath(filePath);
-        } else {
-            filePathModel.addFilePath(filePath);
+        boolean showWebsite = checkboxWebsite.isSelected();
+        String webSiteURL = txtURL.getText();
+        int rowWeb = Integer.parseInt(rowWebSite.getText());
+        int colWeb = Integer.parseInt(columnWebSite.getText());
+
+        WebSite webSite = new WebSite(screenSetup.getScreenSetupID(), rowWeb, colWeb, showWebsite, webSiteURL);
+        screenSetupModel.addWebsite(webSite);
+    }
+
+    public void handleChooseBarChartBtn(ActionEvent actionEvent) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Vælg en CSV...");
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\CSV"));
+        fc.getExtensionFilters().addAll();
+        new FileChooser.ExtensionFilter("CSV Files", "*.csv");
+        File selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            txtBarChartPath.setText(selectedFile.getAbsolutePath());
+        }
+    }
+
+    public void handleChooseLineChartBtn(ActionEvent actionEvent) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Vælg en CSV...");
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\CSV"));
+        fc.getExtensionFilters().addAll();
+        new FileChooser.ExtensionFilter("CSV Files", "*.csv");
+        File selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            txtLineChartPath.setText(selectedFile.getAbsolutePath());
+        }
+    }
+    @FXML
+    void handleChooseExcelBtn(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Vælg en Excel...");
+        fc.setInitialDirectory(new File("..\\2-Semester-Examproject\\Data\\Excel"));
+        fc.getExtensionFilters().addAll();
+        new FileChooser.ExtensionFilter("Excel Files", "*.xlxs");
+        File selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            txtExcelPath.setText(selectedFile.getAbsolutePath());
         }
     }
 }

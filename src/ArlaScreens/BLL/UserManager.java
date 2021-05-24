@@ -2,8 +2,8 @@ package ArlaScreens.BLL;
 
 import ArlaScreens.BE.User;
 import ArlaScreens.BLL.Utils.PasswordHashing;
+import ArlaScreens.DAL.IUserDBDAO;
 import ArlaScreens.DAL.UserDBDAO;
-import ArlaScreens.GUI.Controller.EditUserViewController;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.security.NoSuchAlgorithmException;
@@ -11,44 +11,44 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserManager {
-    private UserDBDAO userDBDAO;
+    private IUserDBDAO IUserDBDAO;
 
     public UserManager() {
-        userDBDAO = new UserDBDAO();
+        IUserDBDAO = new UserDBDAO();
     }
 
     public List<User> getAllUsers() throws SQLException {
-        return userDBDAO.getAllUsers();
+        return IUserDBDAO.getAllUsers();
     }
 
 
    public void editUser(String username, String password, boolean isAdmin, int userID) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
-        userDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
+        IUserDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
     }
 
     public void editAdmin(boolean isAdmin,int userID) throws SQLException {
-        userDBDAO.editAdmin(userID, isAdmin);
+        IUserDBDAO.editAdmin(userID, isAdmin);
     }
 
     public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
-        userDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
+        IUserDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
     }
 
     public boolean checkIfUserExist(String userName) {
-        return userDBDAO.checkIfUserExist(userName);
+        return IUserDBDAO.checkIfUserExist(userName);
     }
 
     public void deleteUser(User user) {
-        userDBDAO.deleteUser(user);
+        IUserDBDAO.deleteUser(user);
     }
 
     public User getUserByName(String userName) throws SQLServerException {
-        return userDBDAO.getUserByName(userName);
+        return IUserDBDAO.getUserByName(userName);
     }
 
     public User getUserByID(int userID) {
-        return userDBDAO.getUserByID(userID);
+        return IUserDBDAO.getUserByID(userID);
     }
 }

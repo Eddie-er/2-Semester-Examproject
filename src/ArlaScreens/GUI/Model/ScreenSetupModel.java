@@ -1,7 +1,6 @@
 package ArlaScreens.GUI.Model;
 
-import ArlaScreens.BE.ScreenSetup;
-import ArlaScreens.BE.User;
+import ArlaScreens.BE.*;
 import ArlaScreens.BLL.ScreenSetupManager;
 
 public class ScreenSetupModel {
@@ -37,5 +36,37 @@ public class ScreenSetupModel {
 
     public void deleteScreenSetup(User user) {
         screenSetupManager.deleteScreenSetup(user);
+    }
+
+    public void addBarChart(BarChart barChart) {
+        screenSetupManager.addBarChart(barChart);
+    }
+
+    public BarChart getBarChart(ScreenSetup screenSetup) {
+        return screenSetupManager.getBarChart(screenSetup);
+    }
+
+    public void addLineChart(LineChart lineChart) {
+        screenSetupManager.addLineChart(lineChart);
+    }
+
+    public LineChart getLineChart(ScreenSetup screenSetup) {
+        return screenSetupManager.getLineChart(screenSetup);
+    }
+
+    public void addExcel(Excel excel) {
+        screenSetupManager.addExcel(excel);
+    }
+
+    public Excel getExcel(ScreenSetup screenSetup) {
+        return screenSetupManager.getExcel(screenSetup);
+    }
+
+    public void addWebsite(WebSite webSite) {
+        screenSetupManager.addWebsite(webSite);
+    }
+
+    public WebSite getWebSite(ScreenSetup screenSetup) {
+        return screenSetupManager.getWebSite(screenSetup);
     }
 }

@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDBDAO {
+public class UserDBDAO implements IUserDBDAO {
 
     private DBConnector dbConnector;
 
@@ -21,6 +21,7 @@ public class UserDBDAO {
      * @return a list of users
      * @throws SQLException
      */
+    @Override
     public List<User> getAllUsers() throws SQLException {
         Connection connection = dbConnector.getConnection();
         List<User> users = new ArrayList<>();
@@ -46,9 +47,9 @@ public class UserDBDAO {
 
     /**
      * Checks if a user with the given name already exists
-     * @param user
      * @return true if username exists
      */
+    @Override
     public boolean checkIfUserExist(String userName) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT UserName FROM dbo.[User] WHERE UserName = ?";
@@ -71,6 +72,7 @@ public class UserDBDAO {
      * Adds a new user to the database
      * @param user
      */
+    @Override
     public void addUser(User user) {
         String query = "INSERT INTO dbo.[User](Password, UserName, Salt, IsAdmin) VALUES (?,?,?,?)";
         try (Connection connection = dbConnector.getConnection()){
@@ -91,6 +93,7 @@ public class UserDBDAO {
      * Edits a Choosen User in The DataBase.
      * @param user
      */
+   @Override
    public void editUser(User user){
         try (Connection connection = dbConnector.getConnection()){
             String query = "UPDATE dbo.[User] SET Password =?, UserName =?, Salt =?, IsAdmin =? WHERE UserID =?";
@@ -112,6 +115,7 @@ public class UserDBDAO {
      * @param isAdmin
      * @throws SQLException
      */
+    @Override
     public void editAdmin(int userID, boolean isAdmin) throws SQLException {
        try (Connection connection = dbConnector.getConnection()) {
            String query = "UPDATE dbo.[User] SET IsAdmin =? WHERE UserID =?";
@@ -128,6 +132,7 @@ public class UserDBDAO {
      * Deletes a user from the database
      * @param user
      */
+    @Override
     public void deleteUser(User user) {
         String query = "DELETE FROM dbo.[User] WHERE UserName = ?";
         try (Connection connection = dbConnector.getConnection()){
@@ -146,6 +151,7 @@ public class UserDBDAO {
      * @return the user
      * @throws SQLServerException
      */
+    @Override
     public User getUserByName(String userName) throws SQLServerException {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT * FROM dbo.[User] WHERE dbo.[User].UserName = ?";
@@ -176,6 +182,7 @@ public class UserDBDAO {
      * @param userID
      * @return the user
      */
+    @Override
     public User getUserByID(int userID) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT * FROM dbo.[User] WHERE dbo.[User].UserID = ?";
