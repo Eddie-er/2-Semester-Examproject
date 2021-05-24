@@ -189,7 +189,7 @@ public class AdminViewController implements Initializable {
         File selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {
-            txtPDFPath.setText(selectedFile.getAbsolutePath().substring(55));
+            txtPDFPath.setText(selectedFile.getAbsolutePath());
         }
     }
     //Opens file chooser and only allows CSV files
@@ -203,7 +203,7 @@ public class AdminViewController implements Initializable {
         File selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {
-            txtCSVPath.setText(selectedFile.getAbsolutePath().substring(55));
+            txtCSVPath.setText(selectedFile.getAbsolutePath());
         }
     }
 
@@ -217,7 +217,7 @@ public class AdminViewController implements Initializable {
         File selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {
-            txtExcelPath.setText(selectedFile.getAbsolutePath().substring(55));
+            txtExcelPath.setText(selectedFile.getAbsolutePath());
         }
     }
 

@@ -1,9 +1,11 @@
 package ArlaScreens.GUI.Controller;
 
+import ArlaScreens.BE.FilePath;
 import ArlaScreens.BE.ScreenView;
 import ArlaScreens.BLL.Utils.ExcelReader;
 import ArlaScreens.BLL.Utils.PDFDisplayer;
 import ArlaScreens.BLL.Utils.TresholdNode;
+import ArlaScreens.GUI.Model.FilePathModel;
 import ArlaScreens.GUI.Model.LoginModel;
 import ArlaScreens.GUI.Model.ScreenSetupModel;
 import ArlaScreens.GUI.Model.ScreenViewModel;
@@ -15,15 +17,23 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +51,7 @@ public class UserViewTest implements Initializable {
     private ScreenSetupModel screenSetupModel;
     private ScreenViewModel screenViewModel;
     private LoginModel loginModel;
+    private FilePathModel filePathModel;
     private ExcelReader excelReader;
 
     private TableView tblExcel;
@@ -55,12 +66,14 @@ public class UserViewTest implements Initializable {
 
     private final BarChart barChart = new BarChart(xAxis, yAxis);
 
+
     public UserViewTest() {
         screenSetupModel = new ScreenSetupModel();
         screenViewModel = new ScreenViewModel();
         excelReader = new ExcelReader();
         tblExcel = new TableView();
         webView = new WebView();
+        filePathModel = new FilePathModel();
         pdfDisplayer = new PDFDisplayer();
         loginModel = LoginModel.getInstance();
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
@@ -111,7 +124,9 @@ public class UserViewTest implements Initializable {
 
         if (screenView.isWebSite()) {
             try {
-                webView.getEngine().load("https://www.arla.dk/");
+                FilePath filePath = filePathModel.getFilePath(loginModel.getLoggedInUser());
+                String path = filePath.getWebSiteURL();
+                webView.getEngine().load(path);
                 gridPane.add(webView, 0, 1);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,8 +142,20 @@ public class UserViewTest implements Initializable {
                 e.printStackTrace();
             }
         }
+
+        /**
+        gridPane.getChildren().add(tblExcel);
+        gridPane.getChildren().add(barChart);
+        gridPane.getChildren().add(lineChart);
+        gridPane.getChildren().add(webView);
+        **/
+
+        openWebView();
+
         thread.setDaemon(true);
         thread.start();
+
+        System.out.println(gridPane.getChildren());
     }
 
     /**
@@ -143,7 +170,6 @@ public class UserViewTest implements Initializable {
                     public void run() {
                         try {
                             ScreenView screenView = screenViewModel.getScreenView(loginModel.getLoggedInUser());
-
                             if (screenView.isExcel()) {
                                 fillTable(excelReader.loadExcel());
                             }
@@ -197,7 +223,10 @@ public class UserViewTest implements Initializable {
         yAxis.setTickUnit(1.0);
         yAxis.setLowerBound(0);
 
-        try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
+        FilePath filePath = filePathModel.getFilePath(loginModel.getLoggedInUser());
+        String path = filePath.getCsvPath();
+
+        try (CSVReader dataReader = new CSVReader(new FileReader(path))) {
 
             String[] names = dataReader.readNext();
             ArrayList<XYChart.Series> chartSeries = new ArrayList();
@@ -230,7 +259,10 @@ public class UserViewTest implements Initializable {
 
 
     public void CSVIntoChart() throws FileNotFoundException {
-        try (CSVReader dataReader = new CSVReader(new FileReader("Data/CSV/test2.csv"))) {
+        FilePath filePath = filePathModel.getFilePath(loginModel.getLoggedInUser());
+        String path = filePath.getCsvPath();
+        //"Data/CSV/test2.csv"
+        try (CSVReader dataReader = new CSVReader(new FileReader(path))) {
 
             String[] names = dataReader.readNext();
             ArrayList<XYChart.Series> chartSeries = new ArrayList();
@@ -259,6 +291,30 @@ public class UserViewTest implements Initializable {
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void openWebView() {
+        webView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("../View/ZoomedInWebView.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("Website");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+                    }
+                }
+            }
+        });
     }
 }
 
