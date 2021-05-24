@@ -1,7 +1,10 @@
 package ArlaScreens.BLL.Utils;
 
+import ArlaScreens.BE.Excel;
 import ArlaScreens.BE.FilePath;
+import ArlaScreens.BE.ScreenSetup;
 import ArlaScreens.BLL.FilePathManager;
+import ArlaScreens.BLL.ScreenSetupManager;
 import ArlaScreens.GUI.Model.LoginModel;
 import com.gembox.spreadsheet.*;
 
@@ -11,11 +14,11 @@ import java.io.IOException;
 public class ExcelReader {
 
     private LoginModel loginModel;
-    private FilePathManager filePathManager;
+    private ScreenSetupManager screenSetupManager;
 
     public ExcelReader() {
         loginModel = LoginModel.getInstance();
-        filePathManager = new FilePathManager();
+        screenSetupManager = new ScreenSetupManager();
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
 
@@ -26,8 +29,10 @@ public class ExcelReader {
      * @throws IOException
      */
     public String[][] loadExcel() throws IOException {
-        FilePath filePath = filePathManager.getFilePath(loginModel.getLoggedInUser());
-        String path = filePath.getExcelPath();
+
+        ScreenSetup screenSetup = screenSetupManager.getScreenSetup(loginModel.getLoggedInUser());
+        Excel excel = screenSetupManager.getExcel(screenSetup);
+        String path = excel.getFilePath();
 
         //"Data/Excel/MOCK_DATA.xlsx"
         File file = new File(path);
