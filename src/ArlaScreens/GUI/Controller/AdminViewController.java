@@ -246,8 +246,6 @@ public class AdminViewController implements Initializable {
             screenSetupModel.addScreenSetup(screenSetup);
         }
 
-        screenSetupModel.addScreenSetup(screenSetup);
-
         boolean showWebsite = checkboxWebsite.isSelected();
         boolean showPDF = checkboxPDF.isSelected();
         boolean showCSV = checkboxCSV.isSelected();
