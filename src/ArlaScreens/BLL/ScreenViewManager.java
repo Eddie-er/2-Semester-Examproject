@@ -27,4 +27,8 @@ public class ScreenViewManager {
     public ScreenView getScreenView(User user) {
         return screenViewDBDAO.getScreenView(user);
     }
+
+    public void deleteScreenView(User user) {
+        screenViewDBDAO.deleteScreenView(user);
+    }
 }

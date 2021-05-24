@@ -33,6 +33,10 @@ public class ScreenViewDBDAO {
         }
     }
 
+    /**
+     * Edits the screenview
+     * @param screenView
+     */
     public void editScreenView(ScreenView screenView) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "UPDATE ScreenView SET WebSite =?, PDF =?, CSV=?, Excel =? WHERE UserID =?";
@@ -48,12 +52,16 @@ public class ScreenViewDBDAO {
         }
     }
 
+    /**
+     * Checks if a screenview already exists from the user
+     * @param user
+     * @return
+     */
     public boolean checkIfScreenViewExist(User user) {
         try (Connection connection = dbConnector.getConnection()){
             String query = "SELECT ScreenView.UserID FROM ScreenView WHERE ScreenView.UserID =?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-
             preparedStatement.setInt(1, user.getUserID());
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -94,5 +102,22 @@ public class ScreenViewDBDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Deletes screenview from the database
+     * @param user
+     */
+    public void deleteScreenView(User user) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM ScreenView WHERE ScreenView.UserID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, user.getUserID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

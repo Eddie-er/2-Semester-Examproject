@@ -28,8 +28,6 @@ import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable {
 
-
-    
     public CheckBox checkboxWebsite;
     public CheckBox checkboxPDF;
     public CheckBox checkboxExcel;
@@ -100,6 +98,10 @@ public class AdminViewController implements Initializable {
     void deleteUserAction(ActionEvent event) {
         if (selectedUser != null) {
             userModel.deleteUser(selectedUser);
+            screenSetupModel.deleteScreenSetup(selectedUser);
+            screenViewModel.deleteScreenView(selectedUser);
+            filePathModel.deleteFilePath(selectedUser);
+
             try {
                 departmentTableView.setItems(userModel.getAllUsers());
             } catch (SQLException throwables) {
@@ -237,6 +239,13 @@ public class AdminViewController implements Initializable {
         int columns = (int) choiceBoxColumns.getSelectionModel().getSelectedItem();
 
         ScreenSetup screenSetup = new ScreenSetup(0, selectedUser.getUserID(), rows, columns);
+
+        if (screenSetupModel.checkIfScreenSetupExist(selectedUser)) {
+            screenSetupModel.editScreenSetup(screenSetup);
+        } else {
+            screenSetupModel.addScreenSetup(screenSetup);
+        }
+
         screenSetupModel.addScreenSetup(screenSetup);
 
         boolean showWebsite = checkboxWebsite.isSelected();
@@ -244,11 +253,11 @@ public class AdminViewController implements Initializable {
         boolean showCSV = checkboxCSV.isSelected();
         boolean showExcel = checkboxExcel.isSelected();
 
+        ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
+
         if (screenViewModel.checkIfUserExist(selectedUser)) {
-            ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
             screenViewModel.editScreenView(screenView);
         } else {
-            ScreenView screenView = new ScreenView(0, selectedUser.getUserID(), showWebsite, showPDF, showCSV, showExcel);
             screenViewModel.addScreenView(screenView);
         }
 
@@ -257,11 +266,11 @@ public class AdminViewController implements Initializable {
         String csvPath = txtCSVPath.getText();
         String excelPath = txtExcelPath.getText();
 
+        FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
+
         if (filePathModel.checkIfFilePathExist(selectedUser)) {
-            FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
             filePathModel.editFilePath(filePath);
         } else {
-            FilePath filePath = new FilePath(0, selectedUser.getUserID(), webSiteURL, pdfPath, csvPath, excelPath);
             filePathModel.addFilePath(filePath);
         }
     }

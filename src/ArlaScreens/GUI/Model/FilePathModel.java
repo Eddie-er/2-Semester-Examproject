@@ -27,4 +27,8 @@ public class FilePathModel {
     public FilePath getFilePath(User user) {
         return filePathManager.getFilePath(user);
     }
+
+    public void deleteFilePath(User user) {
+        filePathManager.deleteFilePath(user);
+    }
 }

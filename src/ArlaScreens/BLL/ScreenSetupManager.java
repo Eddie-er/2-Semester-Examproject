@@ -19,11 +19,23 @@ public class ScreenSetupManager {
         screenSetupDBDAO.addScreenSetup(screenSetup);
     }
 
+    public void editScreenSetup(ScreenSetup screenSetup) {
+        screenSetupDBDAO.editScreenSetup(screenSetup);
+    }
+
+    public boolean checkIfScreenSetupExist(User user) {
+        return screenSetupDBDAO.checkIfScreenSetupExist(user);
+    }
+
     public int getRows(User user) {
         return screenSetupDBDAO.getRows(user);
     }
 
     public int getColumns(User user) {
         return screenSetupDBDAO.getColumns(user);
+    }
+
+    public void deleteScreenSetup(User user) {
+        screenSetupDBDAO.deleteScreenSetup(user);
     }
 }

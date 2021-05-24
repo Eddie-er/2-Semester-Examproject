@@ -27,4 +27,8 @@ public class ScreenViewModel {
     public ScreenView getScreenView(User user) {
         return screenViewManager.getScreenView(user);
     }
+
+    public void deleteScreenView(User user) {
+        screenViewManager.deleteScreenView(user);
+    }
 }

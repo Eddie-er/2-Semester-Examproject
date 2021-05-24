@@ -27,4 +27,8 @@ public class FilePathManager {
     public FilePath getFilePath(User user) {
         return filePathDBDAO.getFilePath(user);
     }
+
+    public void deleteFilePath(User user) {
+        filePathDBDAO.deleteFilePath(user);
+    }
 }

@@ -34,6 +34,10 @@ public class FilePathDBDAO {
         }
     }
 
+    /**
+     * Edits the filepaths
+     * @param filePath
+     */
     public void editFilePath(FilePath filePath) {
         try (Connection connection = dbConnector.getConnection()) {
             String query= "UPDATE FilePath SET WebSiteURL =?, PDFPath =?, CSVPath =?, ExcelPath =? WHERE FilePath.UserID =?";
@@ -52,6 +56,11 @@ public class FilePathDBDAO {
         }
     }
 
+    /**
+     * Checks if a filepath config exists with the user
+     * @param user
+     * @return
+     */
     public boolean checkIfFilePathExist(User user) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT UserID FROM FilePath WHERE UserID = ?";
@@ -98,5 +107,18 @@ public class FilePathDBDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteFilePath(User user) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM FilePath WHERE FilePath.UserID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, user.getUserID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

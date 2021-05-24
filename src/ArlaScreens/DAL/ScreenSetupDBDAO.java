@@ -14,6 +14,10 @@ public class ScreenSetupDBDAO {
         dbConnector = new DBConnector();
     }
 
+    /**
+     * Adds a new screensetup
+     * @param screenSetup
+     */
     public void addScreenSetup(ScreenSetup screenSetup) {
         String query = "INSERT INTO ScreenSetup (UserID, Rows, Columns) VALUES (?,?,?)";
         try (Connection connection = dbConnector.getConnection()) {
@@ -23,6 +27,47 @@ public class ScreenSetupDBDAO {
             preparedStatement.setInt(3, screenSetup.getColumns());
 
             preparedStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * Checks if screensetup already exists from the user
+     * @param user
+     * @return
+     */
+    public boolean checkIfScreenSetupExist(User user) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "SELECT ScreenSetup.UserID FROM ScreenSetup WHERE ScreenSetup.UserID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, user.getUserID());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Edits the screensetup config
+     * @param screenSetup
+     */
+    public void editScreenSetup(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "UPDATE ScreenSetup SET Rows =?, Columns =? WHERE ScreenSetup.UserID =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, screenSetup.getRows());
+            preparedStatement.setInt(2, screenSetup.getColumns());
+            preparedStatement.setInt(3, screenSetup.getUserID());
+
+            preparedStatement.executeUpdate();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -88,5 +133,18 @@ public class ScreenSetupDBDAO {
             throwables.printStackTrace();
         }
         return 0;
+    }
+
+    public void deleteScreenSetup(User user) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM ScreenSetup WHERE ScreenSetup.UserID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, user.getUserID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

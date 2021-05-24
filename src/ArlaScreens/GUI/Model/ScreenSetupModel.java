@@ -19,11 +19,23 @@ public class ScreenSetupModel {
         screenSetupManager.addScreenSetup(screenSetup);
     }
 
+    public void editScreenSetup(ScreenSetup screenSetup) {
+        screenSetupManager.editScreenSetup(screenSetup);
+    }
+
+    public boolean checkIfScreenSetupExist(User user) {
+        return screenSetupManager.checkIfScreenSetupExist(user);
+    }
+
     public int getRows(User user) {
         return screenSetupManager.getRows(user);
     }
 
     public int getColumns(User user) {
         return screenSetupManager.getColumns(user);
+    }
+
+    public void deleteScreenSetup(User user) {
+        screenSetupManager.deleteScreenSetup(user);
     }
 }
