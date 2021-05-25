@@ -173,12 +173,14 @@ public class UserViewTest implements Initializable {
                             ArlaScreens.BE.BarChart barChart = screenSetupModel.getBarChart(screenSetup);
 
                             if (barChart.isSelected()) {
+                                barChartGraph.getData().clear();
                                 CSVIntoBar();
                             }
 
                             ArlaScreens.BE.LineChart lineChart = screenSetupModel.getLineChart(screenSetup);
 
                             if (lineChart.isSelected()) {
+                                lineChartGraph.getData().clear();
                                 CSVIntoChart();
                             }
                         } catch (IOException e) {
@@ -257,7 +259,7 @@ public class UserViewTest implements Initializable {
             for (XYChart.Series serie: chartSeries){
                 barChartGraph.getData().add(serie);
             }
-            barChartGraph.setTitle("Chart over ARLA stuff");
+            barChartGraph.setTitle("ARLA");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
@@ -296,7 +298,7 @@ public class UserViewTest implements Initializable {
             for (XYChart.Series serie: chartSeries){
                 lineChartGraph.getData().add(serie);
             }
-            lineChartGraph.setTitle("Chart over ARLA stuff");
+            lineChartGraph.setTitle("ARLA");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }

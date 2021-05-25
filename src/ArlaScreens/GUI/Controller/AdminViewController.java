@@ -238,7 +238,12 @@ public class AdminViewController implements Initializable {
         String barChartPath = txtBarChartPath.getText();
 
         BarChart barChart = new BarChart(screenSetup.getScreenSetupID(), rowBar, colBar, showBarChart, barChartPath);
-        screenSetupModel.addBarChart(barChart);
+
+        if (screenSetupModel.checkIfBarChartExist(screenSetup)) {
+            screenSetupModel.editBarChart(barChart);
+        } else {
+            screenSetupModel.addBarChart(barChart);
+        }
 
         int rowLine = Integer.parseInt(rowLineChart.getText());
         int colLine = Integer.parseInt(columnLineChart.getText());
@@ -246,7 +251,12 @@ public class AdminViewController implements Initializable {
         String lineChartPath = txtLineChartPath.getText();
 
         LineChart lineChart = new LineChart(screenSetup.getScreenSetupID(), rowLine, colLine, showLineChart, lineChartPath);
-        screenSetupModel.addLineChart(lineChart);
+
+        if (screenSetupModel.checkIfLineChartExist(screenSetup)) {
+            screenSetupModel.editLineChart(lineChart);
+        } else {
+            screenSetupModel.addLineChart(lineChart);
+        }
 
         int rowEx = Integer.parseInt(rowExcel.getText());
         int colEx = Integer.parseInt(columnExcel.getText());
@@ -254,7 +264,12 @@ public class AdminViewController implements Initializable {
         String excelPath = txtExcelPath.getText();
 
         Excel excel = new Excel(screenSetup.getScreenSetupID(), rowEx, colEx, showExcel, excelPath);
-        screenSetupModel.addExcel(excel);
+
+        if (screenSetupModel.checkIfExcelExist(screenSetup)) {
+            screenSetupModel.editExcel(excel);
+        } else {
+            screenSetupModel.addExcel(excel);
+        }
 
         boolean showWebsite = checkboxWebsite.isSelected();
         String webSiteURL = txtURL.getText();
@@ -262,7 +277,12 @@ public class AdminViewController implements Initializable {
         int colWeb = Integer.parseInt(columnWebSite.getText());
 
         WebSite webSite = new WebSite(screenSetup.getScreenSetupID(), rowWeb, colWeb, showWebsite, webSiteURL);
-        screenSetupModel.addWebsite(webSite);
+
+        if (screenSetupModel.checkIfWebSiteExist(screenSetup)) {
+            screenSetupModel.editWebSite(webSite);
+        } else {
+            screenSetupModel.addWebsite(webSite);
+        }
     }
 
     public void handleChooseBarChartBtn(ActionEvent actionEvent) {

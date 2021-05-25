@@ -42,31 +42,63 @@ public class ScreenSetupManager {
         screenSetupDBDAO.addBarChart(barChart);
     }
 
+    public void editBarChart(BarChart barChart) {
+        screenSetupDBDAO.editBarChart(barChart);
+    }
+
     public BarChart getBarChart(ScreenSetup screenSetup) {
         return screenSetupDBDAO.getBarChart(screenSetup);
+    }
+
+    public boolean checkIfBarChartExist(ScreenSetup screenSetup) {
+        return screenSetupDBDAO.checkIfBarChartExist(screenSetup);
     }
 
     public void addLineChart(LineChart lineChart) {
         screenSetupDBDAO.addLineChart(lineChart);
     }
 
+    public void editLineChart(LineChart lineChart) {
+        screenSetupDBDAO.editLineChart(lineChart);
+    }
+
     public LineChart getLineChart(ScreenSetup screenSetup) {
         return screenSetupDBDAO.getLineChart(screenSetup);
+    }
+
+    public boolean checkIfLineChartExist(ScreenSetup screenSetup) {
+        return screenSetupDBDAO.checkIfLineChartExist(screenSetup);
     }
 
     public void addExcel(Excel excel) {
         screenSetupDBDAO.addExcel(excel);
     }
 
+    public void editExcel(Excel excel) {
+        screenSetupDBDAO.editExcel(excel);
+    }
+
     public Excel getExcel(ScreenSetup screenSetup) {
         return screenSetupDBDAO.getExcel(screenSetup);
+    }
+
+    public boolean checkIfExcelExist(ScreenSetup screenSetup) {
+        return screenSetupDBDAO.checkIfExcelExist(screenSetup);
     }
 
     public void addWebsite(WebSite webSite) {
         screenSetupDBDAO.addWebsite(webSite);
     }
 
+    public void editWebSite(WebSite webSite) {
+        screenSetupDBDAO.editWebSite(webSite);
+    }
+
     public WebSite getWebSite(ScreenSetup screenSetup) {
         return screenSetupDBDAO.getWebSite(screenSetup);
+    }
+
+    public boolean checkIfWebSiteExist(ScreenSetup screenSetup) {
+        return screenSetupDBDAO.checkIfWebSiteExist(screenSetup);
     }
 }
