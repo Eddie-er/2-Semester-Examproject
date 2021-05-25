@@ -15,10 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+import javafx.scene.input.KeyEvent;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -76,6 +77,7 @@ public class LoginViewController implements Initializable{
         errorLabel.setText("");
     }
 
+
     public void handleLogin(ActionEvent actionEvent) throws IOException, SQLException {
 
         if (loginModel.login(UserName.getText(), PassWord.getText()) != null && loginModel.getLoggedInUser().isAdmin()) {
@@ -109,4 +111,39 @@ public class LoginViewController implements Initializable{
             errorLabel.setText("Brugernavn eller kodeord forkert. Prøv igen.");
         }
     }
-}
+
+    public void PasswordFieldKeyPressed(KeyEvent keyEvent) throws SQLServerException {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            if (loginModel.login(UserName.getText(), PassWord.getText()) != null && loginModel.getLoggedInUser().isAdmin()) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/AdminView.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setTitle("Admin");
+                    stage.setScene(scene);
+                    stage.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (loginModel.login(UserName.getText(), PassWord.getText()) != null) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/UserViewTest.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setTitle("Bruger");
+                    stage.setScene(scene);
+                    stage.setResizable(true);
+                    stage.setMaximized(true);
+                    stage.showAndWait();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }else{
+                errorLabel.setText("Brugernavn eller kodeord forkert. Prøv igen.");
+            }
+        }
+    }
+  }

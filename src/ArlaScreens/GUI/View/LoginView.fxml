@@ -25,7 +25,7 @@
                </font>
             </Label>
             <TextField fx:id="UserName" layoutX="450.0" layoutY="436.0" minHeight="50.0" minWidth="400.0" prefHeight="45.0" prefWidth="300.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="436.0" />
-            <PasswordField fx:id="PassWord" layoutX="450.0" layoutY="537.0" prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="216.60000000000002" AnchorPane.leftAnchor="450.0" />
+            <PasswordField fx:id="PassWord" layoutX="450.0" layoutY="537.0" onKeyPressed="#PasswordFieldKeyPressed" prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="216.60000000000002" AnchorPane.leftAnchor="450.0" />
             <Button fx:id="Cancel" layoutX="796.0" layoutY="616.0" mnemonicParsing="false" onAction="#cancel" text="Luk" AnchorPane.bottomAnchor="147.20000000000005">
                <font>
                   <Font size="24.0" />
