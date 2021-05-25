@@ -232,56 +232,100 @@ public class AdminViewController implements Initializable {
 
         ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
 
-        int rowBar = Integer.parseInt(rowBarChart.getText());
-        int colBar = Integer.parseInt(columnBarChart.getText());
-        boolean showBarChart = checkboxBarChart.isSelected();
-        String barChartPath = txtBarChartPath.getText();
+        if (!checkboxBarChart.isSelected()) {
+            BarChart barChart = new BarChart(screenSetup.getScreenSetupID(), 0, 0, false, null);
 
-        BarChart barChart = new BarChart(screenSetup.getScreenSetupID(), rowBar, colBar, showBarChart, barChartPath);
-
-        if (screenSetupModel.checkIfBarChartExist(screenSetup)) {
-            screenSetupModel.editBarChart(barChart);
-        } else {
-            screenSetupModel.addBarChart(barChart);
+            if (screenSetupModel.checkIfBarChartExist(screenSetup)) {
+                screenSetupModel.editBarChart(barChart);
+            } else {
+                screenSetupModel.addBarChart(barChart);
+            }
         }
 
-        int rowLine = Integer.parseInt(rowLineChart.getText());
-        int colLine = Integer.parseInt(columnLineChart.getText());
-        boolean showLineChart = checkboxLineChart.isSelected();
-        String lineChartPath = txtLineChartPath.getText();
+        if (checkboxBarChart.isSelected()) {
+            int rowBar = Integer.parseInt(rowBarChart.getText());
+            int colBar = Integer.parseInt(columnBarChart.getText());
+            String barChartPath = txtBarChartPath.getText();
 
-        LineChart lineChart = new LineChart(screenSetup.getScreenSetupID(), rowLine, colLine, showLineChart, lineChartPath);
+            BarChart barChart = new BarChart(screenSetup.getScreenSetupID(), rowBar, colBar, true, barChartPath);
 
-        if (screenSetupModel.checkIfLineChartExist(screenSetup)) {
-            screenSetupModel.editLineChart(lineChart);
-        } else {
-            screenSetupModel.addLineChart(lineChart);
+            if (screenSetupModel.checkIfBarChartExist(screenSetup)) {
+                screenSetupModel.editBarChart(barChart);
+            } else {
+                screenSetupModel.addBarChart(barChart);
+            }
         }
 
-        int rowEx = Integer.parseInt(rowExcel.getText());
-        int colEx = Integer.parseInt(columnExcel.getText());
-        boolean showExcel = checkboxExcel.isSelected();
-        String excelPath = txtExcelPath.getText();
+        if (!checkboxLineChart.isSelected()) {
+            LineChart lineChart = new LineChart(screenSetup.getScreenSetupID(), 0, 0, false, null);
 
-        Excel excel = new Excel(screenSetup.getScreenSetupID(), rowEx, colEx, showExcel, excelPath);
-
-        if (screenSetupModel.checkIfExcelExist(screenSetup)) {
-            screenSetupModel.editExcel(excel);
-        } else {
-            screenSetupModel.addExcel(excel);
+            if (screenSetupModel.checkIfLineChartExist(screenSetup)) {
+                screenSetupModel.editLineChart(lineChart);
+            } else {
+                screenSetupModel.addLineChart(lineChart);
+            }
         }
 
-        boolean showWebsite = checkboxWebsite.isSelected();
-        String webSiteURL = txtURL.getText();
-        int rowWeb = Integer.parseInt(rowWebSite.getText());
-        int colWeb = Integer.parseInt(columnWebSite.getText());
+        if (checkboxLineChart.isSelected()) {
+            int rowLine = Integer.parseInt(rowLineChart.getText());
+            int colLine = Integer.parseInt(columnLineChart.getText());
+            String lineChartPath = txtLineChartPath.getText();
 
-        WebSite webSite = new WebSite(screenSetup.getScreenSetupID(), rowWeb, colWeb, showWebsite, webSiteURL);
+            LineChart lineChart = new LineChart(screenSetup.getScreenSetupID(), rowLine, colLine, true, lineChartPath);
 
-        if (screenSetupModel.checkIfWebSiteExist(screenSetup)) {
-            screenSetupModel.editWebSite(webSite);
-        } else {
-            screenSetupModel.addWebsite(webSite);
+            if (screenSetupModel.checkIfLineChartExist(screenSetup)) {
+                screenSetupModel.editLineChart(lineChart);
+            } else {
+                screenSetupModel.addLineChart(lineChart);
+            }
+        }
+
+        if (!checkboxExcel.isSelected()) {
+            Excel excel = new Excel(screenSetup.getScreenSetupID(), 0, 0, false, null);
+
+            if (screenSetupModel.checkIfExcelExist(screenSetup)) {
+                screenSetupModel.editExcel(excel);
+            } else {
+                screenSetupModel.addExcel(excel);
+            }
+        }
+
+        if (checkboxExcel.isSelected()) {
+            int rowEx = Integer.parseInt(rowExcel.getText());
+            int colEx = Integer.parseInt(columnExcel.getText());
+            String excelPath = txtExcelPath.getText();
+
+            Excel excel = new Excel(screenSetup.getScreenSetupID(), rowEx, colEx, true, excelPath);
+
+            if (screenSetupModel.checkIfExcelExist(screenSetup)) {
+                screenSetupModel.editExcel(excel);
+            } else {
+                screenSetupModel.addExcel(excel);
+            }
+        }
+
+        if (!checkboxWebsite.isSelected()) {
+            WebSite webSite = new WebSite(screenSetup.getScreenSetupID(), 0, 0, false, null);
+
+            if (screenSetupModel.checkIfWebSiteExist(screenSetup)) {
+                screenSetupModel.editWebSite(webSite);
+            } else {
+                screenSetupModel.addWebsite(webSite);
+            }
+        }
+
+        if (checkboxWebsite.isSelected()) {
+            int rowWeb = Integer.parseInt(rowWebSite.getText());
+            int colWeb = Integer.parseInt(columnWebSite.getText());
+            String webSiteURL = txtURL.getText();
+
+            WebSite webSite = new WebSite(screenSetup.getScreenSetupID(), rowWeb, colWeb, true, webSiteURL);
+
+            if (screenSetupModel.checkIfWebSiteExist(screenSetup)) {
+                screenSetupModel.editWebSite(webSite);
+            } else {
+                screenSetupModel.addWebsite(webSite);
+            }
         }
     }
 

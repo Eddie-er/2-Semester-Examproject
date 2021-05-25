@@ -107,7 +107,7 @@ public class UserViewTest implements Initializable {
         if (barChart.isSelected()) {
             try {
                 CSVIntoBar();
-                gridPane.add(barChartGraph, barChart.getRow(), barChart.getColumn());
+                gridPane.add(barChartGraph, barChart.getColumn(), barChart.getRow());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -118,7 +118,7 @@ public class UserViewTest implements Initializable {
         if (lineChart.isSelected()) {
             try {
                 CSVIntoChart();
-                gridPane.add(lineChartGraph, lineChart.getRow(), lineChart.getColumn());
+                gridPane.add(lineChartGraph, lineChart.getColumn(), lineChart.getRow());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -129,7 +129,7 @@ public class UserViewTest implements Initializable {
         if (excel.isSelected()) {
             try {
                 fillTable(excelReader.loadExcel());
-                gridPane.add(tblExcel, excel.getRow(), excel.getColumn());
+                gridPane.add(tblExcel, excel.getColumn(), excel.getRow());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,7 +140,7 @@ public class UserViewTest implements Initializable {
         if (webSite.isSelected()) {
             try {
                 webView.getEngine().load(webSite.getUrl());
-                gridPane.add(webView, webSite.getRow(), webSite.getColumn());
+                gridPane.add(webView, webSite.getColumn(), webSite.getRow());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -157,7 +157,7 @@ public class UserViewTest implements Initializable {
     Thread thread = new Thread(() -> {
         while (true) {
             try {
-                Thread.sleep(300_000);
+                Thread.sleep(10_000);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
