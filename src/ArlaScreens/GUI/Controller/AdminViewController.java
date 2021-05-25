@@ -2,11 +2,8 @@ package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.BE.*;
 import ArlaScreens.BLL.Utils.AlertSystem;
-import ArlaScreens.GUI.Model.FilePathModel;
 import ArlaScreens.GUI.Model.ScreenSetupModel;
-import ArlaScreens.GUI.Model.ScreenViewModel;
 import ArlaScreens.GUI.Model.UserModel;
-import com.gembox.spreadsheet.SpreadsheetInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,8 +47,6 @@ public class AdminViewController implements Initializable {
 
     private UserModel userModel;
     private ScreenSetupModel screenSetupModel;
-    private ScreenViewModel screenViewModel;
-    private FilePathModel filePathModel;
 
     @FXML
     Button editUser;
@@ -72,8 +67,6 @@ public class AdminViewController implements Initializable {
     public AdminViewController() {
         userModel = new UserModel();
         screenSetupModel = new ScreenSetupModel();
-        screenViewModel = new ScreenViewModel();
-        filePathModel = new FilePathModel();
     }
 
     @Override
@@ -327,6 +320,8 @@ public class AdminViewController implements Initializable {
                 screenSetupModel.addWebsite(webSite);
             }
         }
+
+        AlertSystem.alertUser("Konfiguration gemt", "Bekræftelse", "Skærmkonfiguration er gemt");
     }
 
     public void handleChooseBarChartBtn(ActionEvent actionEvent) {

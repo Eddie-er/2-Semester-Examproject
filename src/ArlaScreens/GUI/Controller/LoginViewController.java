@@ -1,6 +1,5 @@
 package ArlaScreens.GUI.Controller;
 
-import ArlaScreens.BE.User;
 import ArlaScreens.GUI.Model.LoginModel;
 import ArlaScreens.GUI.Model.UserModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -16,18 +15,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
-import java.awt.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -94,7 +88,7 @@ public class LoginViewController implements Initializable{
 
         } else if (loginModel.login(UserName.getText(), PassWord.getText()) != null) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/UserViewTest.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setTitle("Bruger");
@@ -128,7 +122,7 @@ public class LoginViewController implements Initializable{
 
             } else if (loginModel.login(UserName.getText(), PassWord.getText()) != null) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("../View/UserViewTest.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/UserView.fxml"));
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
                     stage.setTitle("Bruger");

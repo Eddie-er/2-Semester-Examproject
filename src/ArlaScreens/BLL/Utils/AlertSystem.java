@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class AlertSystem {
     public static void alertUser(String title, String subMsg, String msg) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.setAlwaysOnTop(true);
