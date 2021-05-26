@@ -26,7 +26,7 @@ public class TresholdNode extends StackPane {
         final Tooltip tooltip = new Tooltip();
         tooltip.setText(df.format(value));
         tooltip.showDelayProperty().set(Duration.ZERO);
-        tooltip.setStyle("-fx-font-size: 15px; -fx-background-color: rgb(154, 128, 254, .8);");
+        tooltip.setStyle("-fx-font-size: 15px;");
 
         Tooltip.install(this, tooltip);
 

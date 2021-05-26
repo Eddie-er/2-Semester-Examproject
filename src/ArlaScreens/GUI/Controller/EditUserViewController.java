@@ -65,7 +65,7 @@ public class EditUserViewController implements Initializable {
         }
     }
 
-    //checks if the choosen User should have Admin rights.
+    //checks if the chosen User should have Admin rights.
     public void adminAction(ActionEvent actionEvent) {
         if(adminCheck.isSelected()){
             isAdmin = true;
@@ -102,7 +102,7 @@ public class EditUserViewController implements Initializable {
         System.out.println("User ID: " + userID);
         System.out.println("Admin: " + admin);
 
-        //Edits the choosen User
+        //Edits the chosen User
         userModel.editUser(username, password, admin, userID);
         userModel.editAdmin(isAdmin,userID);
 
