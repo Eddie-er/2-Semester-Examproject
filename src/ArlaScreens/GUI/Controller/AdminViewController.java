@@ -176,7 +176,7 @@ public class AdminViewController implements Initializable {
     }
 
     /**
-     * Edit a Choosen User.
+     * Edit a chosen user.
      * @param event
      * @throws IOException
      */
@@ -198,11 +198,6 @@ public class AdminViewController implements Initializable {
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void handleRegretBtn(ActionEvent event) {
-
     }
 
     public void adminlogout(javafx.event.ActionEvent actionEvent)throws IOException {

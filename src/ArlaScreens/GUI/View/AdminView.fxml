@@ -41,7 +41,6 @@
             <Font size="18.0" />
          </font></CheckBox>
         <Button layoutX="957.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleSaveBtn" text="Gem" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="82.0" />
-        <Button layoutX="883.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleRegretBtn" text="Fortryd" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="142.0" />
         <Label fx:id="choosedDepLabel" layoutX="1268.0" layoutY="66.0" prefHeight="17.0" prefWidth="167.0" />
       <CheckBox fx:id="checkboxLineChart" layoutX="726.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="191.0" text="Linje Diagram" textFill="#111111" AnchorPane.rightAnchor="250.0">
          <font>
