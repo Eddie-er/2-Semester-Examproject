@@ -50,6 +50,10 @@ public class ScreenSetupManager {
         return screenSetupDBDAO.getBarChart(screenSetup);
     }
 
+    public void deleteBarChart(ScreenSetup screenSetup) {
+        screenSetupDBDAO.deleteBarChart(screenSetup);
+    }
+
     public boolean checkIfBarChartExist(ScreenSetup screenSetup) {
         return screenSetupDBDAO.checkIfBarChartExist(screenSetup);
     }
@@ -64,6 +68,10 @@ public class ScreenSetupManager {
 
     public LineChart getLineChart(ScreenSetup screenSetup) {
         return screenSetupDBDAO.getLineChart(screenSetup);
+    }
+
+    public void deleteLineChart(ScreenSetup screenSetup) {
+        screenSetupDBDAO.deleteLineChart(screenSetup);
     }
 
     public boolean checkIfLineChartExist(ScreenSetup screenSetup) {
@@ -82,6 +90,10 @@ public class ScreenSetupManager {
         return screenSetupDBDAO.getExcel(screenSetup);
     }
 
+    public void deleteExcel(ScreenSetup screenSetup) {
+        screenSetupDBDAO.deleteExcel(screenSetup);
+    }
+
     public boolean checkIfExcelExist(ScreenSetup screenSetup) {
         return screenSetupDBDAO.checkIfExcelExist(screenSetup);
     }
@@ -96,6 +108,10 @@ public class ScreenSetupManager {
 
     public WebSite getWebSite(ScreenSetup screenSetup) {
         return screenSetupDBDAO.getWebSite(screenSetup);
+    }
+
+    public void deleteWebSite(ScreenSetup screenSetup) {
+        screenSetupDBDAO.deleteWebSite(screenSetup);
     }
 
     public boolean checkIfWebSiteExist(ScreenSetup screenSetup) {

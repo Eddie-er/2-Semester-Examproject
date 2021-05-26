@@ -2,8 +2,6 @@ package ArlaScreens.DAL;
 
 import ArlaScreens.BE.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import org.jpedal.parser.shape.S;
-
 
 import java.sql.*;
 
@@ -224,6 +222,19 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    public void deleteBarChart(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM BarChart WHERE BarChart.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public boolean checkIfBarChartExist(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT BarChart.ScreenSetupID FROM BarChart WHERE BarChart.ScreenSetupID =?";
@@ -299,6 +310,19 @@ public class ScreenSetupDBDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteLineChart(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM LineChart WHERE LineChart.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public boolean checkIfLineChartExist(ScreenSetup screenSetup) {
@@ -378,6 +402,19 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    public void deleteExcel(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM Excel WHERE Excel.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public boolean checkIfExcelExist(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT Excel.ScreenSetupID FROM Excel WHERE Excel.ScreenSetupID =?";
@@ -454,6 +491,19 @@ public class ScreenSetupDBDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteWebSite(ScreenSetup screenSetup) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "DELETE FROM WebSite WHERE WebSite.ScreenSetupID =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, screenSetup.getScreenSetupID());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public boolean checkIfWebSiteExist(ScreenSetup screenSetup) {

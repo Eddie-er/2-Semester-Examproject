@@ -134,10 +134,10 @@ public class UserDBDAO implements IUserDBDAO {
      */
     @Override
     public void deleteUser(User user) {
-        String query = "DELETE FROM dbo.[User] WHERE UserName = ?";
+        String query = "DELETE FROM dbo.[User] WHERE UserID = ?";
         try (Connection connection = dbConnector.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setInt(1, user.getUserID());
             preparedStatement.execute();
 
         } catch (SQLException throwables) {

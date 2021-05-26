@@ -103,15 +103,22 @@ public class AdminViewController implements Initializable {
     
     @FXML
     void deleteUserAction(ActionEvent event) {
+        ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
         if (selectedUser != null) {
             userModel.deleteUser(selectedUser);
             screenSetupModel.deleteScreenSetup(selectedUser);
+            screenSetupModel.deleteBarChart(screenSetup);
+            screenSetupModel.deleteLineChart(screenSetup);
+            screenSetupModel.deleteExcel(screenSetup);
+            screenSetupModel.deleteWebSite(screenSetup);
 
             try {
                 departmentTableView.setItems(userModel.getAllUsers());
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+
+            AlertSystem.alertUser("Bruger slettet", "Bekræftelse", "Brugeren er slettet");
         }
     }
 
