@@ -17,7 +17,7 @@ public class TresholdNode extends StackPane {
     private DecimalFormat df = new DecimalFormat("0.0#");
 
     /**
-     *
+     * Shows the values in charts, if you hover over them.
      * @param value
      */
     public TresholdNode(Number value) {
