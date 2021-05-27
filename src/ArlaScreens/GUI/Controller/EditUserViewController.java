@@ -1,7 +1,6 @@
 package ArlaScreens.GUI.Controller;
 
 import ArlaScreens.BE.User;
-import ArlaScreens.BLL.Utils.PasswordAlert;
 import ArlaScreens.GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,10 +19,10 @@ import java.util.ResourceBundle;
 public class EditUserViewController implements Initializable {
 
 
-
+    public TextField codeWord;
     private AdminViewController adminViewController;
     private User user;
-    private PasswordAlert passwordAlert;
+
     private UserModel userModel;
 
     public static boolean resetPassword;
@@ -38,8 +37,7 @@ public class EditUserViewController implements Initializable {
     private Button CancelButton;
     @FXML
     private TextField userName;
-    @FXML
-    private Button ResetPassWord;
+
 
     public EditUserViewController() {
         userModel = new UserModel();
@@ -51,9 +49,7 @@ public class EditUserViewController implements Initializable {
     }
 
     //throws interactive Warning to double check if the codeword should be reset.
-    public void ResetPasswordAction(ActionEvent actionEvent) throws IOException{
-        ResetPassWord.setOnAction(e -> PasswordAlert.display());
-    }
+
 
     //Checks the Check box if the choosen User is an admin.
     public void initData(User selectedUser) {
@@ -83,16 +79,17 @@ public class EditUserViewController implements Initializable {
     }
 
     public void saveAction(ActionEvent actionEvent) throws NoSuchAlgorithmException, SQLException {
-        //boolean isSelected = resetPassword;
+        resetPassword = true;
         String username = userName.getText();
         String password;
         int userID = user.getUserID();
         boolean admin = isAdmin;
 
 
-        if(resetPassword){
-            password = "banan69";
-        }else{
+        if(resetPassword && !codeWord.getText().isEmpty()){
+            password = codeWord.getText();
+        }
+        else{
             password = user.getPassword();
         }
 
