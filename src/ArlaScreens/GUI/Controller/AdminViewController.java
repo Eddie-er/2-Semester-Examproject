@@ -105,13 +105,15 @@ public class AdminViewController implements Initializable {
     void deleteUserAction(ActionEvent event) {
         ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
         if (selectedUser != null) {
-            userModel.deleteUser(selectedUser);
-            screenSetupModel.deleteScreenSetup(selectedUser);
+
             screenSetupModel.deleteBarChart(screenSetup);
             screenSetupModel.deleteLineChart(screenSetup);
             screenSetupModel.deleteExcel(screenSetup);
             screenSetupModel.deleteWebSite(screenSetup);
 
+            screenSetupModel.deleteScreenSetup(selectedUser);
+            userModel.deleteUser(selectedUser);
+            
             try {
                 departmentTableView.setItems(userModel.getAllUsers());
             } catch (SQLException throwables) {
