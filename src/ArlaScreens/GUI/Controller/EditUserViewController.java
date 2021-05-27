@@ -88,19 +88,10 @@ public class EditUserViewController implements Initializable {
 
         if(resetPassword && !codeWord.getText().isEmpty()){
             password = codeWord.getText();
-        }
-        else{
-            password = user.getPassword();
+            userModel.editUser(username, password, admin, userID);
         }
 
-        //Tests the Values
-        System.out.println("User name: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("User ID: " + userID);
-        System.out.println("Admin: " + admin);
-
-        //Edits the chosen User
-        userModel.editUser(username, password, admin, userID);
+        //userModel.editUser(username, password, admin, userID);
         userModel.editAdmin(isAdmin,userID);
 
         Stage stage = (Stage) saveButton.getScene().getWindow();
