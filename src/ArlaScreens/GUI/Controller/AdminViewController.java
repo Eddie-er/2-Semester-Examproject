@@ -113,7 +113,7 @@ public class AdminViewController implements Initializable {
 
             screenSetupModel.deleteScreenSetup(selectedUser);
             userModel.deleteUser(selectedUser);
-            
+
             try {
                 departmentTableView.setItems(userModel.getAllUsers());
             } catch (SQLException throwables) {

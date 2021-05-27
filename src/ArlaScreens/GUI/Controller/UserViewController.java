@@ -90,6 +90,7 @@ public class UserViewController implements Initializable {
             try {
                 CSVIntoBar();
                 gridPane.add(barChartGraph, barChart.getColumn(), barChart.getRow());
+                openBarChart();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -101,6 +102,7 @@ public class UserViewController implements Initializable {
             try {
                 CSVIntoChart();
                 gridPane.add(lineChartGraph, lineChart.getColumn(), lineChart.getRow());
+                openLineChart();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -112,6 +114,7 @@ public class UserViewController implements Initializable {
             try {
                 fillTable(excelReader.loadExcel());
                 gridPane.add(tblExcel, excel.getColumn(), excel.getRow());
+                openExcelTable();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -123,11 +126,11 @@ public class UserViewController implements Initializable {
             try {
                 webView.getEngine().load(webSite.getUrl());
                 gridPane.add(webView, webSite.getColumn(), webSite.getRow());
+                openWebView();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        openWebView();
 
         thread.setDaemon(true);
         thread.start();
@@ -286,6 +289,9 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Opens a Webview in a new window when double clicked
+     */
     public void openWebView() {
         webView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -301,6 +307,84 @@ public class UserViewController implements Initializable {
                         Stage stage = new Stage();
                         Scene scene = new Scene(root);
                         stage.setTitle("Website");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Opens a Excel table in a new window when double clicked
+     */
+    public void openExcelTable() {
+        tblExcel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("../View/ExcelTableView.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("Excel");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Opens a barchart in a new window when double clicked
+     */
+    public void openBarChart() {
+        barChartGraph.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("../View/BarChartView.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("Søjlediagram");
+                        stage.setScene(scene);
+                        stage.showAndWait();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Opens a linechart in a new window when double clicked
+     */
+    public void openLineChart() {
+        lineChartGraph.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("../View/LineChartView.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("Linjediagram");
                         stage.setScene(scene);
                         stage.showAndWait();
                     }
