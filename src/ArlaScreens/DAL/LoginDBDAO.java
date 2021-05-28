@@ -5,14 +5,15 @@ import ArlaScreens.BLL.UserManager;
 import ArlaScreens.BLL.Utils.PasswordHashing;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-public class LoginDBDAO {
+public class LoginDBDAO implements ILoginDBDAO {
     private UserManager userManager;
 
     public LoginDBDAO() {
         userManager = new UserManager();
     }
 
-    public User login (String userName, String password) throws SQLServerException {
+    @Override
+    public User login(String userName, String password) throws SQLServerException {
         User user = userManager.getUserByName(userName);
 
         if (user == null) {
@@ -26,7 +27,4 @@ public class LoginDBDAO {
         }
     }
 
-    private boolean passwordMatches(User user, String password) {
-        return PasswordHashing.verifyPassword(password, user.getPassword(), user.getSalt());
-    }
 }

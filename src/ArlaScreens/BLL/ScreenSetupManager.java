@@ -1,120 +1,121 @@
 package ArlaScreens.BLL;
 
 import ArlaScreens.BE.*;
+import ArlaScreens.DAL.IScreenSetupDBDAO;
 import ArlaScreens.DAL.ScreenSetupDBDAO;
 
 public class ScreenSetupManager {
-    private ScreenSetupDBDAO screenSetupDBDAO;
+    private IScreenSetupDBDAO iScreenSetupDBDAO;
 
     public ScreenSetupManager() {
-        screenSetupDBDAO = new ScreenSetupDBDAO();
+        iScreenSetupDBDAO = new ScreenSetupDBDAO();
     }
 
     public ScreenSetup getScreenSetup(User user) {
-        return screenSetupDBDAO.getScreenSetup(user);
+        return iScreenSetupDBDAO.getScreenSetup(user);
     }
 
     public void addScreenSetup(ScreenSetup screenSetup) {
-        screenSetupDBDAO.addScreenSetup(screenSetup);
+        iScreenSetupDBDAO.addScreenSetup(screenSetup);
     }
 
     public void editScreenSetup(ScreenSetup screenSetup) {
-        screenSetupDBDAO.editScreenSetup(screenSetup);
+        iScreenSetupDBDAO.editScreenSetup(screenSetup);
     }
 
     public boolean checkIfScreenSetupExist(User user) {
-        return screenSetupDBDAO.checkIfScreenSetupExist(user);
+        return iScreenSetupDBDAO.checkIfScreenSetupExist(user);
     }
 
     public int getRows(User user) {
-        return screenSetupDBDAO.getRows(user);
+        return iScreenSetupDBDAO.getRows(user);
     }
 
     public int getColumns(User user) {
-        return screenSetupDBDAO.getColumns(user);
+        return iScreenSetupDBDAO.getColumns(user);
     }
 
     public void deleteScreenSetup(User user) {
-        screenSetupDBDAO.deleteScreenSetup(user);
+        iScreenSetupDBDAO.deleteScreenSetup(user);
     }
 
     public void addBarChart(BarChart barChart) {
-        screenSetupDBDAO.addBarChart(barChart);
+        iScreenSetupDBDAO.addBarChart(barChart);
     }
 
     public void editBarChart(BarChart barChart) {
-        screenSetupDBDAO.editBarChart(barChart);
+        iScreenSetupDBDAO.editBarChart(barChart);
     }
 
     public BarChart getBarChart(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.getBarChart(screenSetup);
+        return iScreenSetupDBDAO.getBarChart(screenSetup);
     }
 
     public void deleteBarChart(ScreenSetup screenSetup) {
-        screenSetupDBDAO.deleteBarChart(screenSetup);
+        iScreenSetupDBDAO.deleteBarChart(screenSetup);
     }
 
     public boolean checkIfBarChartExist(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.checkIfBarChartExist(screenSetup);
+        return iScreenSetupDBDAO.checkIfBarChartExist(screenSetup);
     }
 
     public void addLineChart(LineChart lineChart) {
-        screenSetupDBDAO.addLineChart(lineChart);
+        iScreenSetupDBDAO.addLineChart(lineChart);
     }
 
     public void editLineChart(LineChart lineChart) {
-        screenSetupDBDAO.editLineChart(lineChart);
+        iScreenSetupDBDAO.editLineChart(lineChart);
     }
 
     public LineChart getLineChart(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.getLineChart(screenSetup);
+        return iScreenSetupDBDAO.getLineChart(screenSetup);
     }
 
     public void deleteLineChart(ScreenSetup screenSetup) {
-        screenSetupDBDAO.deleteLineChart(screenSetup);
+        iScreenSetupDBDAO.deleteLineChart(screenSetup);
     }
 
     public boolean checkIfLineChartExist(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.checkIfLineChartExist(screenSetup);
+        return iScreenSetupDBDAO.checkIfLineChartExist(screenSetup);
     }
 
     public void addExcel(Excel excel) {
-        screenSetupDBDAO.addExcel(excel);
+        iScreenSetupDBDAO.addExcel(excel);
     }
 
     public void editExcel(Excel excel) {
-        screenSetupDBDAO.editExcel(excel);
+        iScreenSetupDBDAO.editExcel(excel);
     }
 
     public Excel getExcel(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.getExcel(screenSetup);
+        return iScreenSetupDBDAO.getExcel(screenSetup);
     }
 
     public void deleteExcel(ScreenSetup screenSetup) {
-        screenSetupDBDAO.deleteExcel(screenSetup);
+        iScreenSetupDBDAO.deleteExcel(screenSetup);
     }
 
     public boolean checkIfExcelExist(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.checkIfExcelExist(screenSetup);
+        return iScreenSetupDBDAO.checkIfExcelExist(screenSetup);
     }
 
     public void addWebsite(WebSite webSite) {
-        screenSetupDBDAO.addWebsite(webSite);
+        iScreenSetupDBDAO.addWebsite(webSite);
     }
 
     public void editWebSite(WebSite webSite) {
-        screenSetupDBDAO.editWebSite(webSite);
+        iScreenSetupDBDAO.editWebSite(webSite);
     }
 
     public WebSite getWebSite(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.getWebSite(screenSetup);
+        return iScreenSetupDBDAO.getWebSite(screenSetup);
     }
 
     public void deleteWebSite(ScreenSetup screenSetup) {
-        screenSetupDBDAO.deleteWebSite(screenSetup);
+        iScreenSetupDBDAO.deleteWebSite(screenSetup);
     }
 
     public boolean checkIfWebSiteExist(ScreenSetup screenSetup) {
-        return screenSetupDBDAO.checkIfWebSiteExist(screenSetup);
+        return iScreenSetupDBDAO.checkIfWebSiteExist(screenSetup);
     }
 }

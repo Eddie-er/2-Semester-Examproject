@@ -5,7 +5,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
 
-public class ScreenSetupDBDAO {
+public class ScreenSetupDBDAO implements IScreenSetupDBDAO {
 
     private DBConnector dbConnector;
 
@@ -17,6 +17,7 @@ public class ScreenSetupDBDAO {
      * Adds a new screensetup
      * @param screenSetup
      */
+    @Override
     public void addScreenSetup(ScreenSetup screenSetup) {
         String query = "INSERT INTO ScreenSetup (UserID, Rows, Columns) VALUES (?,?,?)";
         try (Connection connection = dbConnector.getConnection()) {
@@ -36,6 +37,7 @@ public class ScreenSetupDBDAO {
      * @param user
      * @return
      */
+    @Override
     public boolean checkIfScreenSetupExist(User user) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT ScreenSetup.UserID FROM ScreenSetup WHERE ScreenSetup.UserID =?";
@@ -57,6 +59,7 @@ public class ScreenSetupDBDAO {
      * Edits the screensetup config
      * @param screenSetup
      */
+    @Override
     public void editScreenSetup(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "UPDATE ScreenSetup SET Rows =?, Columns =? WHERE ScreenSetup.UserID =?";
@@ -72,6 +75,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public ScreenSetup getScreenSetup(User user) {
         try (Connection connection = dbConnector.getConnection()) {
 
@@ -101,6 +105,7 @@ public class ScreenSetupDBDAO {
      * @param user
      * @return
      */
+    @Override
     public int getRows(User user) {
         try (Connection connection = dbConnector.getConnection()){
 
@@ -126,6 +131,7 @@ public class ScreenSetupDBDAO {
      * @param user
      * @return
      */
+    @Override
     public int getColumns(User user) {
         try (Connection connection = dbConnector.getConnection()) {
                 int userID = user.getUserID();
@@ -148,6 +154,7 @@ public class ScreenSetupDBDAO {
      * Deletes the screensetup to the user
      * @param user
      */
+    @Override
     public void deleteScreenSetup(User user) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "DELETE FROM ScreenSetup WHERE ScreenSetup.UserID =?";
@@ -161,6 +168,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public void addBarChart(BarChart barChart) {
         try (Connection connection = dbConnector.getConnection()){
             String query = "INSERT INTO BarChart (ScreenSetupID, Row, Columns, IsSelected, FilePath) VALUES (?, ?, ?, ?, ?)";
@@ -179,6 +187,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public void editBarChart(BarChart barChart) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "UPDATE BarChart SET Row =?, Columns =?, IsSelected =?, FilePath =? WHERE BarChart.ScreenSetupID =?";
@@ -196,6 +205,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public BarChart getBarChart(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT * FROM BarChart WHERE BarChart.ScreenSetupID =?";
@@ -222,6 +232,7 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    @Override
     public void deleteBarChart(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "DELETE FROM BarChart WHERE BarChart.ScreenSetupID =?";
@@ -235,6 +246,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public boolean checkIfBarChartExist(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT BarChart.ScreenSetupID FROM BarChart WHERE BarChart.ScreenSetupID =?";
@@ -252,6 +264,7 @@ public class ScreenSetupDBDAO {
         return false;
     }
 
+    @Override
     public void addLineChart(LineChart lineChart) {
         try (Connection connection = dbConnector.getConnection()){
             String query = "INSERT INTO LineChart (ScreenSetupID, Row, Columns, IsSelected, FilePath) VALUES (?, ?, ?, ?, ?)";
@@ -270,6 +283,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public void editLineChart(LineChart lineChart) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "UPDATE LineChart SET Row =?, Columns =?, IsSelected =?, FilePath =? WHERE LineChart.ScreenSetupID =?";
@@ -287,6 +301,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public LineChart getLineChart(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT * FROM LineChart WHERE LineChart.ScreenSetupID =?";
@@ -312,6 +327,7 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    @Override
     public void deleteLineChart(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "DELETE FROM LineChart WHERE LineChart.ScreenSetupID =?";
@@ -325,6 +341,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public boolean checkIfLineChartExist(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT LineChart.ScreenSetupID FROM LineChart WHERE LineChart.ScreenSetupID =?";
@@ -342,6 +359,7 @@ public class ScreenSetupDBDAO {
         return false;
     }
 
+    @Override
     public void addExcel(Excel excel) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "INSERT INTO Excel (ScreenSetupID, Row, Columns, IsSelected, FilePath) VALUES (?, ?, ?, ?, ?)";
@@ -360,6 +378,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public void editExcel(Excel excel) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "UPDATE Excel SET Row =?, Columns =?, IsSelected =?, FilePath =? WHERE Excel.ScreenSetupID =?";
@@ -377,6 +396,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public Excel getExcel(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT * FROM Excel WHERE Excel.ScreenSetupID =?";
@@ -402,6 +422,7 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    @Override
     public void deleteExcel(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "DELETE FROM Excel WHERE Excel.ScreenSetupID =?";
@@ -415,6 +436,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public boolean checkIfExcelExist(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT Excel.ScreenSetupID FROM Excel WHERE Excel.ScreenSetupID =?";
@@ -432,6 +454,7 @@ public class ScreenSetupDBDAO {
         return false;
     }
 
+    @Override
     public void addWebsite(WebSite webSite) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "INSERT INTO WebSite (ScreenSetupID, Row, Columns, IsSelected, URL) VALUES (?, ?, ?, ?, ?)";
@@ -450,6 +473,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public void editWebSite(WebSite webSite) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "UPDATE WebSite SET Row =?, Columns =?, IsSelected =?, URL =? WHERE WebSite.ScreenSetupID =?";
@@ -468,6 +492,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public WebSite getWebSite(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT * FROM WebSite WHERE WebSite.ScreenSetupID =?";
@@ -493,6 +518,7 @@ public class ScreenSetupDBDAO {
         return null;
     }
 
+    @Override
     public void deleteWebSite(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "DELETE FROM WebSite WHERE WebSite.ScreenSetupID =?";
@@ -506,6 +532,7 @@ public class ScreenSetupDBDAO {
         }
     }
 
+    @Override
     public boolean checkIfWebSiteExist(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {
             String query = "SELECT WebSite.ScreenSetupID FROM WebSite WHERE WebSite.ScreenSetupID =?";

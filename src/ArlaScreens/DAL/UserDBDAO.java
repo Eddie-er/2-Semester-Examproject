@@ -110,6 +110,25 @@ public class UserDBDAO implements IUserDBDAO {
     }
 
     /**
+     * Edits the username
+     * @param userName
+     * @param userID
+     */
+    @Override
+    public void editUserName(String userName, int userID) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String query = "UPDATE dbo.[User] SET UserName =? WHERE UserID =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, userName);
+            preparedStatement.setInt(2, userID);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
      * Edits Choosen Admin in the Database.
      * @param userID
      * @param isAdmin

@@ -1,17 +1,18 @@
 package ArlaScreens.BLL;
 
 import ArlaScreens.BE.User;
+import ArlaScreens.DAL.ILoginDBDAO;
 import ArlaScreens.DAL.LoginDBDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 public class LoginManager {
-    private LoginDBDAO loginDBDAO;
+    private ILoginDBDAO ILoginDBDAO;
 
     public LoginManager() {
-        loginDBDAO = new LoginDBDAO();
+        ILoginDBDAO = new LoginDBDAO();
     }
 
     public User login(String userName, String password) throws SQLServerException {
-        return loginDBDAO.login(userName, password);
+        return ILoginDBDAO.login(userName, password);
     }
 }

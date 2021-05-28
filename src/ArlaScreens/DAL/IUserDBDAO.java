@@ -15,6 +15,8 @@ public interface IUserDBDAO {
 
     void editUser(User user);
 
+    void editUserName(String userName, int userID);
+
     void editAdmin(int userID, boolean isAdmin) throws SQLException;
 
     void deleteUser(User user);

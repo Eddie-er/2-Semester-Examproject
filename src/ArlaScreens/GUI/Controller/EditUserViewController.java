@@ -90,8 +90,8 @@ public class EditUserViewController implements Initializable {
             password = codeWord.getText();
             userModel.editUser(username, password, admin, userID);
         }
-
-        //userModel.editUser(username, password, admin, userID);
+        
+        userModel.editUserName(username, userID);
         userModel.editAdmin(isAdmin,userID);
 
         Stage stage = (Stage) saveButton.getScene().getWindow();

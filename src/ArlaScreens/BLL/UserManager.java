@@ -31,6 +31,10 @@ public class UserManager {
         IUserDBDAO.editAdmin(userID, isAdmin);
     }
 
+    public void editUserName(String userName, int userID) {
+        IUserDBDAO.editUserName(userName, userID);
+    }
+
     public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
         IUserDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
