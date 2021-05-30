@@ -12,6 +12,7 @@ import javafx.util.Duration;
 
 import java.text.DecimalFormat;
 
+//http://www.java2s.com/Tutorials/Java/javafx.scene.control/Tooltip/0320__Tooltip.install_Node_node_Tooltip_t_.htm
 public class TresholdNode extends StackPane {
 
     private DecimalFormat df = new DecimalFormat("0.0#");
