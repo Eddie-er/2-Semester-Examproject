@@ -42,8 +42,11 @@ public class AdminViewController implements Initializable {
     public TextField columnLineChart;
     public TextField rowBarChart;
     public TextField columnBarChart;
+    public TextField rowSetup;
+    public TextField columnSetup;
 
     public ImageView imgExample;
+
 
     private UserModel userModel;
     private ScreenSetupModel screenSetupModel;
@@ -51,8 +54,6 @@ public class AdminViewController implements Initializable {
     @FXML
     Button editUser;
 
-    public ChoiceBox choiceBoxRows;
-    public ChoiceBox choiceBoxColumns;
     @FXML
     private TableView<User> departmentTableView;
     @FXML
@@ -81,9 +82,6 @@ public class AdminViewController implements Initializable {
             selectedUser = newValue;
             updateInformation();
         });
-
-        choiceBoxRows.getItems().addAll(1, 2, 3, 4);
-        choiceBoxColumns.getItems().addAll(1, 2, 3, 4);
 
         File file = new File("Data/Billeder/gridpane.png");
         Image image = new Image(file.toURI().toString());
@@ -137,6 +135,9 @@ public class AdminViewController implements Initializable {
 
             ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
 
+            rowSetup.setText(String.valueOf(screenSetup.getRows()));
+            columnSetup.setText(String.valueOf(screenSetup.getColumns()));
+
             BarChart barChart = screenSetupModel.getBarChart(screenSetup);
 
             if (barChart.isSelected()) {
@@ -175,13 +176,29 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Clears the textfields
+     */
     public void clearTextfields() {
         txtURL.clear();
         txtLineChartPath.clear();
         txtBarChartPath.clear();
         txtExcelPath.clear();
+        rowSetup.clear();
+        columnSetup.clear();
+        rowBarChart.clear();
+        columnBarChart.clear();
+        rowLineChart.clear();
+        columnLineChart.clear();
+        rowExcel.clear();
+        columnExcel.clear();
+        rowWebSite.clear();
+        columnWebSite.clear();
     }
 
+    /**
+     * Resets the checkboxes
+     */
     public void clearCheckboxes() {
         checkboxWebsite.setSelected(false);
         checkboxBarChart.setSelected(false);
@@ -225,13 +242,13 @@ public class AdminViewController implements Initializable {
     }
 
     /**
-     *
+     * Saves a new screensetup in the database
      * @param event
      */
     @FXML
     void handleSaveBtn(ActionEvent event) {
-        int rows = (int) choiceBoxRows.getSelectionModel().getSelectedItem();
-        int columns = (int) choiceBoxColumns.getSelectionModel().getSelectedItem();
+        int rows = Integer.parseInt(rowSetup.getText());
+        int columns = Integer.parseInt(columnSetup.getText());
 
         if (screenSetupModel.checkIfScreenSetupExist(selectedUser)) {
             ScreenSetup screenSetup = new ScreenSetup(0, selectedUser.getUserID(), rows, columns);
@@ -341,6 +358,7 @@ public class AdminViewController implements Initializable {
 
         AlertSystem.alertUser("Konfiguration gemt", "Bekræftelse", "Skærmkonfiguration er gemt");
     }
+
     /***
      * Uses the FileChooser to select a CSV file.
      * Only files with the supported types .csv can be selected
@@ -358,6 +376,7 @@ public class AdminViewController implements Initializable {
             txtBarChartPath.setText(selectedFile.getAbsolutePath());
         }
     }
+
     /***
      * Uses the FileChooser to select a CSV file.
      * Only files with the supported types .csv can be selected
@@ -375,6 +394,7 @@ public class AdminViewController implements Initializable {
             txtLineChartPath.setText(selectedFile.getAbsolutePath());
         }
     }
+
     @FXML
     /*
      * Uses the FileChooser to select an Excel file.

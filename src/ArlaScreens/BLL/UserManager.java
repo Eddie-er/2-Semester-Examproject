@@ -11,48 +11,48 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserManager {
-    private IUserDBDAO IUserDBDAO;
+    private IUserDBDAO iUserDBDAO;
 
     public UserManager() {
-        IUserDBDAO = new UserDBDAO();
+        iUserDBDAO = new UserDBDAO();
     }
 
     public List<User> getAllUsers() throws SQLException {
-        return IUserDBDAO.getAllUsers();
+        return iUserDBDAO.getAllUsers();
     }
 
 
    public void editUser(String username, String password, boolean isAdmin, int userID) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
-        IUserDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
+        iUserDBDAO.editUser(new User(userID, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
     }
 
     public void editAdmin(boolean isAdmin,int userID) throws SQLException {
-        IUserDBDAO.editAdmin(userID, isAdmin);
+        iUserDBDAO.editAdmin(userID, isAdmin);
     }
 
     public void editUserName(String userName, int userID) {
-        IUserDBDAO.editUserName(userName, userID);
+        iUserDBDAO.editUserName(userName, userID);
     }
 
     public void addUser(String username, String password, boolean isAdmin) throws NoSuchAlgorithmException {
         byte[] salt = PasswordHashing.getSalt();
-        IUserDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
+        iUserDBDAO.addUser(new User(0, PasswordHashing.hashPassword(password, salt), salt, username, isAdmin));
     }
 
     public boolean checkIfUserExist(String userName) {
-        return IUserDBDAO.checkIfUserExist(userName);
+        return iUserDBDAO.checkIfUserExist(userName);
     }
 
     public void deleteUser(User user) {
-        IUserDBDAO.deleteUser(user);
+        iUserDBDAO.deleteUser(user);
     }
 
     public User getUserByName(String userName) throws SQLServerException {
-        return IUserDBDAO.getUserByName(userName);
+        return iUserDBDAO.getUserByName(userName);
     }
 
     public User getUserByID(int userID) {
-        return IUserDBDAO.getUserByID(userID);
+        return iUserDBDAO.getUserByID(userID);
     }
 }
