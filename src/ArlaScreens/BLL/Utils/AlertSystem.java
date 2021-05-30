@@ -3,6 +3,9 @@ package ArlaScreens.BLL.Utils;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+/**
+ * A popup window to warn the user or to show a confirmation window
+ */
 public class AlertSystem {
     public static void alertUser(String title, String subMsg, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

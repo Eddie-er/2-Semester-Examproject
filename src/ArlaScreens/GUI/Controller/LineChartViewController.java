@@ -42,6 +42,10 @@ public class LineChartViewController implements Initializable {
         }
     }
 
+    /**
+     * Reads the CSV file and makes a line chart
+     * @throws FileNotFoundException
+     */
     public void CSVIntoChart() throws FileNotFoundException {
         ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
 

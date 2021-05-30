@@ -100,7 +100,12 @@ public class AdminViewController implements Initializable {
         //updates the TableView
         departmentTableView.setItems(userModel.getAllUsers());
     }
-    
+
+    /**
+     * Deletes the user and their screensetup
+     * Opens AlertSystem with a given title, submessage and message
+     * @param event
+     */
     @FXML
     void deleteUserAction(ActionEvent event) {
         ScreenSetup screenSetup = screenSetupModel.getScreenSetup(selectedUser);
@@ -209,11 +214,20 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Closes the window
+     * @param actionEvent
+     * @throws IOException
+     */
     public void adminlogout(javafx.event.ActionEvent actionEvent)throws IOException {
         Stage stage = (Stage) aLogOut.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void handleSaveBtn(ActionEvent event) {
         int rows = (int) choiceBoxRows.getSelectionModel().getSelectedItem();
@@ -327,7 +341,11 @@ public class AdminViewController implements Initializable {
 
         AlertSystem.alertUser("Konfiguration gemt", "Bekræftelse", "Skærmkonfiguration er gemt");
     }
-
+    /***
+     * Uses the FileChooser to select a CSV file.
+     * Only files with the supported types .csv can be selected
+     * @see FileChooser
+     */
     public void handleChooseBarChartBtn(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Vælg en CSV...");
@@ -340,7 +358,11 @@ public class AdminViewController implements Initializable {
             txtBarChartPath.setText(selectedFile.getAbsolutePath());
         }
     }
-
+    /***
+     * Uses the FileChooser to select a CSV file.
+     * Only files with the supported types .csv can be selected
+     * @see FileChooser
+     */
     public void handleChooseLineChartBtn(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Vælg en CSV...");
@@ -354,6 +376,11 @@ public class AdminViewController implements Initializable {
         }
     }
     @FXML
+    /*
+     * Uses the FileChooser to select an Excel file.
+     * Only files with the supported types .xlxs can be selected
+     * @see FileChooser
+     */
     void handleChooseExcelBtn(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Vælg en Excel...");

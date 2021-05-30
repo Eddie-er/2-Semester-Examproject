@@ -9,6 +9,9 @@ import java.sql.SQLException;
 public class DBConnector {
     private SQLServerDataSource dataSource;
 
+    /**
+     * The information of our database
+     */
     public DBConnector() {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("10.176.111.31");
@@ -22,6 +25,11 @@ public class DBConnector {
         return dataSource.getConnection();
     }
 
+    /**
+     * Returns true if the connection is open
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
 
         DBConnector databaseConnector = new DBConnector();

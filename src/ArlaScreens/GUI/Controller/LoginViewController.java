@@ -50,7 +50,11 @@ public class LoginViewController implements Initializable{
         userModel = new UserModel();
     }
 
-    //sætter Arla logo.
+    /**
+     * Sets the Arla logo
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         File file = new File("Data\\Billeder/Arla-Logo.png");
@@ -58,20 +62,33 @@ public class LoginViewController implements Initializable{
         imageView.setImage(image);
     }
 
-    //Lukker fanen ned
+    /**
+     * Closes the window
+     * @param actionEvent
+     * @throws IOException
+     */
     public void cancel(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) Login.getScene().getWindow();
         stage.close();
 
     }
 
+    /**
+     * Empties the textfields
+     * @param actionEvent
+     */
     public void reset(javafx.event.ActionEvent actionEvent) {
         UserName.setText("");
         PassWord.setText("");
         errorLabel.setText("");
     }
 
-
+    /**
+     * Logs into the AdminView if the username and passwords are correct. If the user is not an admin, the UserView will show up.
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void handleLogin(ActionEvent actionEvent) throws IOException, SQLException {
 
         if (loginModel.login(UserName.getText(), PassWord.getText()) != null && loginModel.getLoggedInUser().isAdmin()) {
@@ -106,6 +123,11 @@ public class LoginViewController implements Initializable{
         }
     }
 
+    /**
+     * Same method as "handleLogin" but you can log in using the ENTER key in the password field instead of pressing the login button
+     * @param keyEvent
+     * @throws SQLServerException
+     */
     public void PasswordFieldKeyPressed(KeyEvent keyEvent) throws SQLServerException {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             if (loginModel.login(UserName.getText(), PassWord.getText()) != null && loginModel.getLoggedInUser().isAdmin()) {

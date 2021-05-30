@@ -42,6 +42,10 @@ public class BarChartViewController implements Initializable {
         }
     }
 
+    /**
+     * Reads the CSV file and makes a bar chart
+     * @throws FileNotFoundException
+     */
     public void CSVIntoBar() throws FileNotFoundException {
         barChartGraph.getData().clear();
         barChartGraph.layout();

@@ -26,6 +26,11 @@ public class WebViewController implements Initializable {
         screenSetupModel = new ScreenSetupModel();
     }
 
+    /**
+     * Loads the given URL of the website
+     * @param url
+     * @param resourceBundle
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
 

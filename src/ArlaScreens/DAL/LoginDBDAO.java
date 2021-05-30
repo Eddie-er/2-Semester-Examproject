@@ -12,6 +12,13 @@ public class LoginDBDAO implements ILoginDBDAO {
         userManager = new UserManager();
     }
 
+    /**
+     * Allows the user to login with a given username and password
+     * @param userName
+     * @param password
+     * @return
+     * @throws SQLServerException
+     */
     @Override
     public User login(String userName, String password) throws SQLServerException {
         User user = userManager.getUserByName(userName);
@@ -26,5 +33,4 @@ public class LoginDBDAO implements ILoginDBDAO {
             return null;
         }
     }
-
 }

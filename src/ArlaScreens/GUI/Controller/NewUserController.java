@@ -33,6 +33,11 @@ public class NewUserController implements Initializable {
 
     }
 
+    /**
+     * Adds a user with a given username, password and whether they are a user or an admin
+     * @param actionEvent
+     * @throws NoSuchAlgorithmException
+     */
     public void handleAddUser(ActionEvent actionEvent) throws NoSuchAlgorithmException {
         boolean isSelected = checkboxAdmin.isSelected();
         String username = txtUserName.getText();

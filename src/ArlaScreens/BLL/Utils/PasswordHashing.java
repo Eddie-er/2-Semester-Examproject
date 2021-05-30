@@ -13,7 +13,6 @@ public class PasswordHashing {
      * @param salt
      * @return
      */
-
     public static String hashPassword(String password, byte[] salt) {
         try {
             String base = password;

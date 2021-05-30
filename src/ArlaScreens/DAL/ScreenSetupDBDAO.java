@@ -75,6 +75,11 @@ public class ScreenSetupDBDAO implements IScreenSetupDBDAO {
         }
     }
 
+    /**
+     * Gets the screensetup
+     * @param user
+     * @return
+     */
     @Override
     public ScreenSetup getScreenSetup(User user) {
         try (Connection connection = dbConnector.getConnection()) {
@@ -151,7 +156,7 @@ public class ScreenSetupDBDAO implements IScreenSetupDBDAO {
     }
 
     /**
-     * Deletes the screensetup to the user
+     * Deletes the screensetup of a user
      * @param user
      */
     @Override
@@ -168,6 +173,10 @@ public class ScreenSetupDBDAO implements IScreenSetupDBDAO {
         }
     }
 
+    /**
+     * Adds a bar chart for the user
+     * @param barChart
+     */
     @Override
     public void addBarChart(BarChart barChart) {
         try (Connection connection = dbConnector.getConnection()){
@@ -187,6 +196,10 @@ public class ScreenSetupDBDAO implements IScreenSetupDBDAO {
         }
     }
 
+    /**
+     * Edits a bar chart for the user
+     * @param barChart
+     */
     @Override
     public void editBarChart(BarChart barChart) {
         try (Connection connection = dbConnector.getConnection()) {
@@ -232,6 +245,10 @@ public class ScreenSetupDBDAO implements IScreenSetupDBDAO {
         return null;
     }
 
+    /**
+     * Deletes a bar chart of the user
+     * @param screenSetup
+     */
     @Override
     public void deleteBarChart(ScreenSetup screenSetup) {
         try (Connection connection = dbConnector.getConnection()) {

@@ -51,7 +51,10 @@ public class EditUserViewController implements Initializable {
     //throws interactive Warning to double check if the codeword should be reset.
 
 
-    //Checks the Check box if the choosen User is an admin.
+    /**
+     * Checks the Check box if the chosen user is an admin.
+     * @param selectedUser
+     */
     public void initData(User selectedUser) {
         user = selectedUser;
         userName.setText(selectedUser.getUsername());
@@ -61,7 +64,10 @@ public class EditUserViewController implements Initializable {
         }
     }
 
-    //checks if the chosen User should have Admin rights.
+    /**
+     * Checks if the chosen user is an admin.
+     * @param actionEvent
+     */
     public void adminAction(ActionEvent actionEvent) {
         if(adminCheck.isSelected()){
             isAdmin = true;
@@ -70,14 +76,24 @@ public class EditUserViewController implements Initializable {
             isAdmin = false;
         }
     }
-    
-    //Closes the Window without any changes.
+
+    /**
+     * Closes the Window
+     * @param actionEvent
+     * @throws IOException
+     */
     public void CancelAction(javafx.event.ActionEvent actionEvent)throws IOException {
         Stage stage = (Stage) CancelButton.getScene().getWindow();
         stage.close();
 
     }
 
+    /**
+     * Saves any changes made to a user
+     * @param actionEvent
+     * @throws NoSuchAlgorithmException
+     * @throws SQLException
+     */
     public void saveAction(ActionEvent actionEvent) throws NoSuchAlgorithmException, SQLException {
         resetPassword = true;
         String username = userName.getText();

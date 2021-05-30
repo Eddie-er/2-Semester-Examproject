@@ -63,6 +63,11 @@ public class UserViewController implements Initializable {
         SpreadsheetInfo.setLicense("FREE-LIMITED-KEY");
     }
 
+    /**
+     * Sets the whole screensetup
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gridPane.setGridLinesVisible(true);
@@ -207,6 +212,10 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Reads the CSV file and makes a bar chart
+     * @throws FileNotFoundException
+     */
     public void CSVIntoBar() throws  FileNotFoundException{
         barChartGraph.getData().clear();
         barChartGraph.layout();
@@ -250,7 +259,10 @@ public class UserViewController implements Initializable {
         }
     }
 
-
+    /**
+     * Reads the CSV file and makes a line chart
+     * @throws FileNotFoundException
+     */
     public void CSVIntoChart() throws FileNotFoundException {
         ScreenSetup screenSetup = screenSetupModel.getScreenSetup(loginModel.getLoggedInUser());
 

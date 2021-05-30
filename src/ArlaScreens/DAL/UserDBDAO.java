@@ -90,7 +90,7 @@ public class UserDBDAO implements IUserDBDAO {
     }
 
     /**
-     * Edits a Choosen User in The DataBase.
+     * Edits a chosen user in The database.
      * @param user
      */
    @Override

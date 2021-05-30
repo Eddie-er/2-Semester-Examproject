@@ -32,6 +32,10 @@ public class ExcelTableViewController implements Initializable {
         }
     }
 
+    /**
+     * Shows a given Excel file and updates its content if there are any changes
+     * @param dataSource
+     */
     private void fillTable(String[][] dataSource) {
         tblExcel.getColumns().clear();
 
